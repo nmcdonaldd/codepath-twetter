@@ -18,6 +18,7 @@ class Tweet: NSObject {
     var identifier: Int = 0
     
     var tweetAuthor: User?
+    var tweetMediaEntities: TweetEntities?
     
     init(tweetDictionary: NSDictionary) {
         self.text = tweetDictionary["text"] as? String
@@ -35,8 +36,15 @@ class Tweet: NSObject {
         let userDictonary = tweetDictionary["user"] as! NSDictionary
         self.tweetAuthor = User(userDictionary: userDictonary)
         
-        // TODO: - Grab the pictures "extended_entities"
-        let extendedEntities: NSDictionary? = tweetDictionary["extended_entities"] as? NSDictionary
+        // TODO: - Grab the pictures "entities"
+        let tweetEntities: NSDictionary? = tweetDictionary.value(forKeyPath: "entities") as? NSDictionary
+        let entityMedia = tweetEntities?.mutableArrayValue(forKey: "media")
+        if let media = entityMedia {
+            for value in media {
+                let entityDictionary = value as! NSDictionary
+                self.tweetMediaEntities = TweetEntities(mediaDictionary: entityDictionary)
+            }
+        }
         
     }
     

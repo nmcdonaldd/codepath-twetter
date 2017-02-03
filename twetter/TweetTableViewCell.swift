@@ -21,7 +21,23 @@ class TweetTableViewCell: UITableViewCell {
     // This is the data source for this tweet.
     var tweetData: Tweet! {
         didSet {
-            if let text = self.tweetData.text {
+            
+            if var text = self.tweetData.text {
+                
+                if let beginningIndex = self.tweetData.tweetMediaEntities?.mediaBeginIndex {
+                    let endingIndex = (self.tweetData.tweetMediaEntities?.mediaEndIndex)!
+                    self.contentImageView.isHidden = false
+                    // TODO: - Fix the following so that it allows optionals! Not all tweets have photo media info to remove!
+                    let start = text.index(text.startIndex, offsetBy: beginningIndex)
+                    let end = text.index(text.startIndex, offsetBy: endingIndex)
+                    let removeRange: Range<String.Index> = Range(uncheckedBounds: (lower: start, upper: end))
+                    text.removeSubrange(removeRange)
+                    
+                    print("URL: \((self.tweetData.tweetMediaEntities?.secureMediaURL)!)")
+                    self.contentImageView.setImageWith((self.tweetData.tweetMediaEntities?.secureMediaURL)!)
+                }
+                
+                
                 let attributedName: NSMutableAttributedString = NSMutableAttributedString(string: text)
                 let attributedParagraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
                 attributedParagraphStyle.lineSpacing = 3.0
@@ -58,7 +74,9 @@ class TweetTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.tweetAuthorImageView.layer.cornerRadius = 5.0
+        self.contentImageView.layer.cornerRadius = 5.0
         self.tweetAuthorImageView.clipsToBounds = true
+        self.contentImageView.clipsToBounds = false
         self.contentImageView.isHidden = true
         
     }
