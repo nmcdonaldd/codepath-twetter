@@ -64,7 +64,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="349"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Z6-X2-683" id="Bfz-kd-cUj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="348.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq">
@@ -86,7 +86,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzF-PL-cQE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzF-PL-cQE">
                                                     <rect key="frame" x="61" y="32.5" width="306" height="76.5"/>
                                                     <attributedString key="attributedText">
                                                         <fragment>
@@ -99,9 +99,21 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8FF-zB-S2C">
-                                                    <rect key="frame" x="61" y="117.5" width="306" height="200.5"/>
-                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7V-LT-LVH">
+                                                    <rect key="frame" x="61" y="117" width="306" height="201"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8FF-zB-S2C">
+                                                            <rect key="frame" x="0.0" y="0.0" width="306" height="200.5"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="8FF-zB-S2C" firstAttribute="leading" secondItem="b7V-LT-LVH" secondAttribute="leading" id="5Eg-Al-7dp"/>
+                                                        <constraint firstItem="8FF-zB-S2C" firstAttribute="top" secondItem="b7V-LT-LVH" secondAttribute="top" id="JPl-H0-PTb"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8FF-zB-S2C" secondAttribute="trailing" id="mPd-h3-VfT"/>
+                                                        <constraint firstAttribute="bottom" secondItem="8FF-zB-S2C" secondAttribute="bottom" id="peg-7O-D1l"/>
+                                                    </constraints>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Created at" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy5-83-FbY">
                                                     <rect key="frame" x="307" y="326" width="59.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -111,26 +123,27 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="LWf-0Q-tKX" firstAttribute="centerY" secondItem="G3G-iO-muK" secondAttribute="centerY" id="4gn-lN-s22"/>
-                                                <constraint firstAttribute="trailing" secondItem="8FF-zB-S2C" secondAttribute="trailing" constant="8" id="57j-p5-xHk"/>
+                                                <constraint firstItem="b7V-LT-LVH" firstAttribute="leading" secondItem="vzF-PL-cQE" secondAttribute="leading" id="Aqq-pd-dHu"/>
+                                                <constraint firstItem="b7V-LT-LVH" firstAttribute="top" secondItem="vzF-PL-cQE" secondAttribute="bottom" constant="8" id="EJZ-Dc-cw3"/>
                                                 <constraint firstAttribute="trailing" secondItem="vzF-PL-cQE" secondAttribute="trailing" constant="8" id="O86-ag-80d"/>
                                                 <constraint firstItem="G3G-iO-muK" firstAttribute="top" secondItem="Bfz-kd-cUj" secondAttribute="top" constant="8" id="QAq-Kq-3oU"/>
                                                 <constraint firstItem="vzF-PL-cQE" firstAttribute="leading" secondItem="G3G-iO-muK" secondAttribute="leading" id="QXL-FU-SfH"/>
                                                 <constraint firstItem="Jx2-Qm-xfq" firstAttribute="top" secondItem="Bfz-kd-cUj" secondAttribute="top" constant="8" id="dId-Gc-Wbt"/>
                                                 <constraint firstItem="LWf-0Q-tKX" firstAttribute="leading" secondItem="G3G-iO-muK" secondAttribute="trailing" constant="8" id="fr1-1F-c2X"/>
                                                 <constraint firstAttribute="bottom" secondItem="xy5-83-FbY" secondAttribute="bottom" constant="8" id="i6j-ey-DDa"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8FF-zB-S2C" secondAttribute="bottom" constant="30.5" id="iTt-4j-gJ7"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="b7V-LT-LVH" secondAttribute="bottom" constant="16" id="jAy-fQ-IgZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="xy5-83-FbY" secondAttribute="trailing" constant="8" id="jCG-Hf-g2F"/>
                                                 <constraint firstItem="Jx2-Qm-xfq" firstAttribute="leading" secondItem="Bfz-kd-cUj" secondAttribute="leading" constant="8" id="kbZ-bp-CFz"/>
-                                                <constraint firstItem="xy5-83-FbY" firstAttribute="top" secondItem="8FF-zB-S2C" secondAttribute="bottom" constant="8" id="l9y-Ke-yKv"/>
-                                                <constraint firstItem="8FF-zB-S2C" firstAttribute="top" secondItem="vzF-PL-cQE" secondAttribute="bottom" constant="8" id="leh-o5-dHs"/>
+                                                <constraint firstAttribute="trailing" secondItem="b7V-LT-LVH" secondAttribute="trailing" constant="8" id="nGR-Ms-yja"/>
                                                 <constraint firstItem="G3G-iO-muK" firstAttribute="leading" secondItem="Jx2-Qm-xfq" secondAttribute="trailing" constant="8" id="oe3-HC-lH0"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vzF-PL-cQE" secondAttribute="bottom" constant="8" id="xCP-7C-y3E"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LWf-0Q-tKX" secondAttribute="trailing" constant="8" id="yMr-2R-hFT"/>
                                                 <constraint firstItem="vzF-PL-cQE" firstAttribute="top" secondItem="G3G-iO-muK" secondAttribute="bottom" constant="4" id="yVj-xU-mlh"/>
-                                                <constraint firstItem="8FF-zB-S2C" firstAttribute="leading" secondItem="vzF-PL-cQE" secondAttribute="leading" id="zvY-Kv-PFi"/>
+                                                <constraint firstItem="xy5-83-FbY" firstAttribute="top" secondItem="b7V-LT-LVH" secondAttribute="bottom" constant="8" id="ylq-lb-7Gj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentImageContainerView" destination="b7V-LT-LVH" id="xKP-ws-Zp1"/>
                                             <outlet property="contentImageView" destination="8FF-zB-S2C" id="fVX-ME-b4Q"/>
                                             <outlet property="tweetAuthorImageView" destination="Jx2-Qm-xfq" id="fd0-R1-aqU"/>
                                             <outlet property="tweetAuthorNameLabel" destination="G3G-iO-muK" id="RBT-u4-hSS"/>

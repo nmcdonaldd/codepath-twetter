@@ -17,6 +17,7 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetAuthorNameLabel: UILabel!
     @IBOutlet weak var tweetAuthorImageView: UIImageView!
     @IBOutlet weak var contentImageView: UIImageView!
+    @IBOutlet weak var contentImageContainerView: UIView!
     
     // This is the data source for this tweet.
     var tweetData: Tweet! {
@@ -27,6 +28,8 @@ class TweetTableViewCell: UITableViewCell {
                 if let beginningIndex = self.tweetData.tweetMediaEntities?.mediaBeginIndex {
                     let endingIndex = (self.tweetData.tweetMediaEntities?.mediaEndIndex)!
                     self.contentImageView.isHidden = false
+                    self.contentImageContainerView.isHidden = false
+                    
                     // TODO: - Fix the following so that it allows optionals! Not all tweets have photo media info to remove!
                     let start = text.index(text.startIndex, offsetBy: beginningIndex)
                     let end = text.index(text.startIndex, offsetBy: endingIndex)
@@ -74,11 +77,10 @@ class TweetTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.tweetAuthorImageView.layer.cornerRadius = 5.0
-        self.contentImageView.layer.cornerRadius = 5.0
         self.tweetAuthorImageView.clipsToBounds = true
-        self.contentImageView.clipsToBounds = false
-        self.contentImageView.isHidden = true
-        
+        self.contentImageContainerView.layer.cornerRadius = 4.0
+        self.contentImageContainerView.clipsToBounds = true
+        self.contentImageContainerView.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
