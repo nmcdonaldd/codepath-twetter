@@ -17,10 +17,8 @@ class TweetEntities: NSObject {
     var mediaEndIndex: Int = 0
     
     init(mediaDictionary: NSDictionary) {
-        print("mediaDict: \(mediaDictionary)")
         if let mediaURLString: String = mediaDictionary["media_url_https"] as? String {
             self.secureMediaURL = URL(string: mediaURLString)
-            print("self.mediaURL: \(self.secureMediaURL)")
         }
         if let _displayURL: String = mediaDictionary["display_url"] as? String {
             self.displayURL = URL(string: _displayURL)

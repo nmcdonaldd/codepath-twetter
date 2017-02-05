@@ -55,8 +55,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TweetTableViewCell = self.tweetsTableView.dequeueReusableCell(withIdentifier: "TweetsTableViewCell", for: indexPath) as! TweetTableViewCell
         
-        cell.contentImageView.image = nil
-        cell.contentImageView.isHidden = true
         cell.tweetData = self.tweets[indexPath.row]
         
         return cell
