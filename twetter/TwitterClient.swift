@@ -31,9 +31,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         self.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
             let tweetsDictionaries: [NSDictionary] = response as! [NSDictionary]
-//            for tweet in tweetsDictionaries {
-//                print("Tweet: \(tweet)\n")
-//            }
             let tweets: [Tweet] = Tweet.tweetsFromArray(tweetsDictionaries: tweetsDictionaries)
             
             success(tweets)
@@ -81,5 +78,42 @@ class TwitterClient: BDBOAuth1SessionManager {
             print ("Got an error: \(error?.localizedDescription)")
             self.loginFailure?(error)
         }
+    }
+    
+    func retweet(tweet: Tweet,  success: @escaping (Int)->(),  failure: @escaping (Error?) -> ()) {
+        
+        if let tweetID: String = tweet.id {
+            self.post("1.1/statuses/retweet/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                
+                let retweetResponseDictionary: NSDictionary = response as! NSDictionary
+                let numOfRetweets: Int = retweetResponseDictionary.value(forKeyPath: "retweet_count") as! Int
+                success(numOfRetweets)
+                
+            }, failure: { (task: URLSessionDataTask?, error: Error) in
+                failure(error)
+            })
+        } else {
+            // Somehow a tweet with no ID is requesting to be retweeted by the user. Good job user, you broke it.
+            print("Error!!!!")
+        }
+    }
+    
+    func favorite(tweet: Tweet, success: @escaping (Int) -> (), failure: @escaping (Error?) -> ()) {
+        
+        if let tweetID: String = tweet.id {
+            self.post("1.1/favorites/create.json?id=\(tweetID)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+                
+                let retweetResponseDictionary: NSDictionary = response as! NSDictionary
+                let numOfFavorites: Int = retweetResponseDictionary["favorite_count"] as! Int
+                success(numOfFavorites)
+                
+            }, failure: { (task: URLSessionDataTask?, error: Error) in
+                failure(error)
+            })
+        } else {
+            // Somehow a tweet with no ID is requesting to be retweeted by the user. Good job user, you broke it.
+            print("Error!!!!")
+        }
+
     }
 }
