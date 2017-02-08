@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TweetTableViewCellDelegate {
     
     var tweets: [Tweet]!
     @IBOutlet weak var tweetsTableView: UITableView!
@@ -55,9 +55,20 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TweetTableViewCell = self.tweetsTableView.dequeueReusableCell(withIdentifier: "TweetsTableViewCell", for: indexPath) as! TweetTableViewCell
         
+        cell.cellRow = indexPath
+        cell.delegate = self
         cell.tweetData = self.tweets[indexPath.row]
         
         return cell
+    }
+    
+    
+    // MARK: - TweetTableViewCellDelegate
+    
+    func tweetTableViewCell(_ cell: TweetTableViewCell, didFinishLoadingContentWithIndexPath indexPath: IndexPath) {
+        
+        let iPArr: [IndexPath] = [indexPath]
+        self.tweetsTableView.reloadRows(at: iPArr, with: UITableViewRowAnimation.automatic)
     }
 
     /*

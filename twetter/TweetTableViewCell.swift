@@ -19,12 +19,15 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet weak var contentImageContainerView: UIView!
     
-    
     @IBOutlet weak var tweetFunctionsContainerView: UIView!
     @IBOutlet weak var retweetImageView: UIImageView!
     @IBOutlet weak var favoriteImageView: UIImageView!
     @IBOutlet weak var retweetsLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
+    
+    var cellRow: IndexPath?
+    
+    weak var delegate: TweetTableViewCellDelegate?
     
     // This is the data source for this tweet.
     var tweetData: Tweet! {
@@ -44,7 +47,21 @@ class TweetTableViewCell: UITableViewCell {
 //                    let removeRange: Range<String.Index> = Range(uncheckedBounds: (lower: start, upper: end))
 //                    text.removeSubrange(removeRange)
                     
-                    self.contentImageView.setImageWith((self.tweetData.tweetMediaEntities?.secureMediaURL)!)
+                    // TODO: - change this
+                    
+                    let request: URLRequest = URLRequest(url: (self.tweetData.tweetMediaEntities?.secureMediaURL)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+                    self.contentImageView.setImageWith(request, placeholderImage: nil, success: { [weak self] (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
+                        
+                        guard let strongSelf = self else {
+                            return
+                        }
+                        strongSelf.contentImageView.image = image
+                        strongSelf.setNeedsLayout()
+                        strongSelf.layoutIfNeeded()
+                        strongSelf.delegate?.tweetTableViewCell(strongSelf, didFinishLoadingContentWithIndexPath: strongSelf.cellRow!)
+                    }, failure: { (request: URLRequest, response: HTTPURLResponse?, error: Error) in
+                        //
+                    })
                 }
                 
                 
@@ -129,12 +146,6 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.contentImageContainerView.isHidden = true
@@ -143,4 +154,8 @@ class TweetTableViewCell: UITableViewCell {
         self.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet grey")
     }
 
+}
+
+protocol TweetTableViewCellDelegate: class {
+    func tweetTableViewCell(_ cell: TweetTableViewCell, didFinishLoadingContentWithIndexPath indexPath: IndexPath)
 }
