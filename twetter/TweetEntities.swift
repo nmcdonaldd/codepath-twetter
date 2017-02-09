@@ -13,8 +13,8 @@ class TweetEntities: NSObject {
     var secureMediaURL: URL?
     var displayURL: URL?
     var expandedURL: URL?
-    var mediaBeginIndex: Int = 0
-    var mediaEndIndex: Int = 0
+    var mediaBeginIndex: Int?
+    var mediaEndIndex: Int?
     
     init(mediaDictionary: NSDictionary) {
         if let mediaURLString: String = mediaDictionary["media_url_https"] as? String {
@@ -27,8 +27,8 @@ class TweetEntities: NSObject {
             self.expandedURL = URL(string: _expandedURL)
         }
         let mediaIndicesInTweetText = mediaDictionary.mutableArrayValue(forKey: "indices")
-        self.mediaBeginIndex = mediaIndicesInTweetText.object(at: 0) as! Int
-        self.mediaEndIndex = mediaIndicesInTweetText.object(at: 1) as! Int
+        self.mediaBeginIndex = mediaIndicesInTweetText.object(at: 0) as? Int
+        self.mediaEndIndex = mediaIndicesInTweetText.object(at: 1) as? Int
     }
 
 }

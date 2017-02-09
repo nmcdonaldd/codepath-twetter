@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TweetTableViewCellDelegate {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tweets: [Tweet]!
     @IBOutlet weak var tweetsTableView: UITableView!
@@ -20,7 +20,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tweetsTableView.dataSource = self
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
-        self.tweetsTableView.estimatedRowHeight = 180
+        self.tweetsTableView.estimatedRowHeight = 170
 
         // Do any additional setup after loading the view.
         
@@ -55,20 +55,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TweetTableViewCell = self.tweetsTableView.dequeueReusableCell(withIdentifier: "TweetsTableViewCell", for: indexPath) as! TweetTableViewCell
         
-        cell.cellRow = indexPath
-        cell.delegate = self
         cell.tweetData = self.tweets[indexPath.row]
         
         return cell
-    }
-    
-    
-    // MARK: - TweetTableViewCellDelegate
-    
-    func tweetTableViewCell(_ cell: TweetTableViewCell, didFinishLoadingContentWithIndexPath indexPath: IndexPath) {
-        
-        let iPArr: [IndexPath] = [indexPath]
-        self.tweetsTableView.reloadRows(at: iPArr, with: UITableViewRowAnimation.automatic)
     }
 
     /*

@@ -14,12 +14,12 @@ class Tweet: NSObject {
     var timeStamp: Date?
     var retweetCount: Int! {
         didSet {
-            self.formattedRetweetNumString = Tweet.formatNumberToString(num: self.retweetCount!)
+            self.formattedRetweetNumString = self.formatNumberToString(num: self.retweetCount!)
         }
     }
     var favoriteCount: Int! {
         didSet {
-            self.formattedFavoriteNumString = Tweet.formatNumberToString(num: self.favoriteCount!)
+            self.formattedFavoriteNumString = self.formatNumberToString(num: self.favoriteCount!)
         }
     }
     var isRetweeted: Bool = false
@@ -37,8 +37,9 @@ class Tweet: NSObject {
         self.text = tweetDictionary["text"] as? String
         self.retweetCount = (tweetDictionary["retweet_count"] as! Int)
         self.favoriteCount = (tweetDictionary["favorite_count"] as! Int)
-        self.formattedRetweetNumString = Tweet.formatNumberToString(num: self.retweetCount)
-        self.formattedFavoriteNumString = Tweet.formatNumberToString(num: self.favoriteCount)
+        let nf: NumberFormatter = NumberFormatter()
+        self.formattedRetweetNumString = nf.string(from: NSNumber(value: self.retweetCount))
+        self.formattedFavoriteNumString = nf.string(from: NSNumber(value: self.favoriteCount))
         
         let timeStampString: String? = tweetDictionary["created_at"] as? String
         
@@ -71,7 +72,7 @@ class Tweet: NSObject {
         
     }
     
-    private class func formatNumberToString(num: Int) -> String? {
+    private func formatNumberToString(num: Int) -> String? {
         let nf: NumberFormatter = NumberFormatter()
         return nf.string(from: NSNumber(value: num))
     }
