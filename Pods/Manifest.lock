@@ -16,21 +16,18 @@ PODS:
     - AFNetworking/NSURLSession
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
-  - SVProgressHUD (2.0.4)
   - SwiftDate (4.0.7)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
-  - SVProgressHUD
   - SwiftDate
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
-  SVProgressHUD: bfde85ed6c573ea802b9cb37894ed9b629034f1b
   SwiftDate: 0efb04a6751b1ab804049b2b09a69848cd304c12
 
-PODFILE CHECKSUM: d4b8ea5774f515bff9f112beec764188608828c7
+PODFILE CHECKSUM: 0768fd897a344bcb7cf92b06dd19489e5428d60a
 
 COCOAPODS: 1.1.1

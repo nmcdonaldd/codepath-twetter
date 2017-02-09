@@ -32,11 +32,6 @@ class TweetTableViewCell: UITableViewCell {
             
             if var text = self.tweetData.text {
                 
-                if let beginningIndex = self.tweetData.tweetMediaEntities?.mediaBeginIndex {
-                    let endingIndex = (self.tweetData.tweetMediaEntities?.mediaEndIndex)!
-                }
-                
-                
                 let attributedName: NSMutableAttributedString = NSMutableAttributedString(string: text)
                 let attributedParagraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
                 attributedParagraphStyle.lineSpacing = 3.0

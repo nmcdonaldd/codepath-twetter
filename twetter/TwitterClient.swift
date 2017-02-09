@@ -82,7 +82,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func retweet(tweet: Tweet,  success: @escaping (Int)->(),  failure: @escaping (Error?) -> ()) {
         
-        if let tweetID: String = tweet.id {
+        if let tweetID: String = tweet.tweetID {
             self.post("1.1/statuses/retweet/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
                 
                 let retweetResponseDictionary: NSDictionary = response as! NSDictionary
@@ -100,7 +100,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func favorite(tweet: Tweet, success: @escaping (Int) -> (), failure: @escaping (Error?) -> ()) {
         
-        if let tweetID: String = tweet.id {
+        if let tweetID: String = tweet.tweetID {
             self.post("1.1/favorites/create.json?id=\(tweetID)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
                 
                 let retweetResponseDictionary: NSDictionary = response as! NSDictionary
