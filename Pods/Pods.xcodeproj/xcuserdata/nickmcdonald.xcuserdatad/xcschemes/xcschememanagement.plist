@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftDate.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +42,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0F95DABA1AC237054F881EF5E03DEEF1</key>
+		<key>5364AF0DFBAC69E7DC103EFB5B42DE00</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B6E8D257846DF043FC243F960A4EE7C5</key>
+		<key>8D263F77569D7F3F7C7281A4E60EB492</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D4E96D731FE6A101EBA03E80004D9FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

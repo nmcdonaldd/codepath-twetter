@@ -20,7 +20,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tweetsTableView.dataSource = self
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
-        self.tweetsTableView.estimatedRowHeight = 180
+        self.tweetsTableView.estimatedRowHeight = 170
 
         // Do any additional setup after loading the view.
         

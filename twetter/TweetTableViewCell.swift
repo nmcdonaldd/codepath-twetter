@@ -16,9 +16,6 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetAuthorUsernameLabel: UILabel!
     @IBOutlet weak var tweetAuthorNameLabel: UILabel!
     @IBOutlet weak var tweetAuthorImageView: UIImageView!
-    @IBOutlet weak var contentImageView: UIImageView!
-    @IBOutlet weak var contentImageContainerView: UIView!
-    
     
     @IBOutlet weak var tweetFunctionsContainerView: UIView!
     @IBOutlet weak var retweetImageView: UIImageView!
@@ -37,14 +34,6 @@ class TweetTableViewCell: UITableViewCell {
                 
                 if let beginningIndex = self.tweetData.tweetMediaEntities?.mediaBeginIndex {
                     let endingIndex = (self.tweetData.tweetMediaEntities?.mediaEndIndex)!
-                    self.contentImageContainerView.isHidden = false
-                    
-//                    let start = text.index(text.startIndex, offsetBy: beginningIndex)
-//                    let end = text.index(text.startIndex, offsetBy: endingIndex-1)
-//                    let removeRange: Range<String.Index> = Range(uncheckedBounds: (lower: start, upper: end))
-//                    text.removeSubrange(removeRange)
-                    
-                    self.contentImageView.setImageWith((self.tweetData.tweetMediaEntities?.secureMediaURL)!)
                 }
                 
                 
@@ -90,8 +79,6 @@ class TweetTableViewCell: UITableViewCell {
         // Initialization code
         self.tweetAuthorImageView.layer.cornerRadius = 4.0
         self.tweetAuthorImageView.clipsToBounds = true
-        self.contentImageContainerView.layer.cornerRadius = 4.0
-        self.contentImageContainerView.clipsToBounds = true
         
         let retweetTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedRetweet))
         let favoriteTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedFavorite))
@@ -129,16 +116,8 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.contentImageContainerView.isHidden = true
-        self.contentImageView.image = nil
         self.favoriteImageView.image = UIImage(imageLiteralResourceName: "Heart grey")
         self.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet grey")
     }
