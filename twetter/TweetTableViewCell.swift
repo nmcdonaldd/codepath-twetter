@@ -30,22 +30,12 @@ class TweetTableViewCell: UITableViewCell {
             self.retweetsLabel.text = self.tweetData.formattedRetweetNumString
             self.favoritesLabel.text = self.tweetData.formattedFavoriteNumString
             
-            if var text = self.tweetData.text {
-                
-                let attributedName: NSMutableAttributedString = NSMutableAttributedString(string: text)
-                let attributedParagraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle()
-                attributedParagraphStyle.lineSpacing = 3.0
-                
-                let range: NSRange = NSMakeRange(0, text.characters.count)
-                attributedName.addAttributes([NSParagraphStyleAttributeName: attributedParagraphStyle], range: range)
-                self.tweetTextLabel.attributedText = attributedName
+            if let text = self.tweetData.text {
+                self.tweetTextLabel.text = text
             }
             
-            if let createdAt: String = self.tweetData.timeStamp?.description {
-                let date: DateInRegion = try! DateInRegion(string: createdAt, format: .custom("yyyy-MM-dd HH:mm:ss Z"))
-                let (colloquial, _) = try! date.colloquialSinceNow()
-                
-                self.tweetCreatedAtLabel.text = colloquial
+            if let tweetCreatedRelativeTime: String = self.tweetData.relativeTime {
+                self.tweetCreatedAtLabel.text = tweetCreatedRelativeTime
             }
             
             if let tweetAuthor = self.tweetData.tweetAuthor {
@@ -85,6 +75,10 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     func userTappedRetweet() {
+        // NOTE: - The following might not apply to retweet!!
+        // TODO: - Check to see if the tweet has already been retweeted. If so, we will get an error.
+        //       - At this point, do nothing.
+        
         // Ask the twitter client to favorite this tweet. Give it the tweet ID.
         let twitterClient: TwitterClient = TwitterClient.sharedInstance
         self.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet green")
@@ -99,6 +93,9 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     func userTappedFavorite() {
+        // TODO: - Check to see if the tweet has already been favorited. If so, we will get an error.
+        //       - At this point, do nothing.
+        
         let twitterClient: TwitterClient = TwitterClient.sharedInstance
         self.favoriteImageView.image = UIImage(imageLiteralResourceName: "Heart red")
         

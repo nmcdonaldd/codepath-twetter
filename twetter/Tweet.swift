@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SwiftDate
 
 class Tweet: NSObject {
     
     var text: String?
     var timeStamp: Date?
+    var relativeTime: String?
     var retweetCount: Int? {
         didSet {
             let nf: NumberFormatter = NumberFormatter()
@@ -38,19 +40,28 @@ class Tweet: NSObject {
     var tweetMediaEntities: TweetEntities?
     
     init(tweetDictionary: NSDictionary) {
+        
+        // Set up the basic Tweet details.
         self.text = tweetDictionary["text"] as? String
         self.retweetCount = (tweetDictionary["retweet_count"] as! Int)
         self.favoriteCount = (tweetDictionary["favorite_count"] as! Int)
         let timeStampString: String? = tweetDictionary["created_at"] as? String
+        
         let nf: NumberFormatter = NumberFormatter()
         nf.numberStyle = .decimal
         self.formattedFavoriteNumString = nf.string(from: NSNumber(value: self.favoriteCount!))
         self.formattedRetweetNumString = nf.string(from: NSNumber(value: self.retweetCount!))
         
+        // Set up the time stamp information for the Tweet.
         if let timeStampString = timeStampString {
             let dateFormatter: DateFormatter = DateFormatter()
             dateFormatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             self.timeStamp = dateFormatter.date(from: timeStampString)
+            
+            let date: DateInRegion = try! DateInRegion(string: (self.timeStamp?.description)!, format: .custom("yyyy-MM-dd HH:mm:ss Z"))
+            let (colloquial, _) = try! date.colloquialSinceNow()
+            
+            self.relativeTime = colloquial
         }
         
         let tweetID: String? = tweetDictionary["id_str"] as? String
