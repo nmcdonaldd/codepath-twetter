@@ -43,7 +43,7 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
-        <!--Twetter-->
+        <!--Tweets View Controller-->
         <scene sceneID="Dgb-B7-66F">
             <objects>
                 <viewController id="IzX-Da-Zlz" customClass="TweetsViewController" customModule="twetter" customModuleProvider="target" sceneMemberID="viewController">
@@ -81,8 +81,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-0Q-tKX">
-                                                    <rect key="frame" x="114" y="9.5" width="77" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <rect key="frame" x="114" y="10" width="72" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -182,6 +182,7 @@
                                             <outlet property="tweetCreatedAtLabel" destination="xy5-83-FbY" id="Xy8-zx-Nr8"/>
                                             <outlet property="tweetFunctionsContainerView" destination="WXh-p4-TPv" id="CQ6-w5-dWM"/>
                                             <outlet property="tweetTextLabel" destination="vzF-PL-cQE" id="LAj-CH-mdU"/>
+                                            <segue destination="rcs-Kf-U0m" kind="show" id="4GG-G3-ouL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -195,13 +196,7 @@
                             <constraint firstItem="en7-I4-VDX" firstAttribute="top" secondItem="wWQ-nb-Ii1" secondAttribute="bottom" id="rob-9T-r7U"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Twetter" id="K7A-zU-JTE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="9mK-Ky-3VF">
-                            <connections>
-                                <action selector="onLogoutTapped:" destination="IzX-Da-Zlz" id="Cjn-D1-oqj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="K7A-zU-JTE"/>
                     <connections>
                         <outlet property="tweetsTableView" destination="wWQ-nb-Ii1" id="djm-FD-YFo"/>
                     </connections>
@@ -210,10 +205,28 @@
             </objects>
             <point key="canvasLocation" x="2333.5999999999999" y="138.98050974512745"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--View Controller-->
+        <scene sceneID="IbO-6x-7AF">
+            <objects>
+                <viewController id="rcs-Kf-U0m" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lGb-Tg-M52"/>
+                        <viewControllerLayoutGuide type="bottom" id="tRw-z3-ScV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c63-u5-k5F">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="in2-4C-IbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3425" y="139"/>
+        </scene>
+        <!--Twetter Navigation Controller-->
         <scene sceneID="nol-SM-zBH">
             <objects>
-                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="F0q-Az-0VQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="F0q-Az-0VQ" customClass="TwetterNavigationController" customModule="twetter" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="tuL-Rw-ye1">
@@ -226,6 +239,10 @@
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xbn-GX-HVr">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="IzX-Da-Zlz" kind="relationship" relationship="rootViewController" id="aql-Ym-9gH"/>
                     </connections>

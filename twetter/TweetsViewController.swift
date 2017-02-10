@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TweetsViewController: BaseTwetterViewController {
     
     var tweets: [Tweet]!
     @IBOutlet weak var tweetsTableView: UITableView!
@@ -23,8 +23,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tweetsTableView.estimatedRowHeight = 170
         
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        let title: String = "Home"
+        self.title = title
 
-        // Do any additional setup after loading the view.
+        // Load the image for the title.
+        let titleImageView: UIImageView = UIImageView(image: UIImage(imageLiteralResourceName: "StackOfTweets"))
+        self.navigationItem.titleView = titleImageView
         
         TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) in
             self.tweets = tweets
@@ -39,12 +44,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    // TODO: - THIS IS NO LONGER HOOKED UP TO ANYTHING!
     @IBAction func onLogoutTapped(_ sender: Any) {
         TwitterClient.sharedInstance.logout()
     }
-    
-    
-    // MARK: - UITableViewDelegate
+}
+
+extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let tweets = self.tweets {
@@ -60,15 +66,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.tweetData = self.tweets[indexPath.row]
         return cell
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
 }
