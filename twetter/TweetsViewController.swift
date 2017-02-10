@@ -21,6 +21,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
         self.tweetsTableView.estimatedRowHeight = 170
+        
+        UIApplication.shared.statusBarStyle = .lightContent
 
         // Do any additional setup after loading the view.
         
