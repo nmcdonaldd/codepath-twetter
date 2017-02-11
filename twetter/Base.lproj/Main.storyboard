@@ -67,54 +67,48 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq">
                                                     <rect key="frame" x="8" y="8" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="3AC-7Y-KQc"/>
                                                         <constraint firstAttribute="width" constant="45" id="9PK-TG-FVd"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3G-iO-muK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" ambiguous="YES" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3G-iO-muK">
                                                     <rect key="frame" x="61" y="8" width="45" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-0Q-tKX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-0Q-tKX">
                                                     <rect key="frame" x="114" y="10" width="72" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzF-PL-cQE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" ambiguous="YES" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzF-PL-cQE">
                                                     <rect key="frame" x="61" y="29.5" width="306" height="72"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment>
-                                                            <string key="content">cant wait to be married and to come home after a long day and curl up next to my favorite person in the whole world and fall asleep</string>
-                                                            <attributes>
-                                                                <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                                    <string key="text">cant wait to be married and to come home after a long day and curl up next to my favorite person in the whole world and fall asleep</string>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Created at" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy5-83-FbY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" misplaced="YES" text="Created at" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy5-83-FbY">
                                                     <rect key="frame" x="307" y="109.5" width="60" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXh-p4-TPv">
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WXh-p4-TPv">
                                                     <rect key="frame" x="61" y="147.5" width="306" height="25"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvf-5l-J6e">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Retweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvf-5l-J6e">
                                                             <rect key="frame" x="32" y="4" width="56" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart grey" translatesAutoresizingMaskIntoConstraints="NO" id="JYV-42-CNl">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Heart grey" translatesAutoresizingMaskIntoConstraints="NO" id="JYV-42-CNl">
                                                             <rect key="frame" x="165" y="4" width="16" height="16"/>
                                                             <gestureRecognizers/>
                                                             <constraints>
@@ -122,13 +116,13 @@
                                                                 <constraint firstAttribute="width" constant="16" id="pVA-BE-hWS"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oka-1S-0MM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oka-1S-0MM">
                                                             <rect key="frame" x="189" y="4.5" width="55" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Retweet grey" translatesAutoresizingMaskIntoConstraints="NO" id="zzo-SG-Pdm">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Retweet grey" translatesAutoresizingMaskIntoConstraints="NO" id="zzo-SG-Pdm">
                                                             <rect key="frame" x="8" y="4" width="16" height="16"/>
                                                             <gestureRecognizers/>
                                                             <constraints>
@@ -187,10 +181,44 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ser-5h-uuk">
+                                <rect key="frame" x="67" y="245.5" width="240" height="112"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tweets failed to load." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="662-05-qDL">
+                                        <rect key="frame" x="39" y="33" width="162" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.26274509800000001" green="0.47843137250000001" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YE7-Ee-kYF">
+                                        <rect key="frame" x="82" y="62" width="76" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Retry">
+                                            <color key="titleColor" red="0.26274509800000001" green="0.47843137250000001" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="retryLoadingTweetsTapped:" destination="IzX-Da-Zlz" eventType="touchUpInside" id="wwf-gN-9tn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="662-05-qDL" secondAttribute="trailing" constant="8" id="BMz-De-G1Y"/>
+                                    <constraint firstItem="YE7-Ee-kYF" firstAttribute="top" secondItem="662-05-qDL" secondAttribute="bottom" constant="8" id="F7H-OW-5Ux"/>
+                                    <constraint firstAttribute="trailing" secondItem="YE7-Ee-kYF" secondAttribute="trailing" constant="8" id="FxC-Ux-LhT"/>
+                                    <constraint firstAttribute="width" constant="240" id="eBF-bY-5qw"/>
+                                    <constraint firstItem="662-05-qDL" firstAttribute="top" secondItem="Ser-5h-uuk" secondAttribute="top" constant="33" id="m5e-Yr-coj"/>
+                                    <constraint firstItem="YE7-Ee-kYF" firstAttribute="leading" secondItem="Ser-5h-uuk" secondAttribute="leading" constant="8" id="pXB-5H-d6z"/>
+                                    <constraint firstAttribute="bottom" secondItem="YE7-Ee-kYF" secondAttribute="bottom" constant="20" id="rwt-WG-TlQ"/>
+                                    <constraint firstItem="662-05-qDL" firstAttribute="leading" secondItem="Ser-5h-uuk" secondAttribute="leading" constant="8" id="thU-ng-aMB"/>
+                                    <constraint firstAttribute="height" constant="112" id="tlC-5O-dCe"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ser-5h-uuk" firstAttribute="centerY" secondItem="ggS-MT-ePT" secondAttribute="centerY" id="6py-Ks-4al"/>
                             <constraint firstItem="wWQ-nb-Ii1" firstAttribute="leading" secondItem="ggS-MT-ePT" secondAttribute="leading" id="G8L-w6-mFe"/>
+                            <constraint firstItem="Ser-5h-uuk" firstAttribute="centerX" secondItem="ggS-MT-ePT" secondAttribute="centerX" id="Jd0-yG-nGJ"/>
                             <constraint firstAttribute="trailing" secondItem="wWQ-nb-Ii1" secondAttribute="trailing" id="KFa-ZW-vlZ"/>
                             <constraint firstItem="wWQ-nb-Ii1" firstAttribute="top" secondItem="ggS-MT-ePT" secondAttribute="top" id="LfE-ih-s6B"/>
                             <constraint firstItem="en7-I4-VDX" firstAttribute="top" secondItem="wWQ-nb-Ii1" secondAttribute="bottom" id="rob-9T-r7U"/>
@@ -198,6 +226,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="K7A-zU-JTE"/>
                     <connections>
+                        <outlet property="loadingTweetsFailedView" destination="Ser-5h-uuk" id="5WT-Mf-ws4"/>
                         <outlet property="tweetsTableView" destination="wWQ-nb-Ii1" id="djm-FD-YFo"/>
                     </connections>
                 </viewController>
@@ -205,10 +234,10 @@
             </objects>
             <point key="canvasLocation" x="2333.5999999999999" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Tweet Details View Controller-->
         <scene sceneID="IbO-6x-7AF">
             <objects>
-                <viewController id="rcs-Kf-U0m" sceneMemberID="viewController">
+                <viewController id="rcs-Kf-U0m" customClass="TweetDetailsViewController" customModule="twetter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lGb-Tg-M52"/>
                         <viewControllerLayoutGuide type="bottom" id="tRw-z3-ScV"/>
@@ -229,11 +258,10 @@
                 <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="F0q-Az-0VQ" customClass="TwetterNavigationController" customModule="twetter" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="tuL-Rw-ye1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="tuL-Rw-ye1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.26274509800000001" green="0.47843137250000001" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>

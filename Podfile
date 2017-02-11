@@ -9,6 +9,7 @@ target 'twetter' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'SwiftDate'
+  pod 'SVProgressHUD'
 
   target 'twetterTests' do
     inherit! :search_paths

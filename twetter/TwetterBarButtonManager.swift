@@ -45,7 +45,7 @@ extension TwetterBarButtonManager: UINavigationControllerDelegate {
             sharedRightBarButtonItem.target = destVC
             sharedRightBarButtonItem.action = #selector(BaseTwetterViewController.composeTweetButtonTapped)
             
-            // Set the right bar button item of the destinationVC as the compose button!
+            // Set the right bar button item of the destinationVC as the compose button!\
             destVC.navigationItem.setRightBarButton(sharedRightBarButtonItem, animated: true)
         }
     }

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class TweetsViewController: BaseTwetterViewController {
     
     var tweets: [Tweet]!
     @IBOutlet weak var tweetsTableView: UITableView!
+    @IBOutlet weak var loadingTweetsFailedView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,7 @@ class TweetsViewController: BaseTwetterViewController {
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
         self.tweetsTableView.estimatedRowHeight = 170
+        self.tweetsTableView.isHidden = true
         
         UIApplication.shared.statusBarStyle = .lightContent
         
@@ -31,12 +34,43 @@ class TweetsViewController: BaseTwetterViewController {
         let titleImageView: UIImageView = UIImageView(image: UIImage(imageLiteralResourceName: "StackOfTweets"))
         self.navigationItem.titleView = titleImageView
         
-        TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) in
-            self.tweets = tweets
-            self.tweetsTableView.reloadData()
+        self.loadTweets()
+    }
+    
+    func retryLoadingTweetsTapped() {
+        SVProgressHUD.dismiss()
+        self.loadTweets()
+    }
+    
+    private func loadTweets() {
+        // Setup & show the loading HUD
+        self.setUpLoadingHUD()
+        SVProgressHUD.show()
+        
+        TwitterClient.sharedInstance.homeTimeline(success: { [weak self] (tweets: [Tweet]) in
+            
+            // Unlikely to get a reference cycle, but let's be conservative.
+            if let strongSelf = self {
+                strongSelf.tweets = tweets
+                strongSelf.doneLoadingInitialData()
+                strongSelf.tweetsTableView.reloadData()
+            }
+            
         }) { (error: Error) in
-            // TODO: - show some kind of error to the user.
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: error.localizedDescription)
         }
+    }
+    
+    private func showRetryLoadingTweetsAction() {
+        // TODO: - Show something for the user to retry.
+        
+    }
+    
+    private func setUpLoadingHUD() {
+        SVProgressHUD.setDefaultStyle(.custom)
+        SVProgressHUD.setBackgroundColor(UIColor.clear)
+        SVProgressHUD.setForegroundColor(defaultAppColor)
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,6 +81,11 @@ class TweetsViewController: BaseTwetterViewController {
     // TODO: - THIS IS NO LONGER HOOKED UP TO ANYTHING!
     @IBAction func onLogoutTapped(_ sender: Any) {
         TwitterClient.sharedInstance.logout()
+    }
+    
+    private func doneLoadingInitialData() {
+        SVProgressHUD.dismiss()
+        self.tweetsTableView.isHidden = false
     }
 }
 

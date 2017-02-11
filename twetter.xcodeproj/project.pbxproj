@@ -14,6 +14,7 @@
 		D58C260A1E4E58D50084E1AC /* TwetterBarButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C26091E4E58D50084E1AC /* TwetterBarButtonManager.swift */; };
 		D58C260C1E4E5A3F0084E1AC /* TwetterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C260B1E4E5A3F0084E1AC /* TwetterNavigationController.swift */; };
 		D58C26101E4E5C5C0084E1AC /* BaseTwetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C260F1E4E5C5C0084E1AC /* BaseTwetterViewController.swift */; };
+		D58C26131E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C26121E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift */; };
 		D5CA60D11E41086A007E9D3B /* NotificationCenterNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA60D01E41086A007E9D3B /* NotificationCenterNames.swift */; };
 		D5ED751C1E3EF588000A73EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ED751B1E3EF588000A73EC /* LoginViewController.swift */; };
 		D5ED75211E3F03C6000A73EC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ED75201E3F03C6000A73EC /* User.swift */; };
@@ -60,6 +61,7 @@
 		D58C26091E4E58D50084E1AC /* TwetterBarButtonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwetterBarButtonManager.swift; sourceTree = "<group>"; };
 		D58C260B1E4E5A3F0084E1AC /* TwetterNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwetterNavigationController.swift; sourceTree = "<group>"; };
 		D58C260F1E4E5C5C0084E1AC /* BaseTwetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTwetterViewController.swift; sourceTree = "<group>"; };
+		D58C26121E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwetterKeyDefinitions.swift; sourceTree = "<group>"; };
 		D5CA60D01E41086A007E9D3B /* NotificationCenterNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenterNames.swift; sourceTree = "<group>"; };
 		D5ED751B1E3EF588000A73EC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D5ED75201E3F03C6000A73EC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -150,6 +152,14 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		D58C26111E4E6B6F0084E1AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D58C26121E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D5ED751D1E3F038B000A73EC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				D5F921311E3EF33A00C8970E /* AppDelegate.swift */,
+				D58C26111E4E6B6F0084E1AC /* Supporting Files */,
 				D5ED751F1E3F039E000A73EC /* API */,
 				D53616D91E42CFAC002DC7B8 /* Views */,
 				D5ED751E1E3F0391000A73EC /* View Controllers */,
@@ -522,6 +533,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D58C26131E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift in Sources */,
 				D5ED75251E3FB9A1000A73EC /* TwitterClient.swift in Sources */,
 				D5ED751C1E3EF588000A73EC /* LoginViewController.swift in Sources */,
 				D5CA60D11E41086A007E9D3B /* NotificationCenterNames.swift in Sources */,
