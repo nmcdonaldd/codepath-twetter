@@ -56,19 +56,19 @@
 		A98201B8FFB5B889B64B6539 /* Pods-twetter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twetter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twetter/Pods-twetter.debug.xcconfig"; sourceTree = "<group>"; };
 		B7F3B6C03184D05F2014AF0F /* Pods_twetterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twetterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC8EAF4547A0A3AADA44FE9 /* Pods-twetter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twetter.release.xcconfig"; path = "Pods/Target Support Files/Pods-twetter/Pods-twetter.release.xcconfig"; sourceTree = "<group>"; };
-		D53616DA1E42CFC7002DC7B8 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
-		D58C26061E4E54A80084E1AC /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailsViewController.swift; sourceTree = "<group>"; };
-		D58C26091E4E58D50084E1AC /* TwetterBarButtonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwetterBarButtonManager.swift; sourceTree = "<group>"; };
-		D58C260B1E4E5A3F0084E1AC /* TwetterNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwetterNavigationController.swift; sourceTree = "<group>"; };
-		D58C260F1E4E5C5C0084E1AC /* BaseTwetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTwetterViewController.swift; sourceTree = "<group>"; };
-		D58C26121E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwetterKeyDefinitions.swift; sourceTree = "<group>"; };
-		D5CA60D01E41086A007E9D3B /* NotificationCenterNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenterNames.swift; sourceTree = "<group>"; };
-		D5ED751B1E3EF588000A73EC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D5ED75201E3F03C6000A73EC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D5ED75221E3F03CF000A73EC /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
-		D5ED75241E3FB9A1000A73EC /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
-		D5ED75261E3FC0AE000A73EC /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
-		D5F53C501E43D748005D42D0 /* TweetEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetEntities.swift; sourceTree = "<group>"; };
+		D53616DA1E42CFC7002DC7B8 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = Views/TweetTableViewCell.swift; sourceTree = "<group>"; };
+		D58C26061E4E54A80084E1AC /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetDetailsViewController.swift; path = "View Controllers/TweetDetailsViewController.swift"; sourceTree = "<group>"; };
+		D58C26091E4E58D50084E1AC /* TwetterBarButtonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwetterBarButtonManager.swift; path = Managers/TwetterBarButtonManager.swift; sourceTree = "<group>"; };
+		D58C260B1E4E5A3F0084E1AC /* TwetterNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwetterNavigationController.swift; path = "View Controllers/TwetterNavigationController.swift"; sourceTree = "<group>"; };
+		D58C260F1E4E5C5C0084E1AC /* BaseTwetterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseTwetterViewController.swift; path = "View Controllers/BaseTwetterViewController.swift"; sourceTree = "<group>"; };
+		D58C26121E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwetterKeyDefinitions.swift; path = "Supporting Files/TwetterKeyDefinitions.swift"; sourceTree = "<group>"; };
+		D5CA60D01E41086A007E9D3B /* NotificationCenterNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCenterNames.swift; path = Models/NotificationCenterNames.swift; sourceTree = "<group>"; };
+		D5ED751B1E3EF588000A73EC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "View Controllers/LoginViewController.swift"; sourceTree = "<group>"; };
+		D5ED75201E3F03C6000A73EC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		D5ED75221E3F03CF000A73EC /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = Models/Tweet.swift; sourceTree = "<group>"; };
+		D5ED75241E3FB9A1000A73EC /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwitterClient.swift; path = API/TwitterClient.swift; sourceTree = "<group>"; };
+		D5ED75261E3FC0AE000A73EC /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetsViewController.swift; path = "View Controllers/TweetsViewController.swift"; sourceTree = "<group>"; };
+		D5F53C501E43D748005D42D0 /* TweetEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetEntities.swift; path = Models/TweetEntities.swift; sourceTree = "<group>"; };
 		D5F9212E1E3EF33A00C8970E /* twetter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twetter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F921311E3EF33A00C8970E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5F921361E3EF33A00C8970E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -217,13 +217,13 @@
 			isa = PBXGroup;
 			children = (
 				D5F921311E3EF33A00C8970E /* AppDelegate.swift */,
-				D58C26111E4E6B6F0084E1AC /* Supporting Files */,
 				D5ED751F1E3F039E000A73EC /* API */,
 				D53616D91E42CFAC002DC7B8 /* Views */,
 				D5ED751E1E3F0391000A73EC /* View Controllers */,
 				D58C26081E4E58B10084E1AC /* Managers */,
 				D5ED751D1E3F038B000A73EC /* Models */,
 				D5F921351E3EF33A00C8970E /* Main.storyboard */,
+				D58C26111E4E6B6F0084E1AC /* Supporting Files */,
 				D5F921381E3EF33A00C8970E /* Assets.xcassets */,
 				D5F9213A1E3EF33A00C8970E /* LaunchScreen.storyboard */,
 				D5F9213D1E3EF33A00C8970E /* Info.plist */,
