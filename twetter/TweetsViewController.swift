@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SVProgressHUD
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TweetsViewController: BaseTwetterViewController {
     
     var tweets: [Tweet]!
     @IBOutlet weak var tweetsTableView: UITableView!
@@ -21,15 +22,49 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
         self.tweetsTableView.estimatedRowHeight = 170
-
-        // Do any additional setup after loading the view.
+        self.tweetsTableView.isHidden = true
         
-        TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) in
-            self.tweets = tweets
-            self.tweetsTableView.reloadData()
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        let title: String = "Home"
+        self.title = title
+
+        // Load the image for the title.
+        let titleImageView: UIImageView = UIImageView(image: UIImage(imageLiteralResourceName: "StackOfTweets"))
+        self.navigationItem.titleView = titleImageView
+        
+        self.loadTweets()
+    }
+    
+    private func loadTweets() {
+        // Setup & show the loading HUD
+        self.setUpLoadingHUD()
+        SVProgressHUD.show()
+        
+        TwitterClient.sharedInstance.homeTimeline(success: { [weak self] (tweets: [Tweet]) in
+            
+            // Unlikely to get a reference cycle, but let's be conservative.
+            if let strongSelf = self {
+                if (!(strongSelf.navigationItem.rightBarButtonItem?.isEnabled)!) {
+                    strongSelf.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
+                
+                strongSelf.tweets = tweets
+                strongSelf.doneLoadingInitialData()
+                strongSelf.tweetsTableView.reloadData()
+            }
+            
         }) { (error: Error) in
-            // TODO: - show some kind of error to the user.
+            SVProgressHUD.dismiss()
+            SVProgressHUD.showError(withStatus: error.localizedDescription)
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
         }
+    }
+    
+    private func setUpLoadingHUD() {
+        SVProgressHUD.setDefaultStyle(.custom)
+        SVProgressHUD.setBackgroundColor(UIColor.clear)
+        SVProgressHUD.setForegroundColor(defaultAppColor)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,12 +72,31 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    // TODO: - THIS IS NO LONGER HOOKED UP TO ANYTHING!
     @IBAction func onLogoutTapped(_ sender: Any) {
         TwitterClient.sharedInstance.logout()
     }
     
+    private func doneLoadingInitialData() {
+        SVProgressHUD.dismiss()
+        self.tweetsTableView.isHidden = false
+    }
     
-    // MARK: - UITableViewDelegate
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc: TweetDetailsViewController = segue.destination as! TweetDetailsViewController
+        let cell: TweetTableViewCell = sender as! TweetTableViewCell
+        let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
+        let tweet: Tweet = self.tweets[indexPath.row]
+        
+        vc.tweetData = tweet
+    }
+    
+}
+
+extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let tweets = self.tweets {
@@ -58,15 +112,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.tweetData = self.tweets[indexPath.row]
         return cell
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
 }

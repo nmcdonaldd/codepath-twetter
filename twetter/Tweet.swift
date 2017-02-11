@@ -84,7 +84,6 @@ class Tweet: NSObject {
                 self.tweetMediaEntities = TweetEntities(mediaDictionary: entityDictionary)
             }
         }
-        
     }
     
     class func tweetsFromArray(tweetsDictionaries: [NSDictionary]) -> [Tweet] {
