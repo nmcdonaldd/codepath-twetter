@@ -16,7 +16,6 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetAuthorUsernameLabel: UILabel!
     @IBOutlet weak var tweetAuthorNameLabel: UILabel!
     @IBOutlet weak var tweetAuthorImageView: UIImageView!
-    
     @IBOutlet weak var tweetFunctionsContainerView: UIView!
     @IBOutlet weak var retweetImageView: UIImageView!
     @IBOutlet weak var favoriteImageView: UIImageView!
@@ -26,6 +25,10 @@ class TweetTableViewCell: UITableViewCell {
     // This is the data source for this tweet.
     var tweetData: Tweet! {
         didSet {
+            
+            guard let tweetAuthor: User = self.tweetData.tweetAuthor else {
+                return
+            }
             
             self.retweetsLabel.text = self.tweetData.formattedRetweetNumString
             self.favoritesLabel.text = self.tweetData.formattedFavoriteNumString
@@ -38,16 +41,28 @@ class TweetTableViewCell: UITableViewCell {
                 self.tweetCreatedAtLabel.text = tweetCreatedRelativeTime
             }
             
-            if let tweetAuthor = self.tweetData.tweetAuthor {
-                if let authorUsername = tweetAuthor.username {
-                    self.tweetAuthorUsernameLabel.text = "@\(authorUsername)"
-                }
-                
-                if let authorName = tweetAuthor.name {
-                    self.tweetAuthorNameLabel.text = authorName
-                }
-                
+            if let authorUsername = tweetAuthor.username {
+                self.tweetAuthorUsernameLabel.text = "@\(authorUsername)"
+            }
+            
+            if let authorName = tweetAuthor.name {
+                self.tweetAuthorNameLabel.text = authorName
+            }
+            
+            if let tweetAuthorImage: UIImage = tweetAuthor.cachedProfileImage {
+                self.tweetAuthorImageView.image = tweetAuthorImage
+            } else {
                 if let authorProfileImageURL = tweetAuthor.profileURL {
+                    let request: URLRequest = URLRequest(url: authorProfileImageURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+                    self.tweetAuthorImageView.setImageWith(request, placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
+                        
+                        // Successful response from the network.
+                        tweetAuthor.setCachedProfileImage(image: image)
+                        self.tweetAuthorImageView.image = image
+                        
+                    }, failure: { (request: URLRequest, response: HTTPURLResponse?, error: Error) in
+                        // Error.
+                    })
                     self.tweetAuthorImageView.setImageWith(authorProfileImageURL)
                 }
             }
@@ -61,6 +76,7 @@ class TweetTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
         self.tweetAuthorImageView.layer.cornerRadius = 4.0
         self.tweetAuthorImageView.clipsToBounds = true

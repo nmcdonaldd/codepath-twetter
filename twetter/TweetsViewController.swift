@@ -13,7 +13,6 @@ class TweetsViewController: BaseTwetterViewController {
     
     var tweets: [Tweet]!
     @IBOutlet weak var tweetsTableView: UITableView!
-    @IBOutlet weak var loadingTweetsFailedView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +36,6 @@ class TweetsViewController: BaseTwetterViewController {
         self.loadTweets()
     }
     
-    func retryLoadingTweetsTapped() {
-        SVProgressHUD.dismiss()
-        self.loadTweets()
-    }
-    
     private func loadTweets() {
         // Setup & show the loading HUD
         self.setUpLoadingHUD()
@@ -51,6 +45,10 @@ class TweetsViewController: BaseTwetterViewController {
             
             // Unlikely to get a reference cycle, but let's be conservative.
             if let strongSelf = self {
+                if (!(strongSelf.navigationItem.rightBarButtonItem?.isEnabled)!) {
+                    strongSelf.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
+                
                 strongSelf.tweets = tweets
                 strongSelf.doneLoadingInitialData()
                 strongSelf.tweetsTableView.reloadData()
@@ -59,12 +57,8 @@ class TweetsViewController: BaseTwetterViewController {
         }) { (error: Error) in
             SVProgressHUD.dismiss()
             SVProgressHUD.showError(withStatus: error.localizedDescription)
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
         }
-    }
-    
-    private func showRetryLoadingTweetsAction() {
-        // TODO: - Show something for the user to retry.
-        
     }
     
     private func setUpLoadingHUD() {
@@ -87,6 +81,19 @@ class TweetsViewController: BaseTwetterViewController {
         SVProgressHUD.dismiss()
         self.tweetsTableView.isHidden = false
     }
+    
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc: TweetDetailsViewController = segue.destination as! TweetDetailsViewController
+        let cell: TweetTableViewCell = sender as! TweetTableViewCell
+        let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
+        let tweet: Tweet = self.tweets[indexPath.row]
+        
+        vc.tweetData = tweet
+    }
+    
 }
 
 extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {

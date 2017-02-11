@@ -15,6 +15,8 @@ class User: NSObject {
     var tagline: String?
     var profileURL: URL?
     
+    var cachedProfileImage: UIImage?
+    
     var originalDicitonary: NSDictionary?
     
     init(userDictionary: NSDictionary) {
@@ -25,6 +27,13 @@ class User: NSObject {
         let profileImgURL: String? = userDictionary["profile_image_url_https"] as? String
         if let profileImgURL = profileImgURL {
             self.profileURL = URL(string: profileImgURL)
+        }
+    }
+    
+    func setCachedProfileImage(image: UIImage) {
+        guard self.cachedProfileImage != nil else {
+            self.cachedProfileImage = image
+            return
         }
     }
     
