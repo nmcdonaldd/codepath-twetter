@@ -16,12 +16,21 @@ class TweetDetailsViewController: BaseTwetterViewController {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var tweetCreatedAtLabel: UILabel!
     
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var retweetsTextLabel: UILabel!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var favoriteTextLabel: UILabel!
+    
     var tweetData: Tweet!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.fillViewsWithData()
+    }
+    
+    private func fillViewsWithData() {
         
         guard let tweetAuthor = self.tweetData.tweetAuthor else {
             // Show an error.
@@ -64,10 +73,25 @@ class TweetDetailsViewController: BaseTwetterViewController {
             self.tweetAuthorUsernameLabel.text = "@\(authorUsername)"
         }
         
+        // Set up the tweet relative time.
         if let relativeTime: String = tweetData.relativeTime {
             self.tweetCreatedAtLabel.text = relativeTime
         }
         
+        // Set up the favorites/retweets count view.
+        if let retweetsCount: Int = tweetData.retweetCount {
+            self.retweetCountLabel.text = tweetData.formattedRetweetNumString
+            self.retweetsTextLabel.text = retweetsCount == 1 ? "RETWEET" : "RETWEETS"
+        }
+        
+        if let favoritesCount: Int = tweetData.favoriteCount {
+            self.favoriteCountLabel.text = tweetData.formattedFavoriteNumString
+            self.favoriteTextLabel.text = favoritesCount == 1 ? "FAVORITE" : "FAVORITES"
+        }
+    }
+    
+    override func composeTweetButtonTapped() {
+        self.presentComposeTweetInReplyToPossibleTweet(self.tweetData)
     }
 
     override func didReceiveMemoryWarning() {

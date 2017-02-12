@@ -26,8 +26,7 @@ class TweetsViewController: BaseTwetterViewController {
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        let title: String = "Home"
-        self.title = title
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         // Load the image for the title.
         let titleImageView: UIImageView = UIImageView(image: UIImage(imageLiteralResourceName: "StackOfTweets"))
@@ -43,7 +42,7 @@ class TweetsViewController: BaseTwetterViewController {
         
         TwitterClient.sharedInstance.homeTimeline(success: { [weak self] (tweets: [Tweet]) in
             
-            // Unlikely to get a reference cycle, but let's be conservative.
+            // Unlikely to get a strong reference cycle, but let's be conservative.
             if let strongSelf = self {
                 if (!(strongSelf.navigationItem.rightBarButtonItem?.isEnabled)!) {
                     strongSelf.navigationItem.rightBarButtonItem?.isEnabled = true

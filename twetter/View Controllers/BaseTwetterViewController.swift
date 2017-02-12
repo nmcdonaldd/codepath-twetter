@@ -28,8 +28,16 @@ class BaseTwetterViewController: UIViewController {
     }
     
     func composeTweetButtonTapped() {
-        // TODO: - Implement this!
-        print("Should compose tweet!")
+        self.presentComposeTweetInReplyToPossibleTweet(nil)
+    }
+    
+    func presentComposeTweetInReplyToPossibleTweet(_ tweet: Tweet?) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let composeTweetNavVC: TwetterNavigationController = storyboard.instantiateViewController(withIdentifier: modalTweetVCIdentifier) as! TwetterNavigationController
+        composeTweetNavVC.modalPresentationStyle = .popover
+        let composeTweetVC: ComposeTweetViewController = composeTweetNavVC.topViewController as! ComposeTweetViewController
+        composeTweetVC.inReplyToTweet = tweet
+        self.present(composeTweetNavVC, animated: true, completion: nil)
     }
     
 
