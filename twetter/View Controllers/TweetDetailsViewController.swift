@@ -29,7 +29,9 @@ class TweetDetailsViewController: BaseTwetterViewController {
     
     @IBOutlet weak var tweetMediaImageView: UIImageView!
     @IBOutlet weak var tweetMediaImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var tweetContentView: UIView!
     var tweetData: Tweet!
     
     override func viewDidLoad() {
@@ -51,6 +53,8 @@ class TweetDetailsViewController: BaseTwetterViewController {
         
         self.tweetMediaImageView.layer.cornerRadius = 4.0
         self.tweetMediaImageView.clipsToBounds = true
+        
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.tweetContentView.frame.height)
     }
     
     private func fillViewsWithData() {
