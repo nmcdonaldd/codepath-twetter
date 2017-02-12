@@ -80,10 +80,33 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func retweet(tweet: Tweet,  success: @escaping (Int)->(),  failure: @escaping (Error?) -> ()) {
+    func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
+        var postString: String = "1.1/statuses/update.json"
+        let encodedString: String = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        
+        postString = postString + "?status=\(encodedString)"
+        
+        if let tweet: Tweet = inReplyToTweet {
+            let replyTweetID: String = tweet.tweetID!
+            postString = postString + "&in_reply_to_status_id=\(replyTweetID)"
+        }
+        
+        self.post(postString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            // Code
+            // Find something to do here!
+            success()
+        }) { (task: URLSessionDataTask?, error: Error) in
+            // Code
+            failure(error)
+        }
+        
+    }
+    
+    func retweet(tweet: Tweet, success: @escaping (Int)->(),  failure: @escaping (Error?) -> ()) {
         
         if let tweetID: String = tweet.tweetID {
-            self.post("1.1/statuses/retweet/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            let action: String = tweet.isRetweeted ? "unretweet" : "retweet"
+            self.post("1.1/statuses/\(action)/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
                 
                 let retweetResponseDictionary: NSDictionary = response as! NSDictionary
                 let numOfRetweets: Int = retweetResponseDictionary.value(forKeyPath: "retweet_count") as! Int
@@ -94,14 +117,15 @@ class TwitterClient: BDBOAuth1SessionManager {
             })
         } else {
             // Somehow a tweet with no ID is requesting to be retweeted by the user. Good job user, you broke it.
-            print("Error!!!!")
+            print("Error!")
         }
     }
     
     func favorite(tweet: Tweet, success: @escaping (Int) -> (), failure: @escaping (Error?) -> ()) {
         
         if let tweetID: String = tweet.tweetID {
-            self.post("1.1/favorites/create.json?id=\(tweetID)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            let action: String = tweet.isFavorited ? "destroy" : "create"
+            self.post("1.1/favorites/\(action).json?id=\(tweetID)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
                 
                 let retweetResponseDictionary: NSDictionary = response as! NSDictionary
                 let numOfFavorites: Int = retweetResponseDictionary["favorite_count"] as! Int
