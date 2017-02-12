@@ -89,6 +89,10 @@ class TweetDetailsViewController: BaseTwetterViewController {
             self.favoriteTextLabel.text = favoritesCount == 1 ? "FAVORITE" : "FAVORITES"
         }
     }
+    
+    override func composeTweetButtonTapped() {
+        self.presentComposeTweetInReplyToPossibleTweet(self.tweetData)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

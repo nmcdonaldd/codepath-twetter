@@ -14,7 +14,6 @@ class User: NSObject {
     var username: String?
     var tagline: String?
     var profileURL: URL?
-    
     var cachedProfileImage: UIImage?
     
     var originalDicitonary: NSDictionary?
@@ -37,7 +36,7 @@ class User: NSObject {
         }
     }
     
-    static var _currentUser: User?
+    static private var _currentUser: User?
     
     class var currentUser: User? {
         get {

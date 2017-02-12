@@ -9,4 +9,10 @@
 import UIKit
 
 
+// String Constants
+let modalTweetVCIdentifier: String = "ModalTweetViewController"
+
+
+// Accessories
 let defaultAppColor: UIColor = UIColor(red: 67/255, green: 122/255, blue: 190/255, alpha: 1.0)
+let maxTweetCharacterSize: Int = 140

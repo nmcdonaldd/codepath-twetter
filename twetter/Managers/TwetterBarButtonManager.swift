@@ -28,9 +28,7 @@ class TwetterBarButtonManager: NSObject {
             let barButtonItem: UIBarButtonItem = UIBarButtonItem(image: composeTweetImage, style: .plain, target: nil, action: nil)
             return barButtonItem
         }
-        
         return sharedRightBarItem
-        
     }
 }
 
