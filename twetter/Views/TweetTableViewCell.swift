@@ -23,6 +23,10 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var retweetsLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
     
+    // Media
+    @IBOutlet weak var tweetMediaImageView: UIImageView!
+    @IBOutlet weak var tweetMediaImageViewHeightConstraint: NSLayoutConstraint!
+    
     // This is the data source for this tweet.
     var tweetData: Tweet! {
         didSet {
@@ -30,6 +34,30 @@ class TweetTableViewCell: UITableViewCell {
             guard let tweetAuthor: User = self.tweetData.tweetAuthor else {
                 return
             }
+            
+            tweetMediaLabel:
+                if let tweetMediaInfo: TweetEntities = self.tweetData.getTweetEntities() {
+                    // Need to grab the url for the tweet media.
+                    // For now, let's just grab the first TweetMedia
+                    guard let mediaInfo: TweetMedia = tweetMediaInfo.mediaInfo?.first else {
+                        break tweetMediaLabel
+                    }
+                    
+                    guard let mediaSize: CGSize = mediaInfo.mediaSize() else {
+                        break tweetMediaLabel
+                    }
+                
+                    guard let mediaURL: URL = mediaInfo.URLOfMedia() else {
+                        break tweetMediaLabel
+                    }
+                    
+                    let mediaHeight: CGFloat = mediaSize.height
+                    let mediaWidth: CGFloat = mediaSize.width
+                    
+                    self.tweetMediaImageViewHeightConstraint.constant = (mediaHeight * tweetMediaImageView.frame.size.width) / mediaWidth
+                    self.tweetMediaImageView.setImageWith(mediaURL)
+            }
+            
             
             self.retweetsLabel.text = self.tweetData.formattedRetweetNumString
             self.favoritesLabel.text = self.tweetData.formattedFavoriteNumString
@@ -49,6 +77,8 @@ class TweetTableViewCell: UITableViewCell {
             if let authorName = tweetAuthor.name {
                 self.tweetAuthorNameLabel.text = authorName
             }
+            
+            
             
             if let tweetAuthorImage: UIImage = tweetAuthor.cachedProfileImage {
                 self.tweetAuthorImageView.image = tweetAuthorImage
@@ -89,6 +119,10 @@ class TweetTableViewCell: UITableViewCell {
         self.retweetImageView.isUserInteractionEnabled = true
         self.favoriteImageView.addGestureRecognizer(favoriteTapRecognizer)
         self.favoriteImageView.isUserInteractionEnabled = true
+        
+        self.tweetMediaImageView.layer.cornerRadius = 4.0
+        self.tweetMediaImageView.clipsToBounds = true
+        self.tweetMediaImageView.contentMode = .scaleAspectFill
     }
     
     func userTappedRetweet() {        
@@ -139,6 +173,7 @@ class TweetTableViewCell: UITableViewCell {
         super.prepareForReuse()
         self.favoriteImageView.image = UIImage(imageLiteralResourceName: "Heart grey")
         self.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet grey")
+        self.tweetMediaImageViewHeightConstraint.constant = 0
     }
 
 }

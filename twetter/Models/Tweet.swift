@@ -37,7 +37,7 @@ class Tweet: NSObject {
     var formattedFavoriteNumString: String?
     
     var tweetAuthor: User?
-    var tweetMediaEntities: TweetEntities?
+    var tweetEntities: TweetEntities?
     
     init(tweetDictionary: NSDictionary) {
         
@@ -76,14 +76,24 @@ class Tweet: NSObject {
         let userDictonary = tweetDictionary["user"] as! NSDictionary
         self.tweetAuthor = User(userDictionary: userDictonary)
         
-        let tweetEntities: NSDictionary? = tweetDictionary.value(forKeyPath: "entities") as? NSDictionary
-        let entityMedia = tweetEntities?.mutableArrayValue(forKey: "media")
-        if let media = entityMedia {
-            for value in media {
-                let entityDictionary = value as! NSDictionary
-                self.tweetMediaEntities = TweetEntities(mediaDictionary: entityDictionary)
-            }
+        // TODO: - refactor.
+        guard let tweetEntities: NSDictionary = tweetDictionary.value(forKeyPath: "entities") as? NSDictionary else {
+            return
         }
+        self.tweetEntities = TweetEntities(entitiesDictionary: tweetEntities)
+//        let tweetEntities: NSDictionary? = tweetDictionary.value(forKeyPath: "entities") as? NSDictionary
+//        print("\(tweetEntities)")
+//        let entityMedia = tweetEntities?.mutableArrayValue(forKey: "media")
+//        if let media = entityMedia {
+//            for value in media {
+//                let entityDictionary = value as! NSDictionary
+//                self.tweetEntities = TweetEntities(mediaDictionary: entityDictionary)
+//            }
+//        }
+    }
+    
+    func getTweetEntities() -> TweetEntities? {
+        return self.tweetEntities
     }
     
     class func tweetsFromArray(tweetsDictionaries: [NSDictionary]) -> [Tweet] {
@@ -91,6 +101,7 @@ class Tweet: NSObject {
         
         for dictionary in tweetsDictionaries {
             let tweet: Tweet = Tweet(tweetDictionary: dictionary)
+            //print(dictionary)
             
             tweets.append(tweet)
         }

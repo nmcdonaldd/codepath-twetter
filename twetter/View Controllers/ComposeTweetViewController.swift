@@ -120,7 +120,9 @@ class ComposeTweetViewController: UIViewController {
         let twitterClient: TwitterClient = TwitterClient.sharedInstance
         
         twitterClient.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { 
-            // Do something!
+            
+            // Show a success to the user. 
+            // TODO: - Possibly remove this?
             SVProgressHUD.showSuccess(withStatus: "")
             self.dismiss(animated: true, completion: nil)
         }) { (error: Error?) in
