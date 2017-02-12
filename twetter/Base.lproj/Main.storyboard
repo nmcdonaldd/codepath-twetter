@@ -64,7 +64,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Z6-X2-683" id="Bfz-kd-cUj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="180.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="180.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq">
@@ -368,8 +368,11 @@
                     </view>
                     <connections>
                         <outlet property="favoriteCountLabel" destination="qBx-0Y-1IY" id="mzu-N4-U2g"/>
+                        <outlet property="favoriteImageView" destination="KoS-ok-xjB" id="MFs-wI-D6w"/>
                         <outlet property="favoriteTextLabel" destination="QIG-Nj-dJ0" id="g5G-BO-oQL"/>
+                        <outlet property="replyImageView" destination="prV-IJ-9ba" id="oQp-Wb-a12"/>
                         <outlet property="retweetCountLabel" destination="Rti-sO-na6" id="iti-Q2-1j1"/>
+                        <outlet property="retweetImageView" destination="fs1-xp-Lrd" id="fmX-23-VWv"/>
                         <outlet property="retweetsTextLabel" destination="3UN-5N-IZl" id="unm-Jw-rHJ"/>
                         <outlet property="tweetAuthorImageView" destination="xFW-Ds-Xb1" id="u5b-VQ-EZp"/>
                         <outlet property="tweetAuthorNameLabel" destination="lEh-nL-YJu" id="zUi-Ku-2aR"/>
@@ -394,8 +397,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="@laurmc34 hi!" translatesAutoresizingMaskIntoConstraints="NO" id="QJD-kt-KDO">
-                                <rect key="frame" x="16" y="72" width="382" height="604"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="@laurmc34 hi!" translatesAutoresizingMaskIntoConstraints="NO" id="QJD-kt-KDO">
+                                <rect key="frame" x="9" y="72" width="397" height="604"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
@@ -417,6 +420,9 @@
                                                     <state key="normal" title="Tweet">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="tweetButtonTapped:" destination="Kfp-wB-vqd" eventType="touchUpInside" id="gmD-iV-YCr"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90/140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BIn-YE-mae">
                                                     <rect key="frame" x="8" y="8" width="49" height="18"/>
@@ -444,9 +450,9 @@
                             <constraint firstItem="g5s-cO-Ewn" firstAttribute="top" secondItem="bD2-Wf-BX8" secondAttribute="bottom" id="KAO-d3-jr5"/>
                             <constraint firstItem="bD2-Wf-BX8" firstAttribute="top" secondItem="QJD-kt-KDO" secondAttribute="bottom" constant="16" id="LEv-1b-fdK"/>
                             <constraint firstItem="bD2-Wf-BX8" firstAttribute="leading" secondItem="OkJ-sU-IqM" secondAttribute="leading" id="MDb-4S-dRh"/>
-                            <constraint firstItem="QJD-kt-KDO" firstAttribute="leading" secondItem="OkJ-sU-IqM" secondAttribute="leading" constant="16" id="Mmk-Ue-Hr3"/>
+                            <constraint firstItem="QJD-kt-KDO" firstAttribute="leading" secondItem="OkJ-sU-IqM" secondAttribute="leading" constant="9" id="Mmk-Ue-Hr3"/>
                             <constraint firstItem="QJD-kt-KDO" firstAttribute="top" secondItem="obR-gO-XWc" secondAttribute="bottom" constant="8" id="NrD-SS-mMF"/>
-                            <constraint firstAttribute="trailing" secondItem="QJD-kt-KDO" secondAttribute="trailing" constant="16" id="vdq-Fs-Tte"/>
+                            <constraint firstAttribute="trailing" secondItem="QJD-kt-KDO" secondAttribute="trailing" constant="8" id="vdq-Fs-Tte"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="e0S-gu-9eS">

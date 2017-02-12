@@ -37,7 +37,6 @@ class TweetsViewController: BaseTwetterViewController {
     
     private func loadTweets() {
         // Setup & show the loading HUD
-        self.setUpLoadingHUD()
         SVProgressHUD.show()
         
         TwitterClient.sharedInstance.homeTimeline(success: { [weak self] (tweets: [Tweet]) in
@@ -58,12 +57,6 @@ class TweetsViewController: BaseTwetterViewController {
             SVProgressHUD.showError(withStatus: error.localizedDescription)
             self.navigationItem.rightBarButtonItem?.isEnabled = false
         }
-    }
-    
-    private func setUpLoadingHUD() {
-        SVProgressHUD.setDefaultStyle(.custom)
-        SVProgressHUD.setBackgroundColor(UIColor.clear)
-        SVProgressHUD.setForegroundColor(defaultAppColor)
     }
 
     override func didReceiveMemoryWarning() {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ComposeTweetViewController: UIViewController {
 
@@ -42,6 +43,7 @@ class ComposeTweetViewController: UIViewController {
         
         // Setup the navigation bar.
         self.setUpNavigationBarData()
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     private func setInitialText(tweetInReplyTo: Tweet?) {
@@ -111,6 +113,18 @@ class ComposeTweetViewController: UIViewController {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             self.toolBarBottomConstraint.constant = keyboardSize.height
+        }
+    }
+
+    @IBAction func tweetButtonTapped(_ sender: Any) {
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        
+        twitterClient.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { 
+            // Do something!
+            SVProgressHUD.showSuccess(withStatus: "")
+            self.dismiss(animated: true, completion: nil)
+        }) { (error: Error?) in
+            SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }
     }
 }
