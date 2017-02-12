@@ -17,6 +17,7 @@
 		D58C26131E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C26121E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift */; };
 		D59909341E4FBB79002A7547 /* ComposeTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59909331E4FBB79002A7547 /* ComposeTweetViewController.swift */; };
 		D59909361E4FDCFC002A7547 /* TweetComposeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59909351E4FDCFC002A7547 /* TweetComposeButton.swift */; };
+		D5BF89D11E50F2C100306ACA /* TweetMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF89D01E50F2C100306ACA /* TweetMedia.swift */; };
 		D5CA60D11E41086A007E9D3B /* NotificationCenterNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA60D01E41086A007E9D3B /* NotificationCenterNames.swift */; };
 		D5ED751C1E3EF588000A73EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ED751B1E3EF588000A73EC /* LoginViewController.swift */; };
 		D5ED75211E3F03C6000A73EC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5ED75201E3F03C6000A73EC /* User.swift */; };
@@ -66,6 +67,7 @@
 		D58C26121E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwetterKeyDefinitions.swift; path = "Supporting Files/TwetterKeyDefinitions.swift"; sourceTree = "<group>"; };
 		D59909331E4FBB79002A7547 /* ComposeTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComposeTweetViewController.swift; path = "View Controllers/ComposeTweetViewController.swift"; sourceTree = "<group>"; };
 		D59909351E4FDCFC002A7547 /* TweetComposeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetComposeButton.swift; path = Views/TweetComposeButton.swift; sourceTree = "<group>"; };
+		D5BF89D01E50F2C100306ACA /* TweetMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetMedia.swift; path = Models/TweetMedia.swift; sourceTree = "<group>"; };
 		D5CA60D01E41086A007E9D3B /* NotificationCenterNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationCenterNames.swift; path = Models/NotificationCenterNames.swift; sourceTree = "<group>"; };
 		D5ED751B1E3EF588000A73EC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "View Controllers/LoginViewController.swift"; sourceTree = "<group>"; };
 		D5ED75201E3F03C6000A73EC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
@@ -149,12 +151,12 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		D58C26081E4E58B10084E1AC /* Managers */ = {
+		D58C26081E4E58B10084E1AC /* Managers/Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				D58C26091E4E58D50084E1AC /* TwetterBarButtonManager.swift */,
 			);
-			name = Managers;
+			name = Managers/Utilities;
 			sourceTree = "<group>";
 		};
 		D58C26111E4E6B6F0084E1AC /* Supporting Files */ = {
@@ -171,6 +173,7 @@
 				D5ED75201E3F03C6000A73EC /* User.swift */,
 				D5ED75221E3F03CF000A73EC /* Tweet.swift */,
 				D5F53C501E43D748005D42D0 /* TweetEntities.swift */,
+				D5BF89D01E50F2C100306ACA /* TweetMedia.swift */,
 				D5CA60D01E41086A007E9D3B /* NotificationCenterNames.swift */,
 			);
 			name = Models;
@@ -226,7 +229,7 @@
 				D5ED751F1E3F039E000A73EC /* API */,
 				D53616D91E42CFAC002DC7B8 /* Views */,
 				D5ED751E1E3F0391000A73EC /* View Controllers */,
-				D58C26081E4E58B10084E1AC /* Managers */,
+				D58C26081E4E58B10084E1AC /* Managers/Utilities */,
 				D5ED751D1E3F038B000A73EC /* Models */,
 				D5F921351E3EF33A00C8970E /* Main.storyboard */,
 				D58C26111E4E6B6F0084E1AC /* Supporting Files */,
@@ -545,6 +548,7 @@
 				D5ED751C1E3EF588000A73EC /* LoginViewController.swift in Sources */,
 				D5CA60D11E41086A007E9D3B /* NotificationCenterNames.swift in Sources */,
 				D5ED75271E3FC0AE000A73EC /* TweetsViewController.swift in Sources */,
+				D5BF89D11E50F2C100306ACA /* TweetMedia.swift in Sources */,
 				D58C26071E4E54A80084E1AC /* TweetDetailsViewController.swift in Sources */,
 				D58C260C1E4E5A3F0084E1AC /* TwetterNavigationController.swift in Sources */,
 				D58C26101E4E5C5C0084E1AC /* BaseTwetterViewController.swift in Sources */,

@@ -10,25 +10,16 @@ import UIKit
 
 class TweetEntities: NSObject {
     
-    var secureMediaURL: URL?
-    var displayURL: URL?
-    var expandedURL: URL?
-    var mediaBeginIndex: Int?
-    var mediaEndIndex: Int?
+    // Holds info about the width/height and url of the medias
+    var mediaInfo: [TweetMedia]?
     
-    init(mediaDictionary: NSDictionary) {
-        if let mediaURLString: String = mediaDictionary["media_url_https"] as? String {
-            self.secureMediaURL = URL(string: mediaURLString)
+    init(entitiesDictionary: NSDictionary) {
+        
+        if let mediaDictionary: [NSDictionary] = entitiesDictionary["media"] as? [NSDictionary] {
+            self.mediaInfo = mediaDictionary.map({ (mediaDictionary) -> TweetMedia in
+                TweetMedia(mediaDictionary: mediaDictionary)
+            })
         }
-        if let _displayURL: String = mediaDictionary["display_url"] as? String {
-            self.displayURL = URL(string: _displayURL)
-        }
-        if let _expandedURL: String = mediaDictionary["expanded_url"] as? String {
-            self.expandedURL = URL(string: _expandedURL)
-        }
-        let mediaIndicesInTweetText = mediaDictionary.mutableArrayValue(forKey: "indices")
-        self.mediaBeginIndex = mediaIndicesInTweetText.object(at: 0) as? Int
-        self.mediaEndIndex = mediaIndicesInTweetText.object(at: 1) as? Int
     }
 
 }

@@ -13,6 +13,7 @@ class TwetterNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the tint color for the navigation bar.
         self.navigationBar.barTintColor = defaultAppColor
 
         // Do any additional setup after loading the view.

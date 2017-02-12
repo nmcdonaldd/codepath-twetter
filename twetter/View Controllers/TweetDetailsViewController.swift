@@ -16,6 +16,7 @@ class TweetDetailsViewController: BaseTwetterViewController {
     @IBOutlet weak var tweetAuthorUsernameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var tweetCreatedAtLabel: UILabel!
+    @IBOutlet weak var tweetAuthorInfoView: UIView!
     
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var retweetsTextLabel: UILabel!
@@ -25,6 +26,9 @@ class TweetDetailsViewController: BaseTwetterViewController {
     @IBOutlet weak var retweetImageView: UIImageView!
     @IBOutlet weak var favoriteImageView: UIImageView!
     @IBOutlet weak var replyImageView: UIImageView!
+    
+    @IBOutlet weak var tweetMediaImageView: UIImageView!
+    @IBOutlet weak var tweetMediaImageViewHeightConstraint: NSLayoutConstraint!
     
     var tweetData: Tweet!
     
@@ -44,6 +48,9 @@ class TweetDetailsViewController: BaseTwetterViewController {
         self.favoriteImageView.isUserInteractionEnabled = true
         self.replyImageView.addGestureRecognizer(replyTapRecognizer)
         self.replyImageView.isUserInteractionEnabled = true
+        
+        self.tweetMediaImageView.layer.cornerRadius = 4.0
+        self.tweetMediaImageView.clipsToBounds = true
     }
     
     private func fillViewsWithData() {
@@ -74,6 +81,29 @@ class TweetDetailsViewController: BaseTwetterViewController {
         
         self.tweetAuthorImageView.layer.cornerRadius = 4.0
         self.tweetAuthorImageView.clipsToBounds = true
+        
+        tweetMediaLabel:
+            if let tweetMediaInfo: TweetEntities = self.tweetData.getTweetEntities() {
+                // Need to grab the url for the tweet media.
+                // For now, let's just grab the first TweetMedia
+                guard let mediaInfo: TweetMedia = tweetMediaInfo.mediaInfo?.first else {
+                    break tweetMediaLabel
+                }
+                
+                guard let mediaSize: CGSize = mediaInfo.mediaSize() else {
+                    break tweetMediaLabel
+                }
+                
+                guard let mediaURL: URL = mediaInfo.URLOfMedia() else {
+                    break tweetMediaLabel
+                }
+                
+                let mediaHeight: CGFloat = mediaSize.height
+                let mediaWidth: CGFloat = mediaSize.width
+                
+                self.tweetMediaImageViewHeightConstraint.constant = (mediaHeight * tweetMediaImageView.frame.size.width) / mediaWidth
+                self.tweetMediaImageView.setImageWith(mediaURL)
+            }
         
         // Set the tweet text.
         if let tweetText: String = self.tweetData.text {
