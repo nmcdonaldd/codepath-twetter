@@ -17,7 +17,6 @@ class ComposeTweetViewController: UIViewController {
     @IBOutlet weak var tweetButton: UIButton!
     @IBOutlet weak var tweetCharacterCountLabel: UILabel!
     @IBOutlet weak var tweetTextView: UITextView!
-    
     @IBOutlet weak var toolBarBottomConstraint: NSLayoutConstraint!
     
     var inReplyToTweet: Tweet?
