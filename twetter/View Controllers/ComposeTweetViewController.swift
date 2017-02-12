@@ -89,6 +89,7 @@ class ComposeTweetViewController: UIViewController {
                     
                 }, failure: { (requese: URLRequest, response: HTTPURLResponse?, error: Error) in
                     // Error here!
+                    SVProgressHUD.showError(withStatus: error.localizedDescription)
                 })
             }
         }
