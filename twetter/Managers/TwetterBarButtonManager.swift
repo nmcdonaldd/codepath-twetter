@@ -47,7 +47,7 @@ extension TwetterBarButtonManager: UINavigationControllerDelegate {
             destVC.navigationItem.setRightBarButton(sharedRightBarButtonItem, animated: true)
         }
         
-        UIView.animate(withDuration: 0.3) { 
+        //UIView.animate(withDuration: 0.3) {
             if let _: TwitterProfileViewController = viewController as? TwitterProfileViewController {
                 navigationController.navigationBar.isTranslucent = true
                 navigationController.navigationBar.barTintColor = UIColor.clear
@@ -59,20 +59,8 @@ extension TwetterBarButtonManager: UINavigationControllerDelegate {
                 navigationController.navigationBar.barTintColor = defaultAppColor
                 navigationController.navigationBar.setBackgroundImage(nil, for: .any, barMetrics: .default)
             }
-        }
+        //}
     }
-//    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-//        let colorToChange: UIColor!
-//        if let _: TwitterProfileViewController = viewController as? TwitterProfileViewController {
-//            colorToChange = UIColor.clear
-//        } else {
-//            colorToChange = defaultAppColor
-//        }
-//        
-//        UIView.animate(withDuration: 0.3) { 
-//            navigationController.navigationBar.barTintColor = colorToChange
-//        }
-//    }
 }
 extension UIImage {
     static func fromColor(color: UIColor) -> UIImage {

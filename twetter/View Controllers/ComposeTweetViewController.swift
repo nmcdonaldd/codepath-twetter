@@ -127,7 +127,7 @@ class ComposeTweetViewController: UIViewController {
             
             // Show a success to the user. 
             // TODO: - Possibly remove this?
-            SVProgressHUD.showSuccess(withStatus: "")
+            // SVProgressHUD.showSuccess(withStatus: "")
             self.dismiss(animated: true, completion: nil)
         }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
