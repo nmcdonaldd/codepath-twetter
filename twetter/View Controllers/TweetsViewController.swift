@@ -88,7 +88,7 @@ class TweetsViewController: BaseTwetterViewController {
     
 }
 
-extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
+extension TweetsViewController: UITableViewDelegate, UITableViewDataSource, TweetTableViewCellDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let tweets = self.tweets {
@@ -101,11 +101,23 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TweetTableViewCell = self.tweetsTableView.dequeueReusableCell(withIdentifier: "TweetsTableViewCell", for: indexPath) as! TweetTableViewCell
         
+        cell.delegate = self
         cell.tweetData = self.tweets[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    // TweetTableViewCellDelegate
+    func TweetTableViewCellProfileImageWasTapped(_ cell: TweetTableViewCell) {
+        let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
+        guard let userTapped: User = self.tweets[indexPath.row].tweetAuthor else {
+            return
+        }
+        let navVC: TwetterNavigationController = self.navigationController as! TwetterNavigationController
+        navVC.pushProfileViewControllerOfUser(userTapped)
     }
 }

@@ -24,4 +24,11 @@ class TwetterNavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func pushProfileViewControllerOfUser(_ user: User) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileViewController: TwitterProfileViewController = storyboard.instantiateViewController(withIdentifier: twetterProfileVCIdentifier) as! TwitterProfileViewController
+        profileViewController.user = user
+        self.pushViewController(profileViewController, animated: true)
+    }
 }

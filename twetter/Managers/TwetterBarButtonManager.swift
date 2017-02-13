@@ -46,5 +46,43 @@ extension TwetterBarButtonManager: UINavigationControllerDelegate {
             // Set the right bar button item of the destinationVC as the compose button!
             destVC.navigationItem.setRightBarButton(sharedRightBarButtonItem, animated: true)
         }
+        
+        UIView.animate(withDuration: 0.3) { 
+            if let _: TwitterProfileViewController = viewController as? TwitterProfileViewController {
+                navigationController.navigationBar.isTranslucent = true
+                navigationController.navigationBar.barTintColor = UIColor.clear
+                navigationController.navigationBar.backgroundColor = UIColor.clear
+                let backgroundImage: UIImage = UIImage.fromColor(color: UIColor.clear)
+                navigationController.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
+            } else {
+                navigationController.navigationBar.isTranslucent = false
+                navigationController.navigationBar.barTintColor = defaultAppColor
+                navigationController.navigationBar.setBackgroundImage(nil, for: .any, barMetrics: .default)
+            }
+        }
+    }
+//    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+//        let colorToChange: UIColor!
+//        if let _: TwitterProfileViewController = viewController as? TwitterProfileViewController {
+//            colorToChange = UIColor.clear
+//        } else {
+//            colorToChange = defaultAppColor
+//        }
+//        
+//        UIView.animate(withDuration: 0.3) { 
+//            navigationController.navigationBar.barTintColor = colorToChange
+//        }
+//    }
+}
+extension UIImage {
+    static func fromColor(color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(color.cgColor)
+        context!.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
     }
 }

@@ -76,20 +76,10 @@ class Tweet: NSObject {
         let userDictonary = tweetDictionary["user"] as! NSDictionary
         self.tweetAuthor = User(userDictionary: userDictonary)
         
-        // TODO: - refactor.
         guard let tweetEntities: NSDictionary = tweetDictionary.value(forKeyPath: "entities") as? NSDictionary else {
             return
         }
         self.tweetEntities = TweetEntities(entitiesDictionary: tweetEntities)
-//        let tweetEntities: NSDictionary? = tweetDictionary.value(forKeyPath: "entities") as? NSDictionary
-//        print("\(tweetEntities)")
-//        let entityMedia = tweetEntities?.mutableArrayValue(forKey: "media")
-//        if let media = entityMedia {
-//            for value in media {
-//                let entityDictionary = value as! NSDictionary
-//                self.tweetEntities = TweetEntities(mediaDictionary: entityDictionary)
-//            }
-//        }
     }
     
     func getTweetEntities() -> TweetEntities? {

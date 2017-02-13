@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C5A046C82E83C9EFC8E604E1E5BAE375"
-               BuildableName = "SwiftDate.framework"
-               BlueprintName = "SwiftDate"
+               BlueprintIdentifier = "F266128D2D67F2761258D49B24381F4E"
+               BuildableName = "MBTwitterScroll.framework"
+               BlueprintName = "MBTwitterScroll"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C5A046C82E83C9EFC8E604E1E5BAE375"
-            BuildableName = "SwiftDate.framework"
-            BlueprintName = "SwiftDate"
+            BlueprintIdentifier = "F266128D2D67F2761258D49B24381F4E"
+            BuildableName = "MBTwitterScroll.framework"
+            BlueprintName = "MBTwitterScroll"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

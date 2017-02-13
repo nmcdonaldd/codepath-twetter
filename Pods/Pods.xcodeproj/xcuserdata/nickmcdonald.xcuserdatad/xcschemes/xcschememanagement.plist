@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBTwitterScroll.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-twetter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,17 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5364AF0DFBAC69E7DC103EFB5B42DE00</key>
+		<key>C5A046C82E83C9EFC8E604E1E5BAE375</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D263F77569D7F3F7C7281A4E60EB492</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8D4E96D731FE6A101EBA03E80004D9FD</key>
+		<key>C8620C8C5067FD1675000D46629C41F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -68,6 +68,16 @@
 			<true/>
 		</dict>
 		<key>EE07B7EA397F86BAAEFC80703DAABD31</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F266128D2D67F2761258D49B24381F4E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F88F4D7D3B9494A2616788EC989CCD32</key>
 		<dict>
 			<key>primary</key>
 			<true/>
