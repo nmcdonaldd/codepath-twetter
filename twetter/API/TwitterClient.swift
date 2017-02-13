@@ -141,7 +141,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
         var postString: String = TwitterClient.submitTweetEndpoint + "?status="
-        let encodedString: String = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let encodedString: String = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
         print(encodedString)
         postString = postString + encodedString
         
