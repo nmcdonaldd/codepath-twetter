@@ -41,8 +41,15 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func homeTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
-        self.get(TwitterClient.homeTimelineEndpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+    func homeTimeline(startingAtTweetID tweetIDToStart: String?, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        
+        var paramDict: [String: String] = [String: String]()
+        paramDict.updateValue(tweetsToLoadCount, forKey: "count")
+        if let sinceTweetID: String = tweetIDToStart {
+            paramDict.updateValue(sinceTweetID, forKey: "since_id")
+        }
+        
+        self.get(TwitterClient.homeTimelineEndpoint, parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
             let tweetsDictionaries: [NSDictionary] = response as! [NSDictionary]
             let tweets: [Tweet] = Tweet.tweetsFromArray(tweetsDictionaries: tweetsDictionaries)
@@ -51,6 +58,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             
         }, failure: { (task: URLSessionDataTask?, error: Error) in
             failure(error)
+            print(error)
         })
     }
     

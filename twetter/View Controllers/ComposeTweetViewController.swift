@@ -51,7 +51,7 @@ class ComposeTweetViewController: UIViewController {
         self.tweetTextView.text = ""
         guard let tweet: Tweet = tweetInReplyTo else {
             if let userInReplyTo: User = self.toUser {
-                self.tweetTextView.text = "@\(userInReplyTo.username!)"
+                self.tweetTextView.text = "@\(userInReplyTo.username!) "
             }
             return
         }

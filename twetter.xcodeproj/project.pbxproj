@@ -11,6 +11,7 @@
 		C309DDA96677C76FED03C04E /* Pods_twetterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142853F1C1D7E6FCBB651CB2 /* Pods_twetterTests.framework */; };
 		D518E2471E513AE6009B3B9D /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = D518E2431E513AE6009B3B9D /* FXBlurView.m */; };
 		D53616DB1E42CFC7002DC7B8 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53616DA1E42CFC7002DC7B8 /* TweetTableViewCell.swift */; };
+		D549764D1E519923005E8429 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549764C1E519923005E8429 /* InfiniteScrollActivityView.swift */; };
 		D58C26071E4E54A80084E1AC /* TweetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C26061E4E54A80084E1AC /* TweetDetailsViewController.swift */; };
 		D58C260A1E4E58D50084E1AC /* TwetterBarButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C26091E4E58D50084E1AC /* TwetterBarButtonManager.swift */; };
 		D58C260C1E4E5A3F0084E1AC /* TwetterNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C260B1E4E5A3F0084E1AC /* TwetterNavigationController.swift */; };
@@ -65,6 +66,7 @@
 		D518E2421E513AE6009B3B9D /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXBlurView.h; path = Helpers/FXBlurView.h; sourceTree = "<group>"; };
 		D518E2431E513AE6009B3B9D /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXBlurView.m; path = Helpers/FXBlurView.m; sourceTree = "<group>"; };
 		D53616DA1E42CFC7002DC7B8 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetTableViewCell.swift; path = Views/TweetTableViewCell.swift; sourceTree = "<group>"; };
+		D549764C1E519923005E8429 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfiniteScrollActivityView.swift; path = Views/InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
 		D58C26061E4E54A80084E1AC /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetDetailsViewController.swift; path = "View Controllers/TweetDetailsViewController.swift"; sourceTree = "<group>"; };
 		D58C26091E4E58D50084E1AC /* TwetterBarButtonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwetterBarButtonManager.swift; path = Managers/TwetterBarButtonManager.swift; sourceTree = "<group>"; };
 		D58C260B1E4E5A3F0084E1AC /* TwetterNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwetterNavigationController.swift; path = "View Controllers/TwetterNavigationController.swift"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				D53616DA1E42CFC7002DC7B8 /* TweetTableViewCell.swift */,
 				D59909351E4FDCFC002A7547 /* TweetComposeButton.swift */,
+				D549764C1E519923005E8429 /* InfiniteScrollActivityView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D549764D1E519923005E8429 /* InfiniteScrollActivityView.swift in Sources */,
 				D59909341E4FBB79002A7547 /* ComposeTweetViewController.swift in Sources */,
 				D58C26131E4E6B9E0084E1AC /* TwetterKeyDefinitions.swift in Sources */,
 				D5ED75251E3FB9A1000A73EC /* TwitterClient.swift in Sources */,

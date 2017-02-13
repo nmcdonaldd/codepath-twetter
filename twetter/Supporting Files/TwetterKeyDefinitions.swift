@@ -12,6 +12,7 @@ import UIKit
 // String Constants
 let modalTweetVCIdentifier: String = "ModalTweetViewController"
 let twetterProfileVCIdentifier: String = "TwetterProfileIBIdentifier"
+let tweetsToLoadCount: String = "50"
 
 
 // Accessories
