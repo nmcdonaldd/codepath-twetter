@@ -54,7 +54,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
         self.avatarImage.layer.borderColor = UIColor.white.cgColor
         self.avatarImage.layer.borderWidth = 3.0
         
-        guard let twitterUser: User = self.user else {
+        guard let _: User = self.user else {
             return
         }
         

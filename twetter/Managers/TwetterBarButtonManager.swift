@@ -47,21 +47,28 @@ extension TwetterBarButtonManager: UINavigationControllerDelegate {
             destVC.navigationItem.setRightBarButton(sharedRightBarButtonItem, animated: true)
         }
         
-        //UIView.animate(withDuration: 0.3) {
-            if let _: TwitterProfileViewController = viewController as? TwitterProfileViewController {
-                navigationController.navigationBar.isTranslucent = true
-                navigationController.navigationBar.barTintColor = UIColor.clear
-                navigationController.navigationBar.backgroundColor = UIColor.clear
-                let backgroundImage: UIImage = UIImage.fromColor(color: UIColor.clear)
-                navigationController.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
-            } else {
-                navigationController.navigationBar.isTranslucent = false
-                navigationController.navigationBar.barTintColor = defaultAppColor
-                navigationController.navigationBar.setBackgroundImage(nil, for: .any, barMetrics: .default)
-            }
-        //}
+        self.updateNavBarFromNavController(navigationController, forViewController: viewController)
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        self.updateNavBarFromNavController(navigationController, forViewController: viewController)
+    }
+    
+    private func updateNavBarFromNavController(_ navigationController: UINavigationController, forViewController viewController: UIViewController) {
+        if let _: TwitterProfileViewController = viewController as? TwitterProfileViewController {
+            navigationController.navigationBar.isTranslucent = true
+            navigationController.navigationBar.barTintColor = UIColor.clear
+            navigationController.navigationBar.backgroundColor = UIColor.clear
+            let backgroundImage: UIImage = UIImage.fromColor(color: UIColor.clear)
+            navigationController.navigationBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .default)
+        } else {
+            navigationController.navigationBar.isTranslucent = false
+            navigationController.navigationBar.barTintColor = defaultAppColor
+            navigationController.navigationBar.setBackgroundImage(nil, for: .any, barMetrics: .default)
+        }
     }
 }
+
 extension UIImage {
     static func fromColor(color: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
