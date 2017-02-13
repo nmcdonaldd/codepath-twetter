@@ -58,6 +58,9 @@ class TweetDetailsViewController: BaseTwetterViewController {
         self.tweetMediaImageView.clipsToBounds = true
         
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.tweetContentView.frame.height)
+        
+        let backBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     func userTappedProfileImage() {

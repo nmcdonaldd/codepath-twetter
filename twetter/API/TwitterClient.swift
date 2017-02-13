@@ -140,17 +140,17 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
-        var parametersDictionary: Dictionary<String, String> = Dictionary()
-        let postString: String = TwitterClient.submitTweetEndpoint
-        let encodedString: String = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-        parametersDictionary.updateValue(encodedString, forKey: "status")
+        var postString: String = TwitterClient.submitTweetEndpoint + "?status="
+        let encodedString: String = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        print(encodedString)
+        postString = postString + encodedString
         
         if let tweet: Tweet = inReplyToTweet {
             let replyTweetID: String = tweet.tweetID!
-            parametersDictionary.updateValue(replyTweetID, forKey: "in_reply_to_status_id")
+            postString = postString + "&in_reply_to_status_id=\(replyTweetID)"
         }
         
-        self.post(postString, parameters: parametersDictionary as Any?, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        self.post(postString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             // Code
             // Find something to do here!
             success()

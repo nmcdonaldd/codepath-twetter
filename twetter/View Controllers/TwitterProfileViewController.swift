@@ -9,15 +9,19 @@
 import UIKit
 import SVProgressHUD
 
+// NOTE: The twitter profile was adapted from a tutorial here: http://www.thinkandbuild.it/implementing-the-twitter-ios-app-ui/.
+// It doesn't fully work on larger phone sizes. I didn't have time to fix it, really :(
+
+
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
 let offset_B_LabelHeader:CGFloat = 95.0 // At this offset the Black label reaches the Header
 let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top of the White Label
 
-class TwitterProfileViewController: BaseTwetterViewController, UIScrollViewDelegate {
+class TwitterProfileViewController: BaseTwetterViewController {
     
-    @IBOutlet weak var avatarImage:UIImageView!
-    @IBOutlet weak var header:UIView!
-    @IBOutlet weak var headerLabel:UILabel!
+    @IBOutlet weak var avatarImage: UIImageView!
+    @IBOutlet weak var header: UIView!
+    @IBOutlet weak var headerLabel: UILabel!
     var headerImageView:UIImageView!
     var headerBlurImageView:UIImageView!
     
@@ -29,11 +33,18 @@ class TwitterProfileViewController: BaseTwetterViewController, UIScrollViewDeleg
     @IBOutlet weak var userFollowingCountLabel: UILabel!
     @IBOutlet weak var userFollowersCountLabel: UILabel!
     
+    fileprivate var loadingMoreDataActivityView: InfiniteScrollActivityView!
+    fileprivate var isInfiniteScrolling: Bool = false
+    fileprivate var isLoadingMoreData: Bool = false
+    private var refreshControl: UIRefreshControl!
+    
     var userTweets: [Tweet]!
     var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setUpRefreshControl()
         self.tweetsTableView.delegate = self
         self.tweetsTableView.dataSource = self
         
@@ -113,22 +124,67 @@ class TwitterProfileViewController: BaseTwetterViewController, UIScrollViewDeleg
         
         self.header.clipsToBounds = true
         
-        let twitterClient: TwitterClient = TwitterClient.sharedInstance
-        twitterClient.getUsersTweets(twitterUser, startingAtTweetID: nil, success: { (tweets: [Tweet]) in
-            self.userTweets = tweets
-            self.tweetsTableView.reloadData()
-        }, failure: { (error: Error?) in
-            // Some sort of error.
-            SVProgressHUD.showError(withStatus: error?.localizedDescription)
-        })
-        
         let frame: CGRect = CGRect(x: self.tableHeaderView.frame.origin.x, y: self.tableHeaderView.frame.origin.y, width: self.tableHeaderView.frame.size.width, height: self.userFollowersCountLabel.frame.maxY + 16)
         self.tableHeaderView.frame = frame
+        
+        self.loadUserTweets()
+    }
+    
+    @objc fileprivate func loadUserTweets() {
+        
+        let tweetOffset: String? = self.isInfiniteScrolling ? self.userTweets?.last?.tweetID ?? nil : nil
+        
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        twitterClient.getUsersTweets(self.user!, startingAtTweetID: tweetOffset, success: { [weak self] (tweets: [Tweet]) in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            if (strongSelf.isInfiniteScrolling) {
+                strongSelf.userTweets! += tweets
+                strongSelf.isInfiniteScrolling = false
+            } else {
+                strongSelf.userTweets = tweets
+            }
+            strongSelf.refreshControl.endRefreshing()
+            strongSelf.tweetsTableView.reloadData()
+        }, failure: { [weak self] (error: Error?) in
+            // Some sort of error.
+            self?.refreshControl.endRefreshing()
+            SVProgressHUD.showError(withStatus: error?.localizedDescription)
+        })
+    }
+    
+    private func setUpRefreshControl() {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.backgroundColor = UIColor.clear
+        self.refreshControl.tintColor = UIColor.lightGray
+        self.refreshControl.addTarget(self, action: #selector(TwitterProfileViewController.loadUserTweets), for: .valueChanged)
+        self.tweetsTableView.refreshControl = self.refreshControl
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func composeTweetButtonTapped() {
+        self.presentComposeTweetToUser(self.user)
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc: TweetDetailsViewController = segue.destination as! TweetDetailsViewController
+        let cell: TweetTableViewCell = sender as! TweetTableViewCell
+        let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
+        let tweet: Tweet = self.userTweets[indexPath.row]
+        
+        vc.tweetData = tweet
+    }
+}
+
+extension TwitterProfileViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -173,23 +229,25 @@ class TwitterProfileViewController: BaseTwetterViewController, UIScrollViewDeleg
         // Apply Transformations
         header.layer.transform = headerTransform
         avatarImage.layer.transform = avatarTransform
-    }
-    
-    override func composeTweetButtonTapped() {
-        self.presentComposeTweetToUser(self.user)
-    }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc: TweetDetailsViewController = segue.destination as! TweetDetailsViewController
-        let cell: TweetTableViewCell = sender as! TweetTableViewCell
-        let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
-        let tweet: Tweet = self.userTweets[indexPath.row]
         
-        vc.tweetData = tweet
+        if (!self.isLoadingMoreData) {
+            let scrollViewContentHeight = self.tweetsTableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - self.tweetsTableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tweetsTableView.isDragging) {
+                self.isLoadingMoreData = true
+                let frame = CGRect(x: 0, y: self.tweetsTableView.contentSize.height, width: self.tweetsTableView.bounds.width, height: InfiniteScrollActivityView.defaultDrawHeight)
+                self.loadingMoreDataActivityView?.frame = frame
+                self.loadingMoreDataActivityView?.startAnimating()
+                self.isInfiniteScrolling = true
+                self.loadUserTweets()
+            }
+        }
+        
     }
 }
+
 
 extension TwitterProfileViewController: UITableViewDelegate, UITableViewDataSource {
     

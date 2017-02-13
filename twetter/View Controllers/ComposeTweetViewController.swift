@@ -126,8 +126,6 @@ class ComposeTweetViewController: UIViewController {
         twitterClient.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { 
             
             // Show a success to the user. 
-            // TODO: - Possibly remove this?
-            // SVProgressHUD.showSuccess(withStatus: "")
             self.dismiss(animated: true, completion: nil)
         }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
