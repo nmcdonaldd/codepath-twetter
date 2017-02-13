@@ -11,6 +11,7 @@ import UIKit
 
 // String Constants
 let modalTweetVCIdentifier: String = "ModalTweetViewController"
+let twetterProfileVCIdentifier: String = "TwetterProfileIBIdentifier"
 
 
 // Accessories

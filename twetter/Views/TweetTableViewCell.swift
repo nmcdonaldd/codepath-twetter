@@ -10,6 +10,10 @@ import UIKit
 import SwiftDate
 import SVProgressHUD
 
+protocol TweetTableViewCellDelegate: class {
+    func TweetTableViewCellProfileImageWasTapped(_ cell: TweetTableViewCell)
+}
+
 class TweetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tweetTextLabel: UILabel!
@@ -27,6 +31,8 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetMediaImageView: UIImageView!
     @IBOutlet weak var tweetMediaImageViewHeightConstraint: NSLayoutConstraint!
     
+    weak var delegate: TweetTableViewCellDelegate?
+    
     // This is the data source for this tweet.
     var tweetData: Tweet! {
         didSet {
@@ -35,27 +41,26 @@ class TweetTableViewCell: UITableViewCell {
                 return
             }
             
-            tweetMediaLabel:
-                if let tweetMediaInfo: TweetEntities = self.tweetData.getTweetEntities() {
-                    // Need to grab the url for the tweet media.
-                    // For now, let's just grab the first TweetMedia
-                    guard let mediaInfo: TweetMedia = tweetMediaInfo.mediaInfo?.first else {
-                        break tweetMediaLabel
-                    }
-                    
-                    guard let mediaSize: CGSize = mediaInfo.mediaSize() else {
-                        break tweetMediaLabel
-                    }
+            tweetMediaLabel: if let tweetMediaInfo: TweetEntities = self.tweetData.getTweetEntities() {
+                // Need to grab the url for the tweet media.
+                // For now, let's just grab the first TweetMedia
+                guard let mediaInfo: TweetMedia = tweetMediaInfo.mediaInfo?.first else {
+                    break tweetMediaLabel
+                }
                 
-                    guard let mediaURL: URL = mediaInfo.URLOfMedia() else {
-                        break tweetMediaLabel
-                    }
-                    
-                    let mediaHeight: CGFloat = mediaSize.height
-                    let mediaWidth: CGFloat = mediaSize.width
-                    
-                    self.tweetMediaImageViewHeightConstraint.constant = (mediaHeight * tweetMediaImageView.frame.size.width) / mediaWidth
-                    self.tweetMediaImageView.setImageWith(mediaURL)
+                guard let mediaSize: CGSize = mediaInfo.mediaSize() else {
+                    break tweetMediaLabel
+                }
+            
+                guard let mediaURL: URL = mediaInfo.URLOfMedia() else {
+                    break tweetMediaLabel
+                }
+                
+                let mediaHeight: CGFloat = mediaSize.height
+                let mediaWidth: CGFloat = mediaSize.width
+                
+                self.tweetMediaImageViewHeightConstraint.constant = (mediaHeight * tweetMediaImageView.frame.size.width) / mediaWidth
+                self.tweetMediaImageView.setImageWith(mediaURL)
             }
             
             
@@ -114,15 +119,22 @@ class TweetTableViewCell: UITableViewCell {
         
         let retweetTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedRetweet))
         let favoriteTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedFavorite))
+        let profileImageTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedProfileImage))
         
         self.retweetImageView.addGestureRecognizer(retweetTapRecognizer)
         self.retweetImageView.isUserInteractionEnabled = true
         self.favoriteImageView.addGestureRecognizer(favoriteTapRecognizer)
         self.favoriteImageView.isUserInteractionEnabled = true
+        self.tweetAuthorImageView.addGestureRecognizer(profileImageTapRecognizer)
+        self.tweetAuthorImageView.isUserInteractionEnabled = true
         
         self.tweetMediaImageView.layer.cornerRadius = 4.0
         self.tweetMediaImageView.clipsToBounds = true
         self.tweetMediaImageView.contentMode = .scaleAspectFill
+    }
+    
+    func userTappedProfileImage() {
+        self.delegate?.TweetTableViewCellProfileImageWasTapped(self)
     }
     
     func userTappedRetweet() {        

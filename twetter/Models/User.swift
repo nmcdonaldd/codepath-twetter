@@ -13,8 +13,28 @@ class User: NSObject {
     var name: String?
     var username: String?
     var tagline: String?
+    var userID: String?
     var profileURL: URL?
+    var profileBackdropURL: URL?
     var cachedProfileImage: UIImage?
+    var followersCount: Int? {
+        didSet {
+            let nf: NumberFormatter = NumberFormatter()
+            nf.numberStyle = .decimal
+            self.formattedFollowersCount = nf.string(from: NSNumber(value: self.followersCount!))
+        }
+    }
+    var followingCount: Int? {
+        didSet {
+            let nf: NumberFormatter = NumberFormatter()
+            nf.numberStyle = .decimal
+            self.formattedFollowingCount = nf.string(from: NSNumber(value: self.followingCount!))
+        }
+    }
+    var formattedFollowersCount: String?
+    var formattedFollowingCount: String?
+    var isCurrentUserFollowing: Bool?
+    var numberOfTweets: Int?
     
     var originalDicitonary: NSDictionary?
     
@@ -23,10 +43,34 @@ class User: NSObject {
         self.name = userDictionary["name"] as? String
         self.username = userDictionary["screen_name"] as? String
         self.tagline = userDictionary["description"] as? String
-        let profileImgURL: String? = userDictionary["profile_image_url_https"] as? String
-        if let profileImgURL = profileImgURL {
-            self.profileURL = URL(string: profileImgURL)
+        
+        if let id: String = userDictionary["id_str"] as? String {
+            self.userID = id
         }
+        
+        userProfileURLLabel: if let profileImgURLString: String = userDictionary["profile_image_url_https"] as? String {
+            guard let profileImgURL: URL = URL(string: profileImgURLString) else {
+                break userProfileURLLabel
+            }
+            self.profileURL = profileImgURL
+        }
+        
+        backdropURLLabel: if let backdropURLString: String = userDictionary["profile_background_image_url_https"] as? String {
+            guard let backdropURL: URL = URL(string: backdropURLString) else {
+                break backdropURLLabel
+            }
+            self.profileBackdropURL = backdropURL
+        }
+        
+        self.followersCount = userDictionary["followers_count"] as? Int
+        self.isCurrentUserFollowing = userDictionary["following"] as? Bool
+        self.numberOfTweets = userDictionary["statuses_count"] as? Int
+        self.followingCount = userDictionary["friends_count"] as? Int
+        
+        let nf: NumberFormatter = NumberFormatter()
+        nf.numberStyle = .decimal
+        self.formattedFollowingCount = nf.string(from: NSNumber(value: self.followingCount!))
+        self.formattedFollowersCount = nf.string(from: NSNumber(value: self.followersCount!))
     }
     
     func setCachedProfileImage(image: UIImage) {

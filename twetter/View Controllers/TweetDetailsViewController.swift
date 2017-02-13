@@ -43,6 +43,7 @@ class TweetDetailsViewController: BaseTwetterViewController {
         let retweetTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetDetailsViewController.userTappedRetweet))
         let favoriteTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetDetailsViewController.userTappedFavorite))
         let replyTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetDetailsViewController.userTappedReply))
+        let profileTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetDetailsViewController.userTappedProfileImage))
         
         self.retweetImageView.addGestureRecognizer(retweetTapRecognizer)
         self.retweetImageView.isUserInteractionEnabled = true
@@ -50,11 +51,22 @@ class TweetDetailsViewController: BaseTwetterViewController {
         self.favoriteImageView.isUserInteractionEnabled = true
         self.replyImageView.addGestureRecognizer(replyTapRecognizer)
         self.replyImageView.isUserInteractionEnabled = true
+        self.tweetAuthorImageView.addGestureRecognizer(profileTapRecognizer)
+        self.tweetAuthorImageView.isUserInteractionEnabled = true
         
         self.tweetMediaImageView.layer.cornerRadius = 4.0
         self.tweetMediaImageView.clipsToBounds = true
         
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.tweetContentView.frame.height)
+    }
+    
+    func userTappedProfileImage() {
+        guard let user: User = tweetData.tweetAuthor else {
+            return
+        }
+        
+        let navVC: TwetterNavigationController = self.navigationController as! TwetterNavigationController
+        navVC.pushProfileViewControllerOfUser(user)
     }
     
     private func fillViewsWithData() {

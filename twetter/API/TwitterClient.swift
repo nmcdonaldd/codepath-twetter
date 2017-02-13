@@ -18,13 +18,15 @@ class TwitterClient: BDBOAuth1SessionManager {
     static private let verifyCredentialsEndpoint: String = "1.1/account/verify_credentials.json"
     static private let homeTimelineEndpoint: String = "1.1/statuses/home_timeline.json"
     static private let submitTweetEndpoint: String = "1.1/statuses/update.json"
+    static private let getUserTweetsEndpoint: String = "1.1/statuses/user_timeline.json"
+    static private let getUserEndpoint: String = "1.1/users/show.json"
     static private let OAuthRequestPath: String = "oauth/request_token"
     static private let OAuthAccessPath: String = "oauth/access_token"
     static private let requestTokenPath: String = "https://api.twitter.com/oauth/authorize?oauth_token="
     static private let twetterCallBackURL: String = "twetter://oauth"
     
-    var loginSuccess: (() -> ())?
-    var loginFailure: ((Error?) -> ())?
+    private var loginSuccess: (() -> ())?
+    private var loginFailure: ((Error?) -> ())?
     
     static let sharedInstance: TwitterClient = TwitterClient(baseURL: URL(string: TwitterClient.twitterAPIURL)!, consumerKey: TwitterClient.twitterAppConsumerKey, consumerSecret: TwitterClient.twitterAppConsumerSecret)
     
@@ -50,6 +52,44 @@ class TwitterClient: BDBOAuth1SessionManager {
         }, failure: { (task: URLSessionDataTask?, error: Error) in
             failure(error)
         })
+    }
+    
+    func getUsersTweets(_ user: User, startingAtTweetID tweetIDToStart: String?, success: @escaping ([Tweet]) -> (), failure: @escaping (Error?) -> ()) {
+        guard let userID: String = user.userID else {
+            return
+        }
+        
+        var paramDictionary: [String: String] = [String: String]()
+        paramDictionary.updateValue(userID, forKey: "user_id")
+        
+        if let tweetID: String = tweetIDToStart {
+            paramDictionary.updateValue(tweetID, forKey: "since_id")
+        }
+        
+        self.get(TwitterClient.getUserTweetsEndpoint, parameters: paramDictionary, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            // Code
+            let tweetsResponse: [NSDictionary] = (response as? [NSDictionary])!
+            
+            let tweets: [Tweet] = Tweet.tweetsFromArray(tweetsDictionaries: tweetsResponse)
+            success(tweets)
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            // Error
+            failure(error)
+        })
+        
+    }
+    
+    func getUserWithID(_ userID: String, success: @escaping (User)->(), failure: @escaping (Error?) -> ()) {
+        self.get(TwitterClient.getUserEndpoint, parameters: ["user_id": userID], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
+            let userDict: NSDictionary = response as! NSDictionary
+            let user: User = User(userDictionary: userDict)
+            
+            success(user)
+            
+        }) { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        }
     }
     
     func login(success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
