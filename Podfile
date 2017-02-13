@@ -10,7 +10,6 @@ target 'twetter' do
   pod 'BDBOAuth1Manager'
   pod 'SwiftDate'
   pod 'SVProgressHUD'
-  pod 'MBTwitterScroll'
 
   target 'twetterTests' do
     inherit! :search_paths

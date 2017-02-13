@@ -1,6 +1,0 @@
-framework module MBTwitterScroll {
-  umbrella header "MBTwitterScroll-umbrella.h"
-
-  export *
-  module * { export * }
-}
