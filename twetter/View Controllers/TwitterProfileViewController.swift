@@ -13,16 +13,15 @@ let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its tran
 let offset_B_LabelHeader:CGFloat = 95.0 // At this offset the Black label reaches the Header
 let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top of the White Label
 
-class TwitterProfileViewController: UIViewController, UIScrollViewDelegate {
+class TwitterProfileViewController: BaseTwetterViewController, UIScrollViewDelegate {
     
-    //@IBOutlet var scrollView:UIScrollView!
     @IBOutlet weak var avatarImage:UIImageView!
     @IBOutlet weak var header:UIView!
     @IBOutlet weak var headerLabel:UILabel!
     var headerImageView:UIImageView!
     var headerBlurImageView:UIImageView!
-    var blurredHeaderImageView:UIImageView?
     
+    @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet weak var tweetsTableView: UITableView!
     @IBOutlet weak var userProfileNameLabel: UILabel!
     @IBOutlet weak var userProfileUserNameLabel: UILabel!
@@ -62,6 +61,7 @@ class TwitterProfileViewController: UIViewController, UIScrollViewDelegate {
         
         if let usersName: String = user.name {
             self.userProfileNameLabel.text = usersName
+            self.headerLabel.text = usersName
         }
         
         if let userName: String = user.username {
@@ -75,6 +75,9 @@ class TwitterProfileViewController: UIViewController, UIScrollViewDelegate {
         if let formattedFollowersCount: String = user.formattedFollowersCount {
             self.userFollowersCountLabel.text = formattedFollowersCount
         }
+        
+        let backBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: "@\(user.username!)", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         
         // Header - Image
@@ -94,19 +97,20 @@ class TwitterProfileViewController: UIViewController, UIScrollViewDelegate {
                 return
             }
             
-            strongSelf.headerImageView.image = image
-            strongSelf.headerBlurImageView.image = image?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
+            print("Got the image!")
+            strongSelf.headerImageView?.image = image
+            strongSelf.headerBlurImageView?.image = image?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
+            strongSelf.header.insertSubview(strongSelf.headerImageView, belowSubview: strongSelf.headerLabel)
+            strongSelf.header.insertSubview(strongSelf.headerBlurImageView, belowSubview: strongSelf.headerLabel)
             
             }, failure: { (request: URLRequest, response: HTTPURLResponse?, error: Error) in
                 SVProgressHUD.showError(withStatus: error.localizedDescription)
         })
         self.headerImageView?.contentMode = UIViewContentMode.scaleAspectFill
-        self.header.insertSubview(self.headerImageView, belowSubview: headerLabel)
         
         // Header - Blurred Image
         self.headerBlurImageView?.contentMode = UIViewContentMode.scaleAspectFill
         self.headerBlurImageView?.alpha = 0.0
-        self.header.insertSubview(headerBlurImageView, belowSubview: headerLabel)
         
         self.header.clipsToBounds = true
         
@@ -118,6 +122,9 @@ class TwitterProfileViewController: UIViewController, UIScrollViewDelegate {
             // Some sort of error.
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         })
+        
+        let frame: CGRect = CGRect(x: self.tableHeaderView.frame.origin.x, y: self.tableHeaderView.frame.origin.y, width: self.tableHeaderView.frame.size.width, height: self.userFollowersCountLabel.frame.maxY + 16)
+        self.tableHeaderView.frame = frame
     }
     
     override func didReceiveMemoryWarning() {
@@ -184,6 +191,21 @@ class TwitterProfileViewController: UIViewController, UIScrollViewDelegate {
         header.layer.transform = headerTransform
         avatarImage.layer.transform = avatarTransform
     }
+    
+    override func composeTweetButtonTapped() {
+        self.presentComposeTweetToUser(self.user)
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc: TweetDetailsViewController = segue.destination as! TweetDetailsViewController
+        let cell: TweetTableViewCell = sender as! TweetTableViewCell
+        let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
+        let tweet: Tweet = self.userTweets[indexPath.row]
+        
+        vc.tweetData = tweet
+    }
 }
 
 extension TwitterProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -198,6 +220,10 @@ extension TwitterProfileViewController: UITableViewDelegate, UITableViewDataSour
         cell.tweetData = self.userTweets[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tweetsTableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

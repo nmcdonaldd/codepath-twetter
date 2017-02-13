@@ -20,6 +20,7 @@ class ComposeTweetViewController: UIViewController {
     @IBOutlet weak var toolBarBottomConstraint: NSLayoutConstraint!
     
     var inReplyToTweet: Tweet?
+    var toUser: User?
     var currentUser: User!
     
     override func viewDidLoad() {
@@ -47,8 +48,11 @@ class ComposeTweetViewController: UIViewController {
     
     private func setInitialText(tweetInReplyTo: Tweet?) {
         
+        self.tweetTextView.text = ""
         guard let tweet: Tweet = tweetInReplyTo else {
-            self.tweetTextView.text = ""
+            if let userInReplyTo: User = self.toUser {
+                self.tweetTextView.text = "@\(userInReplyTo.username!)"
+            }
             return
         }
         
