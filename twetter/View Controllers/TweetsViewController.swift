@@ -11,18 +11,19 @@ import SVProgressHUD
 
 class TweetsViewController: BaseTwetterViewController {
     
-    fileprivate var tweets: [Tweet]! {
-        didSet {
-            self.currentTweetsOffset = self.tweets.count
-        }
-    }
     @IBOutlet weak var tweetsTableView: UITableView!
+    
     private var refreshControl: UIRefreshControl!
     private var currentTweetsOffset: Int = 0
     fileprivate var loadingMoreDataActivityView: InfiniteScrollActivityView!
     fileprivate var isInfiniteScrolling: Bool = false
     fileprivate var isLoadingMoreData: Bool = false
     fileprivate var selectedIndexPath: IndexPath?
+    fileprivate var tweets: [Tweet]! {
+        didSet {
+            self.currentTweetsOffset = self.tweets.count
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
