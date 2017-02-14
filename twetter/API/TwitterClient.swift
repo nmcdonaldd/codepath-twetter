@@ -139,7 +139,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
+    func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?) -> ()) {
         var postString: String = TwitterClient.submitTweetEndpoint + "?status="
         let encodedString: String = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
         print(encodedString)
@@ -153,7 +153,10 @@ class TwitterClient: BDBOAuth1SessionManager {
         self.post(postString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             // Code
             // Find something to do here!
-            success()
+            let tweetResponse: NSDictionary = response as! NSDictionary
+            let tweet: Tweet = Tweet(tweetDictionary: tweetResponse)
+            
+            success(tweet)
         }) { (task: URLSessionDataTask?, error: Error) in
             // Code
             failure(error)

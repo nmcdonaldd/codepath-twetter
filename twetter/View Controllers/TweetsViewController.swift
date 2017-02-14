@@ -11,7 +11,7 @@ import SVProgressHUD
 
 class TweetsViewController: BaseTwetterViewController {
     
-    var tweets: [Tweet]! {
+    fileprivate var tweets: [Tweet]! {
         didSet {
             self.currentTweetsOffset = self.tweets.count
         }
@@ -124,6 +124,10 @@ class TweetsViewController: BaseTwetterViewController {
     
     
     // MARK: - Navigation
+
+    override func composeTweetButtonTapped() {
+        self.presentComposeTweetToUser(nil, orInReplyTo: nil, withSender: self)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc: TweetDetailsViewController = segue.destination as! TweetDetailsViewController
@@ -198,5 +202,13 @@ extension TweetsViewController: TweetDetailsViewControllerDelegate {
         if let selectIndexPath = self.selectedIndexPath {
             self.tweetsTableView.reloadRows(at: [selectIndexPath], with: .automatic)
         }
+    }
+}
+
+extension TweetsViewController: ComposeTweetDelegate {
+    func ComposeTweetViewController(_ composeTweetVC: ComposeTweetViewController, willExitWithSuccessfulTweet tweet: Tweet) {
+        self.tweets.insert(tweet, at: 0)
+        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
+        self.tweetsTableView.insertRows(at: [indexPath], with: .automatic)
     }
 }

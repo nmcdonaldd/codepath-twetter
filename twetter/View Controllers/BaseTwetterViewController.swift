@@ -28,22 +28,21 @@ class BaseTwetterViewController: UIViewController {
     }
     
     func composeTweetButtonTapped() {
-        self.presentComposeTweetInReplyToPossibleTweet(nil)
+        self.presentComposeTweetToUser(nil, orInReplyTo: nil, withSender: nil)
     }
     
-    func presentComposeTweetInReplyToPossibleTweet(_ tweet: Tweet?) {
-        self.transitionToComposeView(tweet: tweet, userInReplyTo: nil)
+    func presentComposeTweetToUser(_ user: User?, orInReplyTo tweet: Tweet?, withSender sender: Any?) {
+        self.transitionToComposeView(tweet: tweet, userInReplyTo: user, withSender: sender)
     }
     
-    func presentComposeTweetToUser(_ user: User?) {
-        self.transitionToComposeView(tweet: nil, userInReplyTo: user)
-    }
-    
-    private func transitionToComposeView(tweet: Tweet?, userInReplyTo: User?) {
+    private func transitionToComposeView(tweet: Tweet?, userInReplyTo: User?, withSender sender: Any?) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let composeTweetNavVC: TwetterNavigationController = storyboard.instantiateViewController(withIdentifier: modalTweetVCIdentifier) as! TwetterNavigationController
         composeTweetNavVC.modalPresentationStyle = .popover
         let composeTweetVC: ComposeTweetViewController = composeTweetNavVC.topViewController as! ComposeTweetViewController
+        if let possibleDelegate: ComposeTweetDelegate = sender as? ComposeTweetDelegate {
+            composeTweetVC.delegate = possibleDelegate
+        }
         composeTweetVC.inReplyToTweet = tweet
         composeTweetVC.toUser = userInReplyTo
         self.present(composeTweetNavVC, animated: true, completion: nil)
