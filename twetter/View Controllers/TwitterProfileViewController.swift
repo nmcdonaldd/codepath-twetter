@@ -122,9 +122,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
         
         self.header.clipsToBounds = true
         
-        let frame: CGRect = CGRect(x: self.tableHeaderView.frame.origin.x, y: self.tableHeaderView.frame.origin.y, width: self.tableHeaderView.frame.size.width, height: self.userFollowersCountLabel.frame.maxY + 16)
-        self.tableHeaderView.frame = frame
-        
+        self.tweetsTableView.tableHeaderView = self.tableHeaderView
         self.loadUserTweets()
     }
     
