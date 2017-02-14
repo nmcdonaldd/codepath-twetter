@@ -167,7 +167,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
     }
     
     override func composeTweetButtonTapped() {
-        self.presentComposeTweetToUser(self.user)
+        self.presentComposeTweetToUser(self.user, sender: nil)
     }
     
     // MARK: - Navigation

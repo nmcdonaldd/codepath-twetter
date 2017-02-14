@@ -9,6 +9,10 @@
 import UIKit
 import SVProgressHUD
 
+protocol ComposeTweetDelegate: class {
+    func ComposeTweetViewController(_ composeTweetVC: ComposeTweetViewController, willExitWithSuccessfulTweet tweet: Tweet)
+}
+
 class ComposeTweetViewController: UIViewController {
 
     @IBOutlet weak var bottomToolBar: UIToolbar!
@@ -22,6 +26,8 @@ class ComposeTweetViewController: UIViewController {
     var inReplyToTweet: Tweet?
     var toUser: User?
     var currentUser: User!
+    
+    weak var delegate: ComposeTweetDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +111,8 @@ class ComposeTweetViewController: UIViewController {
     }
     
     @IBAction func cancelTweetTapped(_ sender: Any) {
+        self.tweetTextView.resignFirstResponder()
+        self.tweetTextView.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -118,10 +126,16 @@ class ComposeTweetViewController: UIViewController {
     @IBAction func tweetButtonTapped(_ sender: Any) {
         let twitterClient: TwitterClient = TwitterClient.sharedInstance
         
-        twitterClient.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { 
+        twitterClient.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { [weak self] (tweet: Tweet) in
             
-            // Show a success to the user. 
-            self.dismiss(animated: true, completion: nil)
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.delegate?.ComposeTweetViewController(strongSelf, willExitWithSuccessfulTweet: tweet)
+            strongSelf.tweetTextView.resignFirstResponder()
+            strongSelf.tweetTextView.endEditing(true)
+            strongSelf.dismiss(animated: true, completion: nil)
         }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }

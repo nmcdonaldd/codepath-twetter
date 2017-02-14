@@ -221,7 +221,7 @@ class TweetDetailsViewController: BaseTwetterViewController {
     }
     
     override func composeTweetButtonTapped() {
-        self.presentComposeTweetInReplyToPossibleTweet(self.tweetData)
+        self.presentComposeTweetInReplyToPossibleTweet(self.tweetData, sender: nil)
     }
 
     override func didReceiveMemoryWarning() {
