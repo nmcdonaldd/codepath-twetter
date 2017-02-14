@@ -187,5 +187,4 @@ class TweetTableViewCell: UITableViewCell {
         self.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet grey")
         self.tweetMediaImageViewHeightConstraint.constant = 0
     }
-
 }
