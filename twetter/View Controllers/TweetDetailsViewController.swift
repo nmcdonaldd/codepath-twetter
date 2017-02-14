@@ -60,9 +60,6 @@ class TweetDetailsViewController: BaseTwetterViewController {
         self.tweetAuthorImageView.addGestureRecognizer(profileTapRecognizer)
         self.tweetAuthorImageView.isUserInteractionEnabled = true
         
-        self.tweetMediaImageView.layer.cornerRadius = 4.0
-        self.tweetMediaImageView.clipsToBounds = true
-        
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.tweetContentView.frame.height)
         
         let backBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -103,9 +100,6 @@ class TweetDetailsViewController: BaseTwetterViewController {
                 self.tweetAuthorImageView.setImageWith(authorProfileImageURL)
             }
         }
-        
-        self.tweetAuthorImageView.layer.cornerRadius = 4.0
-        self.tweetAuthorImageView.clipsToBounds = true
         
         tweetMediaLabel:
             if let tweetMediaInfo: TweetEntities = self.tweetData.getTweetEntities() {

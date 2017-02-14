@@ -51,9 +51,6 @@ class TwitterProfileViewController: BaseTwetterViewController {
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
         self.tweetsTableView.estimatedRowHeight = 170
-        self.avatarImage.layer.cornerRadius = 10.0
-        self.avatarImage.layer.borderColor = UIColor.white.cgColor
-        self.avatarImage.layer.borderWidth = 3.0
         
         guard let _: User = self.user else {
             return

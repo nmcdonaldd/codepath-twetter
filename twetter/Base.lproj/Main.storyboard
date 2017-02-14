@@ -22,10 +22,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJr-yh-zTi">
-                                <rect key="frame" x="81" y="454" width="212" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJr-yh-zTi" customClass="TwetterLoginButton" customModule="twetter" customModuleProvider="target">
+                                <rect key="frame" x="80" y="305" width="215" height="60"/>
                                 <color key="backgroundColor" red="0.26274509800000001" green="0.47843137250000001" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Login with Twitter">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -34,7 +34,13 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.26274509800000001" green="0.47843137250000001" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="OJr-yh-zTi" secondAttribute="bottom" constant="302" id="6Ze-wR-EPq"/>
+                            <constraint firstItem="OJr-yh-zTi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="285" id="CSA-t5-UDe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OJr-yh-zTi" secondAttribute="trailing" constant="64" id="Hdt-lk-eyX"/>
+                            <constraint firstItem="OJr-yh-zTi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="64" id="rIq-PC-zy0"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="F0q-Az-0VQ" kind="presentation" identifier="loginSegue" id="Mwy-DW-POc"/>
@@ -65,10 +71,10 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Z6-X2-683" id="Bfz-kd-cUj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="3AC-7Y-KQc"/>
@@ -144,7 +150,7 @@
                                                         <constraint firstItem="JYV-42-CNl" firstAttribute="leading" secondItem="Tvf-5l-J6e" secondAttribute="trailing" constant="77" id="uP8-yz-Euj"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hrc-ub-Cuq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hrc-ub-Cuq" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
                                                     <rect key="frame" x="61" y="110" width="306" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" id="s9q-9K-PKp"/>
@@ -229,7 +235,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeB-RL-tri" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="308.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qJI-pk-JYM">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qJI-pk-JYM" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="55" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="83q-3I-wbj"/>
@@ -350,7 +356,7 @@
                                                     <constraint firstAttribute="height" constant="25" id="Z1g-i8-PZ0"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-nK-vaz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RbL-nK-vaz" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="182.5" width="359" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="qTl-FV-I6P"/>
@@ -459,7 +465,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="AvI-ZX-BJa"/>
                                     <barButtonItem style="plain" id="GFb-t0-oSS">
                                         <view key="customView" contentMode="scaleToFill" id="PUr-RB-FnH">
-                                            <rect key="frame" x="220" y="6" width="139" height="33"/>
+                                            <rect key="frame" x="220" y="5.5" width="139" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3U-hI-Ld2" customClass="TweetComposeButton" customModule="twetter" customModuleProvider="target">
@@ -610,7 +616,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="312"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASY-bE-Zt1" userLabel="AvatarImage">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASY-bE-Zt1" userLabel="AvatarImage" customClass="TwetterProfileImageView" customModule="twetter" customModuleProvider="target">
                                             <rect key="frame" x="8" y="80" width="70" height="70"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="Gbu-xO-0GX"/>
@@ -700,10 +706,10 @@
                                         <rect key="frame" x="0.0" y="340" width="375" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rcc-hb-nAP" id="69P-H8-w5B">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LGx-Gp-fGW">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LGx-Gp-fGW" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="Fpy-Kh-Irr"/>
@@ -779,7 +785,7 @@
                                                         <constraint firstItem="yhw-g4-imF" firstAttribute="centerY" secondItem="f9O-mN-n7D" secondAttribute="centerY" id="uUr-a6-frZ"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kh1-UQ-tji">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kh1-UQ-tji" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
                                                     <rect key="frame" x="61" y="110" width="306" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" id="yyq-Ar-XEu"/>
@@ -859,9 +865,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Heart grey" width="104" height="104"/>
-        <image name="Reply arrow" width="104" height="104"/>
-        <image name="Retweet grey" width="100" height="100"/>
+        <image name="Heart grey" width="52" height="52"/>
+        <image name="Reply arrow" width="52" height="52"/>
+        <image name="Retweet grey" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gtp-Zd-fFD"/>

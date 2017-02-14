@@ -29,8 +29,6 @@ class ComposeTweetViewController: UIViewController {
         self.tweetTextView.delegate = self
 
         // Do any additional setup after loading the view.
-        self.tweetButton.layer.cornerRadius = 4.0
-        self.tweetButton.clipsToBounds = true
         self.tweetTextView.becomeFirstResponder()
         
         self.setInitialText(tweetInReplyTo: self.inReplyToTweet)
@@ -82,7 +80,7 @@ class ComposeTweetViewController: UIViewController {
             // Have to fetch the image from the network.
             if let profileImageURL: URL = currentUser.profileURL {
                 let profileImageRequest: URLRequest = URLRequest(url: profileImageURL, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
-                profileImageView = UIImageView()
+                profileImageView = BaseTwetterImageView()
                 profileImageView?.setImageWith(profileImageRequest, placeholderImage: nil, success: {[weak self] (request: URLRequest, response: HTTPURLResponse?, image: UIImage) in
                     
                     currentUserProfileImage = image
@@ -99,9 +97,6 @@ class ComposeTweetViewController: UIViewController {
     }
     
     private func addProfileImageViewToNavigationBar(_ profileImageView: UIImageView) {
-        profileImageView.layer.cornerRadius = 4.0
-        profileImageView.clipsToBounds = true
-        profileImageView.contentMode = .scaleAspectFill
         let navigationBarHeight = self.navigationController?.navigationBar.frame.height
         let adjustedProfileImageViewHeight = navigationBarHeight! - 16
         let profileImageViewFrame: CGRect = CGRect(x: 8, y: 8, width: adjustedProfileImageViewHeight, height: adjustedProfileImageViewHeight)

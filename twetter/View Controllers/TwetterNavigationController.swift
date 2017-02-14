@@ -18,6 +18,10 @@ class TwetterNavigationController: UINavigationController {
 
         // Do any additional setup after loading the view.
         self.delegate = TwetterBarButtonManager.sharedInstance
+        
+        // Change the status bar color.
+        UIApplication.shared.statusBarStyle = .lightContent
+        
     }
 
     override func didReceiveMemoryWarning() {

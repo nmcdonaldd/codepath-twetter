@@ -35,14 +35,13 @@ class TweetsViewController: BaseTwetterViewController {
         self.tweetsTableView.isHidden = true
         self.setUpRefreshControl()
         
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         // Load the image for the title.
         let titleImageView: UIImageView = UIImageView(image: UIImage(imageLiteralResourceName: "StackOfTweets"))
         self.navigationItem.titleView = titleImageView
         
+        SVProgressHUD.show()
         self.loadTweets()
     }
     
@@ -56,7 +55,6 @@ class TweetsViewController: BaseTwetterViewController {
     
     @objc fileprivate func loadTweets() {
         // Setup & show the loading HUD
-        //SVProgressHUD.show()
         
         let tweetOffset: String? = self.isInfiniteScrolling ? self.tweets?.last?.tweetID ?? nil : nil
         

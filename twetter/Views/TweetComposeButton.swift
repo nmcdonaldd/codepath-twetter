@@ -21,4 +21,9 @@ class TweetComposeButton: UIButton {
             }
         }
     }
+    
+    override func awakeFromNib() {
+        self.layer.cornerRadius = 4.0
+        self.clipsToBounds = true
+    }
 }

@@ -83,8 +83,6 @@ class TweetTableViewCell: UITableViewCell {
                 self.tweetAuthorNameLabel.text = authorName
             }
             
-            
-            
             if let tweetAuthorImage: UIImage = tweetAuthor.cachedProfileImage {
                 self.tweetAuthorImageView.image = tweetAuthorImage
             } else {
@@ -114,8 +112,6 @@ class TweetTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         // Initialization code
-        self.tweetAuthorImageView.layer.cornerRadius = 4.0
-        self.tweetAuthorImageView.clipsToBounds = true
         
         let retweetTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedRetweet))
         let favoriteTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedFavorite))
@@ -127,10 +123,6 @@ class TweetTableViewCell: UITableViewCell {
         self.favoriteImageView.isUserInteractionEnabled = true
         self.tweetAuthorImageView.addGestureRecognizer(profileImageTapRecognizer)
         self.tweetAuthorImageView.isUserInteractionEnabled = true
-        
-        self.tweetMediaImageView.layer.cornerRadius = 4.0
-        self.tweetMediaImageView.clipsToBounds = true
-        self.tweetMediaImageView.contentMode = .scaleAspectFill
     }
     
     func userTappedProfileImage() {
@@ -186,5 +178,6 @@ class TweetTableViewCell: UITableViewCell {
         self.favoriteImageView.image = UIImage(imageLiteralResourceName: "Heart grey")
         self.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet grey")
         self.tweetMediaImageViewHeightConstraint.constant = 0
+        self.tweetMediaImageView.image = nil
     }
 }
