@@ -49,7 +49,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
         self.tweetsTableView.dataSource = self
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
-        self.tweetsTableView.estimatedRowHeight = self.tweetsTableView.rowHeight
+        self.tweetsTableView.estimatedRowHeight = 170
         
         guard let _: User = self.user else {
             return
@@ -113,6 +113,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
             }, failure: { (request: URLRequest, response: HTTPURLResponse?, error: Error) in
                 SVProgressHUD.showError(withStatus: error.localizedDescription)
         })
+        
         self.headerImageView?.contentMode = UIViewContentMode.scaleAspectFill
         
         // Header - Blurred Image
@@ -166,7 +167,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
     }
     
     override func composeTweetButtonTapped() {
-        self.presentComposeTweetToUser(self.user, orInReplyTo: nil, withSender: nil)
+        self.presentComposeTweetToUser(self.user, orInReplyTo: nil, withSender: self)
     }
     
     // MARK: - Navigation
@@ -271,5 +272,13 @@ extension TwitterProfileViewController: TweetDetailsViewControllerDelegate {
         if let selectIndexPath = self.selectedIndexPath {
             self.tweetsTableView.reloadRows(at: [selectIndexPath], with: .automatic)
         }
+    }
+}
+
+extension TwitterProfileViewController: ComposeTweetDelegate {
+    func ComposeTweetViewController(_ composeTweetVC: ComposeTweetViewController, willExitWithSuccessfulTweet tweet: Tweet) {
+        self.userTweets.insert(tweet, at: 0)
+        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
+        self.tweetsTableView.insertRows(at: [indexPath], with: .automatic)
     }
 }

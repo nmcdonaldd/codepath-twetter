@@ -32,10 +32,20 @@ class BaseTwetterViewController: UIViewController {
     }
     
     func presentComposeTweetToUser(_ user: User?, orInReplyTo tweet: Tweet?, withSender sender: Any?) {
-        self.transitionToComposeView(tweet: tweet, userInReplyTo: user, withSender: sender)
+        var userToReplyTo: User? = user
+        
+        checkingTwitterUserIDLabel: if let userInReplyTo: User = userToReplyTo {
+            guard let currentUserID: String = User.currentUser?.userID, let profileViewingUserID: String = userInReplyTo.userID else {
+                break checkingTwitterUserIDLabel
+            }
+            if currentUserID == profileViewingUserID {
+                userToReplyTo = nil
+            }
+        }
+        self.transitionToComposeView(inReplyToTweet: tweet, userInReplyTo: userToReplyTo, withSender: sender)
     }
     
-    private func transitionToComposeView(tweet: Tweet?, userInReplyTo: User?, withSender sender: Any?) {
+    private func transitionToComposeView(inReplyToTweet tweet: Tweet?, userInReplyTo: User?, withSender sender: Any?) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let composeTweetNavVC: TwetterNavigationController = storyboard.instantiateViewController(withIdentifier: modalTweetVCIdentifier) as! TwetterNavigationController
         composeTweetNavVC.modalPresentationStyle = .popover
