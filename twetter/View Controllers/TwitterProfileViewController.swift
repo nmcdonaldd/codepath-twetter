@@ -166,9 +166,6 @@ class TwitterProfileViewController: BaseTwetterViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func composeTweetButtonTapped() {
-        self.presentComposeTweetToUser(self.user, orInReplyTo: nil, withSender: self)
-    }
     
     // MARK: - Navigation
     
@@ -180,6 +177,10 @@ class TwitterProfileViewController: BaseTwetterViewController {
         vc.delegate = self
         
         vc.tweetData = tweet
+    }
+    
+    override func composeTweetButtonTapped() {
+        self.presentComposeTweetToUser(self.user, orInReplyTo: nil, withSender: self)
     }
 }
 
