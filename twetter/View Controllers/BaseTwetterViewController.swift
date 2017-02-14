@@ -28,15 +28,11 @@ class BaseTwetterViewController: UIViewController {
     }
     
     func composeTweetButtonTapped() {
-        self.presentComposeTweetInReplyToPossibleTweet(nil, sender: nil)
+        self.presentComposeTweetToUser(nil, orInReplyTo: nil, withSender: nil)
     }
     
-    func presentComposeTweetInReplyToPossibleTweet(_ tweet: Tweet?, sender: Any?) {
-        self.transitionToComposeView(tweet: tweet, userInReplyTo: nil, withSender: sender)
-    }
-    
-    func presentComposeTweetToUser(_ user: User?, sender: Any?) {
-        self.transitionToComposeView(tweet: nil, userInReplyTo: user, withSender: sender)
+    func presentComposeTweetToUser(_ user: User?, orInReplyTo tweet: Tweet?, withSender sender: Any?) {
+        self.transitionToComposeView(tweet: tweet, userInReplyTo: user, withSender: sender)
     }
     
     private func transitionToComposeView(tweet: Tweet?, userInReplyTo: User?, withSender sender: Any?) {

@@ -126,7 +126,7 @@ class TweetsViewController: BaseTwetterViewController {
     // MARK: - Navigation
 
     override func composeTweetButtonTapped() {
-        self.presentComposeTweetToUser(nil, sender: self)
+        self.presentComposeTweetToUser(nil, orInReplyTo: nil, withSender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

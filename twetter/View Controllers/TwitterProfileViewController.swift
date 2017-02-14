@@ -12,7 +12,6 @@ import SVProgressHUD
 // NOTE: The twitter profile was adapted from a tutorial here: http://www.thinkandbuild.it/implementing-the-twitter-ios-app-ui/.
 // It doesn't fully work on larger phone sizes. I didn't have time to fix it, really :(
 
-
 let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
 let offset_B_LabelHeader:CGFloat = 95.0 // At this offset the Black label reaches the Header
 let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top of the White Label
@@ -50,7 +49,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
         self.tweetsTableView.dataSource = self
         
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
-        self.tweetsTableView.estimatedRowHeight = 170
+        self.tweetsTableView.estimatedRowHeight = self.tweetsTableView.rowHeight
         
         guard let _: User = self.user else {
             return
@@ -167,7 +166,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
     }
     
     override func composeTweetButtonTapped() {
-        self.presentComposeTweetToUser(self.user, sender: nil)
+        self.presentComposeTweetToUser(self.user, orInReplyTo: nil, withSender: nil)
     }
     
     // MARK: - Navigation
@@ -243,7 +242,6 @@ extension TwitterProfileViewController: UIScrollViewDelegate {
                 self.loadUserTweets()
             }
         }
-        
     }
 }
 
