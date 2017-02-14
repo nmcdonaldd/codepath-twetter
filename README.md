@@ -102,9 +102,11 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories: **GIF COMING SOON**
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Implemented user stories](https://github.com/nmcdonaldd/codepath-twetter/blob/master/Example/Twetter_wk5_1.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+[Here's a video](https://www.youtube.com/watch?v=_AK3xpazWiw) of implemented user stories that plays better than the gif!
 
 ## Notes
 
