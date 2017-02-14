@@ -9,6 +9,10 @@
 import UIKit
 import SVProgressHUD
 
+protocol TweetDetailsViewControllerDelegate: class {
+    func tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
+}
+
 class TweetDetailsViewController: BaseTwetterViewController {
     
     @IBOutlet weak var tweetAuthorImageView: UIImageView!
@@ -33,6 +37,8 @@ class TweetDetailsViewController: BaseTwetterViewController {
     
     @IBOutlet weak var tweetContentView: UIView!
     var tweetData: Tweet!
+    
+    weak var delegate: TweetDetailsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,6 +186,7 @@ class TweetDetailsViewController: BaseTwetterViewController {
             
             let retweetAssetName: String = strongSelf.tweetData.isRetweeted ? "Retweet green" : "Retweet grey"
             strongSelf.retweetImageView.image = UIImage(imageLiteralResourceName: retweetAssetName)
+            strongSelf.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
             
         }) { [weak self] (error: Error?) in
             print("Error on retweet request: \(error?.localizedDescription)")
@@ -206,6 +213,7 @@ class TweetDetailsViewController: BaseTwetterViewController {
             strongSelf.favoriteTextLabel.text = favoriteNoun
             let favoriteAssetName: String = strongSelf.tweetData.isFavorited ? "Heart red" : "Heart grey"
             strongSelf.favoriteImageView.image = UIImage(imageLiteralResourceName: favoriteAssetName)
+            strongSelf.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
             
         }) { [weak self] (error: Error?) in
             print("Error on favorite request: \(error?.localizedDescription)")

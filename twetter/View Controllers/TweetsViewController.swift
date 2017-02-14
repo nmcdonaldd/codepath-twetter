@@ -22,6 +22,7 @@ class TweetsViewController: BaseTwetterViewController {
     fileprivate var loadingMoreDataActivityView: InfiniteScrollActivityView!
     fileprivate var isInfiniteScrolling: Bool = false
     fileprivate var isLoadingMoreData: Bool = false
+    fileprivate var selectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,7 +132,7 @@ class TweetsViewController: BaseTwetterViewController {
         let cell: TweetTableViewCell = sender as! TweetTableViewCell
         let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
         let tweet: Tweet = self.tweets[indexPath.row]
-        
+        vc.delegate = self
         vc.tweetData = tweet
     }
     
@@ -157,6 +158,7 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.selectedIndexPath = indexPath
     }
 }
 
@@ -189,6 +191,14 @@ extension TweetsViewController: UIScrollViewDelegate {
                 self.isInfiniteScrolling = true
                 self.loadTweets()
             }
+        }
+    }
+}
+
+extension TweetsViewController: TweetDetailsViewControllerDelegate {
+    func tweetDetailsViewControllerDidUpdateRTOrFavoriteValue() {
+        if let selectIndexPath = self.selectedIndexPath {
+            self.tweetsTableView.reloadRows(at: [selectIndexPath], with: .automatic)
         }
     }
 }
