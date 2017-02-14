@@ -78,7 +78,6 @@ class TweetsViewController: BaseTwetterViewController {
             }
             
             strongSelf.navigationItem.rightBarButtonItem?.isEnabled = true
-            strongSelf.tweets = tweets
             strongSelf.doneLoadingInitialData()
             strongSelf.tweetsTableView.reloadData()
             strongSelf.isLoadingMoreData = false
