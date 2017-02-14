@@ -55,7 +55,7 @@ class User: NSObject {
             self.profileURL = profileImgURL
         }
         
-        backdropURLLabel: if let backdropURLString: String = userDictionary["profile_background_image_url_https"] as? String {
+        backdropURLLabel: if let backdropURLString: String = userDictionary["profile_banner_url"] as? String {
             guard let backdropURL: URL = URL(string: backdropURLString) else {
                 break backdropURLLabel
             }
