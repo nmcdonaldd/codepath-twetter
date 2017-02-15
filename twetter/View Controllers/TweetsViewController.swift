@@ -59,40 +59,37 @@ class TweetsViewController: BaseTwetterViewController {
         
         let tweetOffset: String? = self.isInfiniteScrolling ? self.tweets?.last?.tweetID ?? nil : nil
         
-        TwitterClient.sharedInstance.homeTimeline(startingAtTweetID: tweetOffset, success: { [weak self] (tweets: [Tweet]) in
-            
-            // Unlikely to get a strong reference cycle, but let's be conservative.
-            guard let strongSelf = self else {
-                return
-            }
-            
-            strongSelf.navigationItem.rightBarButtonItem?.isEnabled = true
-            if (!(strongSelf.navigationItem.rightBarButtonItem?.isEnabled)!) {
-                strongSelf.navigationItem.rightBarButtonItem?.isEnabled = true
-            }
-            
-            if (strongSelf.isInfiniteScrolling) {
-                strongSelf.tweets! += tweets
-                strongSelf.isInfiniteScrolling = false
-            } else {
-                strongSelf.tweets = tweets
-            }
-            
-            strongSelf.navigationItem.rightBarButtonItem?.isEnabled = true
-            strongSelf.doneLoadingInitialData()
-            strongSelf.tweetsTableView.reloadData()
-            strongSelf.isLoadingMoreData = false
-            strongSelf.refreshControl.endRefreshing()
+        guard let _: User = User.currentUser else {
+            // Can't locate current user.
+            return
+        }
         
-        }) { [weak self] (error: Error) in
-            guard let strongSelf = self else {
-                return
+        User.currentUserTimeline(startingAtTweetID: tweetOffset, withSuccess: { (tweets: [Tweet]) in
+            
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            if (!(self.navigationItem.rightBarButtonItem?.isEnabled)!) {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
             }
-            strongSelf.refreshControl.endRefreshing()
-            strongSelf.isLoadingMoreData = false
+            
+            if (self.isInfiniteScrolling) {
+                self.tweets! += tweets
+                self.isInfiniteScrolling = false
+            } else {
+                self.tweets = tweets
+            }
+            
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            self.doneLoadingInitialData()
+            self.tweetsTableView.reloadData()
+            self.isLoadingMoreData = false
+            self.refreshControl.endRefreshing()
+            
+        }) { (error: Error) in
+            self.refreshControl.endRefreshing()
+            self.isLoadingMoreData = false
             SVProgressHUD.dismiss()
             SVProgressHUD.showError(withStatus: error.localizedDescription)
-            strongSelf.navigationItem.rightBarButtonItem?.isEnabled = false
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
 

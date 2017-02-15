@@ -87,8 +87,15 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
+    
+    // Returns a User object from the passed-in userID string.
+    
     func getUserWithID(_ userID: String, success: @escaping (User)->(), failure: @escaping (Error?) -> ()) {
-        self.get(TwitterClient.getUserEndpoint, parameters: ["user_id": userID], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        
+        var paramDict: [String: String] = [String: String]()
+        paramDict.updateValue(userID, forKey: "user_id")
+        
+        self.get(TwitterClient.getUserEndpoint, parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
             let userDict: NSDictionary = response as! NSDictionary
             let user: User = User(userDictionary: userDict)
@@ -140,38 +147,35 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?) -> ()) {
-        var postString: String = TwitterClient.submitTweetEndpoint + "?status="
-        let encodedString: String = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
-        print(encodedString)
-        postString = postString + encodedString
+        
+        var paramDict: [String: String] = [String: String]()
+        paramDict.updateValue(text, forKey: "status")
         
         if let tweet: Tweet = inReplyToTweet {
             let replyTweetID: String = tweet.tweetID!
-            postString = postString + "&in_reply_to_status_id=\(replyTweetID)"
+            paramDict.updateValue(replyTweetID, forKey: "in_reply_to_status_id")
         }
         
-        self.post(postString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            // Code
+        self.post(TwitterClient.submitTweetEndpoint, parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            
             // Find something to do here!
             let tweetResponse: NSDictionary = response as! NSDictionary
             let tweet: Tweet = Tweet(tweetDictionary: tweetResponse)
             
             success(tweet)
         }) { (task: URLSessionDataTask?, error: Error) in
-            // Code
+            
             failure(error)
         }
     }
     
-    func retweet(tweet: Tweet, success: @escaping (Int)->(),  failure: @escaping (Error?) -> ()) {
+    func retweet(tweet: Tweet, success: @escaping ()->(),  failure: @escaping (Error?) -> ()) {
         
         if let tweetID: String = tweet.tweetID {
             let action: String = tweet.isRetweeted ? "unretweet" : "retweet"
             self.post("1.1/statuses/\(action)/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-                
-                let retweetResponseDictionary: NSDictionary = response as! NSDictionary
-                let numOfRetweets: Int = retweetResponseDictionary.value(forKeyPath: "retweet_count") as! Int
-                success(numOfRetweets)
+
+                success()
                 
             }, failure: { (task: URLSessionDataTask?, error: Error) in
                 failure(error)
@@ -182,15 +186,15 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func favorite(tweet: Tweet, success: @escaping (Int) -> (), failure: @escaping (Error?) -> ()) {
+    func favorite(tweet: Tweet, success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         
         if let tweetID: String = tweet.tweetID {
             let action: String = tweet.isFavorited ? "destroy" : "create"
-            self.post("1.1/favorites/\(action).json", parameters: ["id": tweetID], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            var paramDict: [String: String] = [String: String]()
+            paramDict.updateValue(tweetID, forKey: "id")
+            self.post("1.1/favorites/\(action).json", parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
                 
-                let retweetResponseDictionary: NSDictionary = response as! NSDictionary
-                let numOfFavorites: Int = retweetResponseDictionary["favorite_count"] as! Int
-                success(numOfFavorites)
+                success()
                 
             }, failure: { (task: URLSessionDataTask?, error: Error) in
                 failure(error)

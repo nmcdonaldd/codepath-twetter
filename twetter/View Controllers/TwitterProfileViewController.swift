@@ -130,26 +130,23 @@ class TwitterProfileViewController: BaseTwetterViewController {
         
         let tweetOffset: String? = self.isInfiniteScrolling ? self.userTweets?.last?.tweetID ?? nil : nil
         
-        let twitterClient: TwitterClient = TwitterClient.sharedInstance
-        twitterClient.getUsersTweets(self.user!, startingAtTweetID: tweetOffset, success: { [weak self] (tweets: [Tweet]) in
-            
-            guard let strongSelf = self else {
-                return
-            }
-            
-            if (strongSelf.isInfiniteScrolling) {
-                strongSelf.userTweets! += tweets
-                strongSelf.isInfiniteScrolling = false
+        guard let user: User = self.user else {
+            return
+        }
+        
+        user.getUserTweets(startingAtTweetIDOffset: tweetOffset, success: { (tweets: [Tweet]) in
+            if self.isInfiniteScrolling {
+                self.userTweets! += tweets
+                self.isInfiniteScrolling = false
             } else {
-                strongSelf.userTweets = tweets
+                self.userTweets = tweets
             }
-            strongSelf.refreshControl.endRefreshing()
-            strongSelf.tweetsTableView.reloadData()
-        }, failure: { [weak self] (error: Error?) in
-            // Some sort of error.
-            self?.refreshControl.endRefreshing()
+            self.refreshControl.endRefreshing()
+            self.tweetsTableView.reloadData()
+        }) { (error: Error?) in
+            self.refreshControl.endRefreshing()
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
-        })
+        }
     }
     
     private func setUpRefreshControl() {
