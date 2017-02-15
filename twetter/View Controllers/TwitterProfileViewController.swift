@@ -135,11 +135,20 @@ class TwitterProfileViewController: BaseTwetterViewController {
         }
         
         user.getUserTweets(startingAtTweetIDOffset: tweetOffset, success: { (tweets: [Tweet]) in
+            
+            var tweetsReturned: [Tweet] = tweets
             if self.isInfiniteScrolling {
-                self.userTweets! += tweets
+                // The tweets returned will have the last one that we already have.
+                // Thus, lets purge the first one.
+                if let tweetIDOfFirstTweet: String = tweetsReturned.first?.tweetID {
+                    if tweetIDOfFirstTweet == tweetOffset {
+                        tweetsReturned.remove(at: 0)
+                    }
+                }
+                self.userTweets! += tweetsReturned
                 self.isInfiniteScrolling = false
             } else {
-                self.userTweets = tweets
+                self.userTweets = tweetsReturned
             }
             self.refreshControl.endRefreshing()
             self.tweetsTableView.reloadData()

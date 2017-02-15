@@ -46,7 +46,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         var paramDict: [String: String] = [String: String]()
         paramDict.updateValue(tweetsToLoadCount, forKey: "count")
         if let sinceTweetID: String = tweetIDToStart {
-            paramDict.updateValue(sinceTweetID, forKey: "since_id")
+            paramDict.updateValue(sinceTweetID, forKey: "max_id")
         }
         
         self.get(TwitterClient.homeTimelineEndpoint, parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
@@ -71,7 +71,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         paramDictionary.updateValue(userID, forKey: "user_id")
         
         if let tweetID: String = tweetIDToStart {
-            paramDictionary.updateValue(tweetID, forKey: "since_id")
+            paramDictionary.updateValue(tweetID, forKey: "max_id")
         }
         
         self.get(TwitterClient.getUserTweetsEndpoint, parameters: paramDictionary, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in

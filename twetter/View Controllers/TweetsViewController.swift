@@ -71,11 +71,20 @@ class TweetsViewController: BaseTwetterViewController {
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
             }
             
+            var tweetsReturned: [Tweet] = tweets
+            
             if (self.isInfiniteScrolling) {
-                self.tweets! += tweets
+                // The tweets returned will have the last one that we already have.
+                // Thus, lets purge the first one.
+                if let tweetIDOfFirstTweet: String = tweetsReturned.first?.tweetID {
+                    if tweetIDOfFirstTweet == tweetOffset {
+                        tweetsReturned.remove(at: 0)
+                    }
+                }
+                self.tweets! += tweetsReturned
                 self.isInfiniteScrolling = false
             } else {
-                self.tweets = tweets
+                self.tweets = tweetsReturned
             }
             
             self.navigationItem.rightBarButtonItem?.isEnabled = true
