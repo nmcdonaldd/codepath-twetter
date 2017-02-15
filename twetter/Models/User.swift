@@ -110,7 +110,6 @@ class User: NSObject {
                 if let userData = userData {
                     let dictionary = try! JSONSerialization.jsonObject(with: userData, options: []) as! NSDictionary
                     _currentUser = User(userDictionary: dictionary)
-                    
                 }
             }
             return _currentUser
@@ -125,7 +124,6 @@ class User: NSObject {
             } else {
                 defaults.set(nil, forKey: "currentUser")
             }
-            
             defaults.synchronize()
         }
     }

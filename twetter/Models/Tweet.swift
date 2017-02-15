@@ -95,9 +95,7 @@ class Tweet: NSObject {
             } else {
                 self.favoriteCount! += 1
             }
-            
             self.isFavorited = !self.isFavorited
-            
             success()
         }) { (error: Error?) in
             failure(error)
@@ -113,9 +111,7 @@ class Tweet: NSObject {
             } else {
                 self.retweetCount! += 1
             }
-            
             self.isRetweeted = !self.isRetweeted
-            
             success()
         }) { (error: Error?) in
             failure(error)
@@ -125,9 +121,7 @@ class Tweet: NSObject {
     class func tweetWithText(_ tweetText: String, inReplyToTweet tweetInReplyTo: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?) -> ()) {
         let twitterClient: TwitterClient = TwitterClient.sharedInstance
         twitterClient.tweetWithText(tweetText, inReplyToTweet: tweetInReplyTo, success: { (tweet: Tweet) in
-            
             success(tweet)
-            
         }) { (error: Error?) in
             failure(error)
         }
@@ -138,10 +132,8 @@ class Tweet: NSObject {
         
         for dictionary in tweetsDictionaries {
             let tweet: Tweet = Tweet(tweetDictionary: dictionary)
-            
             tweets.append(tweet)
         }
-        
         return tweets
     }
 
