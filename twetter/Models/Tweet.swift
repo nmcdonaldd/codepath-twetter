@@ -86,12 +86,58 @@ class Tweet: NSObject {
         return self.tweetEntities
     }
     
+    func toggleFavorite(success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        twitterClient.favorite(tweet: self, success: {
+            
+            if self.isFavorited {
+                self.favoriteCount! -= 1
+            } else {
+                self.favoriteCount! += 1
+            }
+            
+            self.isFavorited = !self.isFavorited
+            
+            success()
+        }) { (error: Error?) in
+            failure(error)
+        }
+    }
+    
+    func toggleRetweet(success: @escaping ()->(), failure: @escaping (Error?) ->()) {
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        twitterClient.retweet(tweet: self, success: { 
+            
+            if self.isRetweeted {
+                self.retweetCount! -= 1
+            } else {
+                self.retweetCount! += 1
+            }
+            
+            self.isRetweeted = !self.isRetweeted
+            
+            success()
+        }) { (error: Error?) in
+            failure(error)
+        }
+    }
+    
+    class func tweetWithText(_ tweetText: String, inReplyToTweet tweetInReplyTo: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?) -> ()) {
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        twitterClient.tweetWithText(tweetText, inReplyToTweet: tweetInReplyTo, success: { (tweet: Tweet) in
+            
+            success(tweet)
+            
+        }) { (error: Error?) in
+            failure(error)
+        }
+    }
+    
     class func tweetsFromArray(tweetsDictionaries: [NSDictionary]) -> [Tweet] {
         var tweets: [Tweet] = [Tweet]()
         
         for dictionary in tweetsDictionaries {
             let tweet: Tweet = Tweet(tweetDictionary: dictionary)
-            //print(dictionary)
             
             tweets.append(tweet)
         }

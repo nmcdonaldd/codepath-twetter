@@ -31,10 +31,10 @@ class ComposeTweetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tweetTextView.delegate = self
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.        
+        self.tweetTextView.delegate = self
+        
         self.tweetTextView.becomeFirstResponder()
         
         self.setInitialText(tweetInReplyTo: self.inReplyToTweet)
@@ -124,18 +124,12 @@ class ComposeTweetViewController: UIViewController {
     }
 
     @IBAction func tweetButtonTapped(_ sender: Any) {
-        let twitterClient: TwitterClient = TwitterClient.sharedInstance
         
-        twitterClient.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { [weak self] (tweet: Tweet) in
-            
-            guard let strongSelf = self else {
-                return
-            }
-            
-            strongSelf.delegate?.ComposeTweetViewController(strongSelf, willExitWithSuccessfulTweet: tweet)
-            strongSelf.tweetTextView.resignFirstResponder()
-            strongSelf.tweetTextView.endEditing(true)
-            strongSelf.dismiss(animated: true, completion: nil)
+        Tweet.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { (tweet: Tweet) in
+            self.delegate?.ComposeTweetViewController(self, willExitWithSuccessfulTweet: tweet)
+            self.tweetTextView.resignFirstResponder()
+            self.tweetTextView.endEditing(true)
+            self.dismiss(animated: true, completion: nil)
         }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }

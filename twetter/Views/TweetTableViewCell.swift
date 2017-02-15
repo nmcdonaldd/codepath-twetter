@@ -130,45 +130,23 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     func userTappedRetweet() {        
-        // Ask the twitter client to favorite this tweet. Give it the tweet ID.
-        let twitterClient: TwitterClient = TwitterClient.sharedInstance
         
-        twitterClient.retweet(tweet: self.tweetData, success: { [weak self] (retweetCount: Int) in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            strongSelf.tweetData.retweetCount = retweetCount
-            strongSelf.tweetData.isRetweeted = !strongSelf.tweetData.isRetweeted
-            strongSelf.retweetsLabel.text = strongSelf.tweetData.formattedRetweetNumString
-            let retweetAssetName: String = strongSelf.tweetData.isRetweeted ? "Retweet green" : "Retweet grey"
-            strongSelf.retweetImageView.image = UIImage(imageLiteralResourceName: retweetAssetName)
-            
-        }) { [weak self] (error: Error?) in
-            print("Error on retweet request: \(error?.localizedDescription)")
-            self?.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet grey")
+        self.tweetData.toggleRetweet(success: {
+            self.retweetsLabel.text = self.tweetData.formattedRetweetNumString
+            let retweetAssetName: String = self.tweetData.isRetweeted ? "Retweet green" : "Retweet grey"
+            self.retweetImageView.image = UIImage(imageLiteralResourceName: retweetAssetName)
+        }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }
     }
     
     func userTappedFavorite() {
         
-        let twitterClient: TwitterClient = TwitterClient.sharedInstance
-        
-        twitterClient.favorite(tweet: self.tweetData, success: { [weak self] (favoriteCount: Int) in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            strongSelf.tweetData.favoriteCount = favoriteCount
-            strongSelf.tweetData.isFavorited = !strongSelf.tweetData.isFavorited
-            strongSelf.favoritesLabel.text = strongSelf.tweetData.formattedFavoriteNumString
-            let favoriteAssetName: String = strongSelf.tweetData.isFavorited ? "Heart red" : "Heart grey"
-            strongSelf.favoriteImageView.image = UIImage(imageLiteralResourceName: favoriteAssetName)
-            
-        }) { [weak self] (error: Error?) in
-            print("Error on favorite request: \(error?.localizedDescription)")
-            self?.favoriteImageView.image = UIImage(imageLiteralResourceName: "Heart grey")
+        self.tweetData.toggleFavorite(success: {
+            self.favoritesLabel.text = self.tweetData.formattedFavoriteNumString
+            let favoriteAssetName: String = self.tweetData.isFavorited ? "Heart red" : "Heart grey"
+            self.favoriteImageView.image = UIImage(imageLiteralResourceName: favoriteAssetName)
+        }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }
     }

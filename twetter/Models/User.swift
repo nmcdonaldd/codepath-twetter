@@ -73,6 +73,24 @@ class User: NSObject {
         self.formattedFollowersCount = nf.string(from: NSNumber(value: self.followersCount!))
     }
     
+    func getUserTweets(startingAtTweetIDOffset tweetID: String?, success: @escaping ([Tweet]) -> (), failure: @escaping (Error?) -> ()) {
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        twitterClient.getUsersTweets(self, startingAtTweetID: tweetID, success: { (tweets: [Tweet]) in
+            success(tweets)
+        }) { (error: Error?) in
+            failure(error)
+        }
+    }
+    
+    class func currentUserTimeline(startingAtTweetID tweetID: String?, withSuccess success: @escaping ([Tweet]) -> (), withFailure failure: @escaping (Error) -> ()) {
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        twitterClient.homeTimeline(startingAtTweetID: tweetID, success: { (tweets: [Tweet]) in
+            success(tweets)
+        }) { (error: Error) in
+            failure(error)
+        }
+    }
+    
     func setCachedProfileImage(image: UIImage) {
         guard self.cachedProfileImage != nil else {
             self.cachedProfileImage = image

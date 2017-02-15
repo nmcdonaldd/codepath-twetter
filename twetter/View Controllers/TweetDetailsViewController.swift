@@ -15,6 +15,16 @@ protocol TweetDetailsViewControllerDelegate: class {
 
 class TweetDetailsViewController: BaseTwetterViewController {
     
+    // String constants for names
+    private static let retweetsPlural: String = "RETWEETS"
+    private static let retweetSingular: String = "RETWEET"
+    private static let favoritesPlural: String = "FAVORITES"
+    private static let favoriteSingular: String = "FAVORITE"
+    private static let retweetGreyImageIdentifier: String = "Retweet grey"
+    private static let retweetGreenImageIdentifier: String = "Retweet green"
+    private static let favoriteGreyIdentifier: String = "Heart grey"
+    private static let favoriteRedIdentifier: String = "Heart red"
+    
     @IBOutlet weak var tweetAuthorImageView: UIImageView!
     @IBOutlet weak var tweetAuthorNameLabel: UILabel!
     @IBOutlet weak var tweetAuthorUsernameLabel: UILabel!
@@ -146,72 +156,51 @@ class TweetDetailsViewController: BaseTwetterViewController {
         // Set up the favorites/retweets count view.
         if let retweetsCount: Int = tweetData.retweetCount {
             self.retweetCountLabel.text = tweetData.formattedRetweetNumString
-            self.retweetsTextLabel.text = retweetsCount == 1 ? "RETWEET" : "RETWEETS"
+            self.retweetsTextLabel.text = retweetsCount == 1 ? TweetDetailsViewController.retweetSingular : TweetDetailsViewController.retweetsPlural
         }
         
         if let favoritesCount: Int = tweetData.favoriteCount {
             self.favoriteCountLabel.text = tweetData.formattedFavoriteNumString
-            self.favoriteTextLabel.text = favoritesCount == 1 ? "FAVORITE" : "FAVORITES"
+            self.favoriteTextLabel.text = favoritesCount == 1 ? TweetDetailsViewController.favoriteSingular : TweetDetailsViewController.favoritesPlural
         }
         
         // Setup the buttons.
-        let selectedRetweetAssetName: String = tweetData.isRetweeted ? "Retweet green" : "Retweet grey"
-        let selectedFavoriteAssetName: String = tweetData.isFavorited ? "Heart red" : "Heart grey"
+        let selectedRetweetAssetName: String = tweetData.isRetweeted ? TweetDetailsViewController.retweetGreenImageIdentifier : TweetDetailsViewController.retweetGreyImageIdentifier
+        let selectedFavoriteAssetName: String = tweetData.isFavorited ? TweetDetailsViewController.favoriteRedIdentifier : TweetDetailsViewController.favoriteGreyIdentifier
         self.retweetImageView.image = UIImage(imageLiteralResourceName: selectedRetweetAssetName)
         self.favoriteImageView.image = UIImage(imageLiteralResourceName: selectedFavoriteAssetName)
     }
     
     func userTappedRetweet() {
         
-        // Ask the twitter client to favorite this tweet. Give it the tweet ID.
-        let twitterClient: TwitterClient = TwitterClient.sharedInstance
-        
-        twitterClient.retweet(tweet: self.tweetData, success: { [weak self] (retweetCount: Int) in
-            guard let strongSelf = self else {
-                return
-            }
+        self.tweetData.toggleRetweet(success: {
             
-            strongSelf.tweetData.retweetCount = retweetCount
-            strongSelf.tweetData.isRetweeted = !strongSelf.tweetData.isRetweeted
-            strongSelf.retweetCountLabel.text = strongSelf.tweetData.formattedRetweetNumString
+           self.retweetCountLabel.text = self.tweetData.formattedRetweetNumString
+            let retweetNoun: String = self.tweetData.retweetCount == 1 ? TweetDetailsViewController.retweetSingular : TweetDetailsViewController.retweetsPlural
+            self.retweetsTextLabel.text = retweetNoun
+            let retweetAssetName: String = self.tweetData.isRetweeted ? TweetDetailsViewController.retweetGreenImageIdentifier : TweetDetailsViewController.retweetGreyImageIdentifier
+            self.retweetImageView.image = UIImage(imageLiteralResourceName: retweetAssetName)
             
-            let retweetNoun: String = strongSelf.tweetData.retweetCount == 1 ? "RETWEET" : "RETWEETS"
-            strongSelf.retweetsTextLabel.text = retweetNoun
+            self.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
             
-            let retweetAssetName: String = strongSelf.tweetData.isRetweeted ? "Retweet green" : "Retweet grey"
-            strongSelf.retweetImageView.image = UIImage(imageLiteralResourceName: retweetAssetName)
-            strongSelf.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
-            
-        }) { [weak self] (error: Error?) in
-            print("Error on retweet request: \(error?.localizedDescription)")
-            self?.retweetImageView.image = UIImage(imageLiteralResourceName: "Retweet grey")
+        }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }
-        
     }
     
     func userTappedFavorite() {
-        let twitterClient: TwitterClient = TwitterClient.sharedInstance
         
-        twitterClient.favorite(tweet: self.tweetData, success: { [weak self] (favoriteCount: Int) in
+        self.tweetData.toggleFavorite(success: { 
             
-            guard let strongSelf = self else {
-                return
-            }
+            self.favoriteCountLabel.text = self.tweetData.formattedFavoriteNumString
+            let favoriteNoun: String = self.tweetData.favoriteCount == 1 ? TweetDetailsViewController.favoriteSingular: TweetDetailsViewController.favoritesPlural
+            self.favoriteTextLabel.text = favoriteNoun
+            let favoriteAssetName: String = self.tweetData.isFavorited ? TweetDetailsViewController.favoriteRedIdentifier : TweetDetailsViewController.favoriteGreyIdentifier
+            self.favoriteImageView.image = UIImage(imageLiteralResourceName: favoriteAssetName)
+            self.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
             
-            strongSelf.tweetData.favoriteCount = favoriteCount
-            strongSelf.tweetData.isFavorited = !strongSelf.tweetData.isFavorited
-            strongSelf.favoriteCountLabel.text = strongSelf.tweetData.formattedFavoriteNumString
-            
-            let favoriteNoun: String = strongSelf.tweetData.favoriteCount == 1 ? "FAVORITE" : "FAVORITES"
-            strongSelf.favoriteTextLabel.text = favoriteNoun
-            let favoriteAssetName: String = strongSelf.tweetData.isFavorited ? "Heart red" : "Heart grey"
-            strongSelf.favoriteImageView.image = UIImage(imageLiteralResourceName: favoriteAssetName)
-            strongSelf.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
-            
-        }) { [weak self] (error: Error?) in
-            print("Error on favorite request: \(error?.localizedDescription)")
-            self?.favoriteImageView.image = UIImage(imageLiteralResourceName: "Heart grey")
+        }) { (error: Error?) in
+            self.favoriteImageView.image = UIImage(imageLiteralResourceName: TweetDetailsViewController.favoriteGreyIdentifier)
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }
     }
