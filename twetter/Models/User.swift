@@ -16,6 +16,8 @@ class User: NSObject {
     var userID: String?
     var profileURL: URL?
     var profileBackdropURL: URL?
+    var backupProfileBackropURL: URL?
+    
     var cachedProfileImage: UIImage?
     var followersCount: Int? {
         didSet {
@@ -55,11 +57,21 @@ class User: NSObject {
             self.profileURL = profileImgURL
         }
         
+        backupBackdropURL: if let backUpBackdropURL: String = userDictionary["profile_background_image_url_https"] as? String {
+            guard let profileBackupBackdropURL: URL = URL(string: backUpBackdropURL) else {
+                break backupBackdropURL
+            }
+            self.backupProfileBackropURL = profileBackupBackdropURL
+        }
+        
         backdropURLLabel: if let backdropURLString: String = userDictionary["profile_banner_url"] as? String {
             guard let backdropURL: URL = URL(string: backdropURLString) else {
+                self.profileBackdropURL = self.backupProfileBackropURL
                 break backdropURLLabel
             }
             self.profileBackdropURL = backdropURL
+        } else {
+            self.profileBackdropURL = self.backupProfileBackropURL
         }
         
         self.followersCount = userDictionary["followers_count"] as? Int

@@ -848,6 +848,8 @@
                     </view>
                     <connections>
                         <outlet property="avatarImage" destination="ASY-bE-Zt1" id="ki2-uG-G3c"/>
+                        <outlet property="followersLabel" destination="wb2-NN-PrY" id="cqS-BM-t6o"/>
+                        <outlet property="followingLabel" destination="r0d-PZ-akK" id="8AM-3p-R7Z"/>
                         <outlet property="header" destination="BMG-US-5s9" id="dUH-IL-HYc"/>
                         <outlet property="headerLabel" destination="Vgp-fl-JOA" id="oHT-3Q-yfI"/>
                         <outlet property="tableHeaderView" destination="vLq-2n-u5h" id="v4X-Mu-Mbb"/>

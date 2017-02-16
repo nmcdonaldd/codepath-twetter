@@ -32,6 +32,8 @@ class TwitterProfileViewController: BaseTwetterViewController {
     @IBOutlet weak var userFollowingCountLabel: UILabel!
     @IBOutlet weak var userFollowersCountLabel: UILabel!
     
+    @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
     fileprivate var loadingMoreDataActivityView: InfiniteScrollActivityView!
     fileprivate var isInfiniteScrolling: Bool = false
     fileprivate var isLoadingMoreData: Bool = false
@@ -91,6 +93,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
         // Header - Image
         
         guard let headerBackdropURL: URL = user.profileBackdropURL else {
+            SVProgressHUD.showError(withStatus: "Error loading user")
             return
         }
         
@@ -99,16 +102,12 @@ class TwitterProfileViewController: BaseTwetterViewController {
         self.headerBlurImageView = UIImageView(frame: header.bounds)
         self.headerImageView = UIImageView(frame: header.bounds)
         
-        self.headerImageView.setImageWith(backdropURLRequest, placeholderImage: nil, success: { [weak self] (request: URLRequest, response: HTTPURLResponse?, image: UIImage?) in
+        self.headerImageView.setImageWith(backdropURLRequest, placeholderImage: nil, success: { (request: URLRequest, response: HTTPURLResponse?, image: UIImage?) in
             
-            guard let strongSelf = self else {
-                return
-            }
-            
-            strongSelf.headerImageView?.image = image
-            strongSelf.headerBlurImageView?.image = image?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
-            strongSelf.header.insertSubview(strongSelf.headerImageView, belowSubview: strongSelf.headerLabel)
-            strongSelf.header.insertSubview(strongSelf.headerBlurImageView, belowSubview: strongSelf.headerLabel)
+            self.headerImageView?.image = image
+            self.headerBlurImageView?.image = image?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
+            self.header.insertSubview(self.headerImageView, belowSubview: self.headerLabel)
+            self.header.insertSubview(self.headerBlurImageView, belowSubview: self.headerLabel)
             
             }, failure: { (request: URLRequest, response: HTTPURLResponse?, error: Error) in
                 SVProgressHUD.showError(withStatus: error.localizedDescription)
@@ -145,7 +144,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
                         tweetsReturned.remove(at: 0)
                     }
                 }
-                self.userTweets! += tweetsReturned
+                self.userTweets? += tweetsReturned
                 self.isInfiniteScrolling = false
             } else {
                 self.userTweets = tweetsReturned
