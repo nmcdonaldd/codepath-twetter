@@ -132,14 +132,11 @@ class TwitterClient: BDBOAuth1SessionManager {
         let requestToken: BDBOAuth1Credential = BDBOAuth1Credential(queryString: url.query)
         self.fetchAccessToken(withPath: TwitterClient.OAuthAccessPath, method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) in
             self.currentAccount(success: { (user: User) in
-                self.loginSuccess?()
                 User.currentUser = user
+                self.loginSuccess?()
             }, failure: { (error: Error) in
                 self.loginFailure?(error)
             })
-            
-            self.loginSuccess?()
-            
         }) { (error: Error?) in
             print ("Got an error: \(error?.localizedDescription)")
             self.loginFailure?(error)
