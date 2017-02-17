@@ -18,7 +18,7 @@ class TwetterFollowingButtonView: UIButton {
     override func awakeFromNib() {
         self.layer.cornerRadius = 4.0
         self.layer.borderColor = defaultAppColor.cgColor
-        self.layer.borderWidth = 2.0
+        self.layer.borderWidth = 1.0
     }
     
     func setButtonTypeWithTitle(_ type: TwetterFollowingButtonType, title: String) {
@@ -34,7 +34,7 @@ class TwetterFollowingButtonView: UIButton {
                 self.backgroundColor = UIColor.white
                 self.setTitleColor(defaultAppColor, for: .normal)
                 self.layer.borderColor = defaultAppColor.cgColor
-                self.layer.borderWidth = 1.5
+                self.layer.borderWidth = 1.0
                 break
             }
             self.setTitle(title, for: .normal)
