@@ -21,21 +21,23 @@ class TwetterFollowingButtonView: UIButton {
         self.layer.borderWidth = 2.0
     }
     
-    func setButtonType(_ type: TwetterFollowingButtonType) {
-        switch type {
-        case .notFollowing:
-            self.backgroundColor = defaultAppColor
-            self.setTitleColor(UIColor.white, for: .normal)
-            self.layer.borderColor = UIColor.white.cgColor
-            self.layer.borderWidth = 0.0
-            break
-        case .following:
-            self.backgroundColor = UIColor.white
-            self.setTitleColor(defaultAppColor, for: .normal)
-            self.layer.borderColor = defaultAppColor.cgColor
-            self.layer.borderWidth = 1.5
-            break
+    func setButtonTypeWithTitle(_ type: TwetterFollowingButtonType, title: String) {
+        UIView.animate(withDuration: 0.3) {
+            switch type {
+            case .notFollowing:
+                self.backgroundColor = defaultAppColor
+                self.setTitleColor(UIColor.white, for: .normal)
+                self.layer.borderColor = UIColor.white.cgColor
+                self.layer.borderWidth = 0.0
+                break
+            case .following:
+                self.backgroundColor = UIColor.white
+                self.setTitleColor(defaultAppColor, for: .normal)
+                self.layer.borderColor = defaultAppColor.cgColor
+                self.layer.borderWidth = 1.5
+                break
+            }
+            self.setTitle(title, for: .normal)
         }
     }
-    
 }

@@ -102,8 +102,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
                 followButtonType = .notFollowing
                 followingString = TwitterProfileViewController.followString
             }
-            self.followButton.setTitle(followingString, for: .normal)
-            self.followButton.setButtonType(followButtonType)
+            self.followButton.setButtonTypeWithTitle(followButtonType, title: followingString)
         }
         
         let backBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: "@\(user.username!)", style: .plain, target: nil, action: nil)
@@ -236,8 +235,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
                 twetterButtonType = .notFollowing
                 followString = TwitterProfileViewController.followString
             }
-            self.followButton.setButtonType(twetterButtonType)
-            self.followButton.setTitle(followString, for: .normal)
+            self.followButton.setButtonTypeWithTitle(twetterButtonType, title: followString)
         }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }
