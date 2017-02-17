@@ -14,12 +14,10 @@ class TweetEntities: NSObject {
     var mediaInfo: [TweetMedia]?
     
     init(entitiesDictionary: NSDictionary) {
-        
         if let mediaDictionary: [NSDictionary] = entitiesDictionary["media"] as? [NSDictionary] {
             self.mediaInfo = mediaDictionary.map({ (mediaDictionary) -> TweetMedia in
                 TweetMedia(mediaDictionary: mediaDictionary)
             })
         }
     }
-
 }

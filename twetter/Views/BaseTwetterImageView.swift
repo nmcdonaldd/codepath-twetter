@@ -15,5 +15,4 @@ class BaseTwetterImageView: UIImageView {
         self.clipsToBounds = true
         self.contentMode = .scaleAspectFill
     }
-    
 }

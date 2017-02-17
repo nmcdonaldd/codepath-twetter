@@ -59,7 +59,7 @@ class Tweet: NSObject {
             self.timeStamp = dateFormatter.date(from: timeStampString)
             
             let date: DateInRegion = try! DateInRegion(string: (self.timeStamp?.description)!, format: .custom("yyyy-MM-dd HH:mm:ss Z"))
-            let (colloquial, _) = try! date.colloquialSinceNow()
+            let (colloquial, _): (String, String?) = try! date.colloquialSinceNow()
             
             self.relativeTime = colloquial
         }

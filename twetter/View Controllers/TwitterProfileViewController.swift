@@ -125,6 +125,23 @@ class TwitterProfileViewController: BaseTwetterViewController {
         self.loadUserTweets()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let headerView: UIView = self.tweetsTableView.tableHeaderView {
+            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            var headerFrame: CGRect = headerView.frame
+            
+            if height != headerFrame.size.height {
+                headerFrame.size.height = height
+                headerView.frame = headerFrame
+                
+                self.tweetsTableView.tableHeaderView = headerView
+            }
+        }
+    }
+    
+    
     @objc fileprivate func loadUserTweets() {
         
         let tweetOffset: String? = self.isInfiniteScrolling ? self.userTweets?.last?.tweetID ?? nil : nil

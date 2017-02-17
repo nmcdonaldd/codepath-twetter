@@ -75,26 +75,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="8" width="45" height="45"/>
+                                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="45" id="3AC-7Y-KQc"/>
-                                                        <constraint firstAttribute="width" constant="45" id="9PK-TG-FVd"/>
+                                                        <constraint firstAttribute="height" constant="50" id="3AC-7Y-KQc"/>
+                                                        <constraint firstAttribute="width" constant="50" id="9PK-TG-FVd"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3G-iO-muK">
-                                                    <rect key="frame" x="61" y="8" width="45" height="20"/>
+                                                    <rect key="frame" x="66" y="8" width="45" height="20"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWf-0Q-tKX">
-                                                    <rect key="frame" x="114" y="10" width="72" height="16"/>
+                                                    <rect key="frame" x="119" y="10" width="72" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzF-PL-cQE">
-                                                    <rect key="frame" x="61" y="30" width="306" height="72"/>
+                                                    <rect key="frame" x="66" y="30" width="301" height="72"/>
                                                     <string key="text">cant wait to be married and to come home after a long day and curl up next to my favorite person in the whole world and fall asleep</string>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -107,7 +107,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXh-p4-TPv">
-                                                    <rect key="frame" x="61" y="137" width="306" height="25"/>
+                                                    <rect key="frame" x="66" y="137" width="301" height="25"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvf-5l-J6e">
                                                             <rect key="frame" x="32" y="4" width="56" height="16"/>
@@ -151,7 +151,7 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hrc-ub-Cuq" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
-                                                    <rect key="frame" x="61" y="110" width="306" height="0.0"/>
+                                                    <rect key="frame" x="66" y="110" width="301" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" id="s9q-9K-PKp"/>
                                                     </constraints>
@@ -226,11 +226,11 @@
                         <viewControllerLayoutGuide type="bottom" id="RfA-Oc-Ass"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7az-NB-0gI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FI-Ed-px6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeB-RL-tri" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="308.5"/>
@@ -872,6 +872,6 @@
         <image name="Retweet grey" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gtp-Zd-fFD"/>
+        <segue reference="eR3-DR-hWt"/>
     </inferredMetricsTieBreakers>
 </document>

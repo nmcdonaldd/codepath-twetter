@@ -114,7 +114,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         self.fetchRequestToken(withPath: TwitterClient.OAuthRequestPath, method: "GET", callbackURL: URL(string: TwitterClient.twetterCallBackURL), scope: nil, success: { (requestToken: BDBOAuth1Credential?) in
             let url: URL = URL(string: TwitterClient.requestTokenPath + requestToken!.token!)!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
         }) { (error: Error?) in
             self.loginFailure?(error)
         }

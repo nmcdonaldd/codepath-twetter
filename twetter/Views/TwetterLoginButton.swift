@@ -15,5 +15,4 @@ class TwetterLoginButton: UIButton {
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 3.0
     }
-
 }
