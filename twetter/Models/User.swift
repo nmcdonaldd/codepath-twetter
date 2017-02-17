@@ -37,6 +37,7 @@ class User: NSObject {
     var formattedFollowingCount: String?
     var isCurrentUserFollowing: Bool?
     var numberOfTweets: Int?
+    var isFollowing: Bool = false
     
     var originalDicitonary: NSDictionary?
     
@@ -78,6 +79,7 @@ class User: NSObject {
         self.isCurrentUserFollowing = userDictionary["following"] as? Bool
         self.numberOfTweets = userDictionary["statuses_count"] as? Int
         self.followingCount = userDictionary["friends_count"] as? Int
+        self.isFollowing = userDictionary["following"] as! Bool
         
         let nf: NumberFormatter = NumberFormatter()
         nf.numberStyle = .decimal
@@ -89,6 +91,21 @@ class User: NSObject {
         let twitterClient: TwitterClient = TwitterClient.sharedInstance
         twitterClient.getUsersTweets(self, startingAtTweetID: tweetID, success: { (tweets: [Tweet]) in
             success(tweets)
+        }) { (error: Error?) in
+            failure(error)
+        }
+    }
+    
+    func toggleFollow(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
+        let twitterClient: TwitterClient = TwitterClient.sharedInstance
+        twitterClient.toggleFollowingUser(withID: self.userID!, isAlreadyFollowing: self.isFollowing, success: { 
+            if self.isFollowing {
+                self.followersCount! -= 1
+            } else {
+                self.followersCount! += 1
+            }
+            self.isFollowing = !self.isFollowing
+            success()
         }) { (error: Error?) in
             failure(error)
         }

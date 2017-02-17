@@ -18,6 +18,9 @@ let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of 
 
 class TwitterProfileViewController: BaseTwetterViewController {
     
+    static private let followingString: String = "Following"
+    static private let followString: String = "Follow"
+    
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var header: UIView!
     @IBOutlet weak var headerLabel: UILabel!
@@ -39,6 +42,7 @@ class TwitterProfileViewController: BaseTwetterViewController {
     fileprivate var isLoadingMoreData: Bool = false
     fileprivate var selectedIndexPath: IndexPath?
     private var refreshControl: UIRefreshControl!
+    @IBOutlet weak var followButton: TwetterFollowingButtonView!
     
     var userTweets: [Tweet]!
     var user: User?
@@ -84,6 +88,22 @@ class TwitterProfileViewController: BaseTwetterViewController {
         
         if let formattedFollowersCount: String = user.formattedFollowersCount {
             self.userFollowersCountLabel.text = formattedFollowersCount
+        }
+        
+        if user.username == User.currentUser?.username! {
+            self.followButton.isHidden = true
+        } else {
+            var followButtonType: TwetterFollowingButtonType
+            var followingString: String!
+            if user.isFollowing {
+                followButtonType = .following
+                followingString = TwitterProfileViewController.followingString
+            } else {
+                followButtonType = .notFollowing
+                followingString = TwitterProfileViewController.followString
+            }
+            self.followButton.setTitle(followingString, for: .normal)
+            self.followButton.setButtonType(followButtonType)
         }
         
         let backBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: "@\(user.username!)", style: .plain, target: nil, action: nil)
@@ -197,6 +217,30 @@ class TwitterProfileViewController: BaseTwetterViewController {
         vc.delegate = self
         
         vc.tweetData = tweet
+    }
+    
+    @IBAction func followButtonTapped(_ sender: Any) {
+        guard let user: User = self.user else {
+            return
+        }
+        
+        user.toggleFollow(success: { 
+            // Toggle the button.
+            self.userFollowersCountLabel.text = user.formattedFollowersCount
+            var twetterButtonType: TwetterFollowingButtonType = .notFollowing
+            var followString: String
+            if user.isFollowing {
+                twetterButtonType = .following
+                followString = TwitterProfileViewController.followingString
+            } else {
+                twetterButtonType = .notFollowing
+                followString = TwitterProfileViewController.followString
+            }
+            self.followButton.setButtonType(twetterButtonType)
+            self.followButton.setTitle(followString, for: .normal)
+        }) { (error: Error?) in
+            SVProgressHUD.showError(withStatus: error?.localizedDescription)
+        }
     }
     
     override func composeTweetButtonTapped() {

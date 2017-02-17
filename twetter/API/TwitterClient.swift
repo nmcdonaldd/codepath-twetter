@@ -24,6 +24,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     static private let OAuthAccessPath: String = "oauth/access_token"
     static private let requestTokenPath: String = "https://api.twitter.com/oauth/authorize?oauth_token="
     static private let twetterCallBackURL: String = "twetter://oauth"
+    static private let twetterFollowPrefixEndpoint: String = "1.1/friendships/"
     
     private var loginSuccess: (() -> ())?
     private var loginFailure: ((Error?) -> ())?
@@ -139,6 +140,20 @@ class TwitterClient: BDBOAuth1SessionManager {
         }) { (error: Error?) in
             print ("Got an error: \(error?.localizedDescription)")
             self.loginFailure?(error)
+        }
+    }
+    
+    func toggleFollowingUser(withID userID: String, isAlreadyFollowing alreadyFollowing: Bool, success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
+        var postString = TwitterClient.twetterFollowPrefixEndpoint
+        postString += alreadyFollowing ? "destroy" : "create"
+        postString += ".json"
+        var paramDict: [String: String] = [String: String]()
+        paramDict.updateValue(userID, forKey: "user_id")
+        
+        self.post(postString, parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            success()
+        }) { (task: URLSessionDataTask?, error: Error?) in
+            failure(error)
         }
     }
     

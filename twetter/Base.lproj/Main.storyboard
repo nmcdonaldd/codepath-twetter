@@ -71,7 +71,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Z6-X2-683" id="Bfz-kd-cUj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="181"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-Qm-xfq" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
@@ -226,11 +226,11 @@
                         <viewControllerLayoutGuide type="bottom" id="RfA-Oc-Ass"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7az-NB-0gI">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FI-Ed-px6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeB-RL-tri" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="308.5"/>
@@ -624,7 +624,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nick McDonald" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfe-af-V2F">
-                                            <rect key="frame" x="8" y="158" width="359" height="22"/>
+                                            <rect key="frame" x="8" y="158" width="127.5" height="22"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -673,6 +673,20 @@
                                                 <constraint firstAttribute="height" constant="1" id="Kzh-Wh-yJO"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbe-sW-leT" customClass="TwetterFollowingButtonView" customModule="twetter" customModuleProvider="target">
+                                            <rect key="frame" x="277" y="154.5" width="90" height="29"/>
+                                            <color key="backgroundColor" red="0.26274509800000001" green="0.47843137250000001" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="ZJk-bd-FmQ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <state key="normal" title="Following">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="followButtonTapped:" destination="7Uw-Qt-1iA" eventType="touchUpInside" id="JKb-dr-7zQ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="r0d-PZ-akK" firstAttribute="centerY" secondItem="Xyj-M9-fVS" secondAttribute="centerY" id="0bB-n6-Kt5"/>
@@ -691,13 +705,15 @@
                                         <constraint firstItem="6Lv-2A-EPl" firstAttribute="leading" secondItem="vfe-af-V2F" secondAttribute="leading" id="cUY-z5-qwA"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Zwu-Se-iy4" secondAttribute="bottom" constant="16" id="f1h-wF-HO9"/>
                                         <constraint firstAttribute="trailing" secondItem="nZf-fm-Dk4" secondAttribute="trailing" constant="8" id="gER-rT-Brk"/>
-                                        <constraint firstAttribute="trailing" secondItem="vfe-af-V2F" secondAttribute="trailing" constant="8" id="h5I-EG-kOB"/>
                                         <constraint firstItem="5YQ-tT-MMw" firstAttribute="trailing" secondItem="nZf-fm-Dk4" secondAttribute="trailing" id="itE-iq-HwV"/>
+                                        <constraint firstItem="Jbe-sW-leT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vfe-af-V2F" secondAttribute="trailing" constant="8" id="l1B-zT-Z5K"/>
                                         <constraint firstItem="Xyj-M9-fVS" firstAttribute="centerY" secondItem="wb2-NN-PrY" secondAttribute="centerY" id="m2U-bf-jf5"/>
                                         <constraint firstItem="Zwu-Se-iy4" firstAttribute="leading" secondItem="nZf-fm-Dk4" secondAttribute="leading" id="o9r-P1-vjO"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="r0d-PZ-akK" secondAttribute="trailing" constant="8" id="pW9-f2-dma"/>
+                                        <constraint firstAttribute="trailing" secondItem="Jbe-sW-leT" secondAttribute="trailing" constant="8" id="tAM-z2-NOb"/>
                                         <constraint firstItem="5YQ-tT-MMw" firstAttribute="top" secondItem="Xyj-M9-fVS" secondAttribute="bottom" constant="16" id="uvQ-I0-Q0n"/>
                                         <constraint firstItem="r0d-PZ-akK" firstAttribute="leading" secondItem="Xyj-M9-fVS" secondAttribute="trailing" constant="8" id="v96-iw-n1q"/>
+                                        <constraint firstItem="Jbe-sW-leT" firstAttribute="centerY" secondItem="vfe-af-V2F" secondAttribute="centerY" id="w0e-FD-4X4"/>
                                         <constraint firstItem="wb2-NN-PrY" firstAttribute="leading" secondItem="Zwu-Se-iy4" secondAttribute="trailing" constant="8" id="xyr-z9-0Th"/>
                                     </constraints>
                                 </view>
@@ -706,7 +722,7 @@
                                         <rect key="frame" x="0.0" y="340" width="375" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rcc-hb-nAP" id="69P-H8-w5B">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="181"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LGx-Gp-fGW" customClass="BaseTwetterImageView" customModule="twetter" customModuleProvider="target">
@@ -848,6 +864,7 @@
                     </view>
                     <connections>
                         <outlet property="avatarImage" destination="ASY-bE-Zt1" id="ki2-uG-G3c"/>
+                        <outlet property="followButton" destination="Jbe-sW-leT" id="KMi-7E-wj7"/>
                         <outlet property="followersLabel" destination="wb2-NN-PrY" id="cqS-BM-t6o"/>
                         <outlet property="followingLabel" destination="r0d-PZ-akK" id="8AM-3p-R7Z"/>
                         <outlet property="header" destination="BMG-US-5s9" id="dUH-IL-HYc"/>
@@ -872,6 +889,6 @@
         <image name="Retweet grey" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eR3-DR-hWt"/>
+        <segue reference="gtp-Zd-fFD"/>
     </inferredMetricsTieBreakers>
 </document>
