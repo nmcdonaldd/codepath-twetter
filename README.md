@@ -92,21 +92,22 @@ The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
 - [x] Showing the image associated with a tweet in the tweet cell.
+- [x] User can follow/unfollow users from their profiles.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. How to encode URLs correctly. I.e. putting a comma in a tweet results in a bad POST request.
+1. How to encode URLs correctly. I.e. putting a comma in a tweet results in a bad POST request. <-- Fixed this.
 2. How to cache tweets efficiently since Twitter has a GET limit every 15 minutes.
 
 ## Video Walkthrough 
 
-Here's a walkthrough of implemented user stories: **GIF COMING SOON**
+Here's a walkthrough of implemented user stories:
 
-![Implemented user stories](https://github.com/nmcdonaldd/codepath-twetter/blob/master/Example/Twetter_wk5_1.gif)
+[Implemented user stories](https://mega.nz/#!FURzyADT!SM6n0JNr2pM-OQQQwVKbWhLV-F_MI3De7SQMs7BUMBo)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-[Here's a video](https://www.youtube.com/watch?v=_AK3xpazWiw) of implemented user stories that plays better than the gif!
+[Here's a video](https://www.youtube.com/watch?v=yHtbzg1HaQc) of implemented user stories that plays better than the gif!
 
 ## Notes
 
