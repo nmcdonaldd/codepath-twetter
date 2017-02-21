@@ -26,12 +26,12 @@ class TwitterClient: BDBOAuth1SessionManager {
     static private let twetterCallBackURL: String = "twetter://oauth"
     static private let twetterFollowPrefixEndpoint: String = "1.1/friendships/"
     
-    private var loginSuccess: (() -> ())?
-    private var loginFailure: ((Error?) -> ())?
+    private var loginSuccess: (()->())?
+    private var loginFailure: ((Error?)->())?
     
     static let sharedInstance: TwitterClient = TwitterClient(baseURL: URL(string: TwitterClient.twitterAPIURL)!, consumerKey: TwitterClient.twitterAppConsumerKey, consumerSecret: TwitterClient.twitterAppConsumerSecret)
     
-    func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
+    func currentAccount(success: @escaping (User)->(), failure: @escaping (Error)->()) {
         self.get(TwitterClient.verifyCredentialsEndpoint, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             let userDictionary: NSDictionary = response as! NSDictionary
             let user: User = User(userDictionary: userDictionary)
@@ -42,7 +42,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func homeTimeline(startingAtTweetID tweetIDToStart: String?, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+    func homeTimeline(startingAtTweetID tweetIDToStart: String?, success: @escaping ([Tweet])->(), failure: @escaping (Error)->()) {
         
         var paramDict: [String: String] = [String: String]()
         paramDict.updateValue(tweetsToLoadCount, forKey: "count")
@@ -63,7 +63,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func getUsersTweets(_ user: User, startingAtTweetID tweetIDToStart: String?, success: @escaping ([Tweet]) -> (), failure: @escaping (Error?) -> ()) {
+    func getUsersTweets(_ user: User, startingAtTweetID tweetIDToStart: String?, success: @escaping ([Tweet])->(), failure: @escaping (Error?)->()) {
         guard let userID: String = user.userID else {
             return
         }
@@ -88,10 +88,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
-    
-    // Returns a User object from the passed-in userID string.
-    
-    func getUserWithID(_ userID: String, success: @escaping (User)->(), failure: @escaping (Error?) -> ()) {
+    // Returns a User object from the passed-in userID string.s
+    func getUserWithID(_ userID: String, success: @escaping (User)->(), failure: @escaping (Error?)->()) {
         
         var paramDict: [String: String] = [String: String]()
         paramDict.updateValue(userID, forKey: "user_id")
@@ -108,7 +106,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func login(success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
+    func login(success: @escaping ()->(), failure: @escaping (Error?)->()) {
         self.loginSuccess = success
         self.loginFailure = failure
         self.deauthorize()
@@ -143,7 +141,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func toggleFollowingUser(withID userID: String, isAlreadyFollowing alreadyFollowing: Bool, success: @escaping ()->(), failure: @escaping (Error?) -> ()) {
+    func toggleFollowingUser(withID userID: String, isAlreadyFollowing alreadyFollowing: Bool, success: @escaping ()->(), failure: @escaping (Error?)->()) {
         var postString = TwitterClient.twetterFollowPrefixEndpoint
         postString += alreadyFollowing ? "destroy" : "create"
         postString += ".json"
@@ -157,7 +155,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?) -> ()) {
+    func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?)->()) {
         
         var paramDict: [String: String] = [String: String]()
         paramDict.updateValue(text, forKey: "status")
@@ -172,48 +170,42 @@ class TwitterClient: BDBOAuth1SessionManager {
             // Find something to do here!
             let tweetResponse: NSDictionary = response as! NSDictionary
             let tweet: Tweet = Tweet(tweetDictionary: tweetResponse)
-            
             success(tweet)
         }) { (task: URLSessionDataTask?, error: Error) in
-            
             failure(error)
         }
     }
     
-    func retweet(tweet: Tweet, success: @escaping ()->(),  failure: @escaping (Error?) -> ()) {
+    func retweet(tweet: Tweet, success: @escaping ()->(),  failure: @escaping (Error?)->()) {
         
-        if let tweetID: String = tweet.tweetID {
-            let action: String = tweet.isRetweeted ? "unretweet" : "retweet"
-            self.post("1.1/statuses/\(action)/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-
-                success()
-                
-            }, failure: { (task: URLSessionDataTask?, error: Error) in
-                failure(error)
-            })
-        } else {
+        guard let tweetID: String = tweet.tweetID else {
             // Somehow a tweet with no ID is requesting to be retweeted by the user. Good job user, you broke it.
             print("Error!")
+            return
         }
+        
+        let action: String = tweet.isRetweeted ? "unretweet" : "retweet"
+        self.post("1.1/statuses/\(action)/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            success()
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
     }
     
-    func favorite(tweet: Tweet, success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
+    func favorite(tweet: Tweet, success: @escaping ()->(), failure: @escaping (Error?)->()) {
         
-        if let tweetID: String = tweet.tweetID {
-            let action: String = tweet.isFavorited ? "destroy" : "create"
-            var paramDict: [String: String] = [String: String]()
-            paramDict.updateValue(tweetID, forKey: "id")
-            self.post("1.1/favorites/\(action).json", parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-                
-                success()
-                
-            }, failure: { (task: URLSessionDataTask?, error: Error) in
-                failure(error)
-            })
-        } else {
+        guard let tweetID: String = tweet.tweetID else {
             // Somehow a tweet with no ID is requesting to be retweeted by the user. Good job user, you broke it.
             print("Error!")
+            return
         }
-
+        let action: String = tweet.isFavorited ? "destroy" : "create"
+        var paramDict: [String: String] = [String: String]()
+        paramDict.updateValue(tweetID, forKey: "id")
+        self.post("1.1/favorites/\(action).json", parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            success()
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
     }
 }

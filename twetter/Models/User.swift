@@ -26,6 +26,7 @@ class User: NSObject {
             self.formattedFollowersCount = nf.string(from: NSNumber(value: self.followersCount!))
         }
     }
+    
     var followingCount: Int? {
         didSet {
             let nf: NumberFormatter = NumberFormatter()
@@ -127,6 +128,9 @@ class User: NSObject {
         }
     }
     
+    
+    // MARK: - Current User.
+    
     static private var _currentUser: User?
     
     class var currentUser: User? {
@@ -148,7 +152,7 @@ class User: NSObject {
             let defaults = UserDefaults.standard
             
             if let user = user {
-                let data = try! JSONSerialization.data(withJSONObject: user.originalDicitonary as Any, options: [])
+                let data: Data = try! JSONSerialization.data(withJSONObject: user.originalDicitonary as Any, options: [])
                 defaults.set(data, forKey: "currentUser")
             } else {
                 defaults.set(nil, forKey: "currentUser")
