@@ -126,7 +126,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func handleOpenURL(withURL url: URL) {
-        
         let requestToken: BDBOAuth1Credential = BDBOAuth1Credential(queryString: url.query)
         self.fetchAccessToken(withPath: TwitterClient.OAuthAccessPath, method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) in
             self.currentAccount(success: { (user: User) in
@@ -156,7 +155,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?)->()) {
-        
         var paramDict: [String: String] = [String: String]()
         paramDict.updateValue(text, forKey: "status")
         
