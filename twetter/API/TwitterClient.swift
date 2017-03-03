@@ -25,6 +25,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     static private let requestTokenPath: String = "https://api.twitter.com/oauth/authorize?oauth_token="
     static private let twetterCallBackURL: String = "twetter://oauth"
     static private let twetterFollowPrefixEndpoint: String = "1.1/friendships/"
+    static private let twetterUserMentionsEndpoint: String = "1.1/statuses/mentions_timeline.json"
     
     private var loginSuccess: (()->())?
     private var loginFailure: ((Error?)->())?
@@ -88,7 +89,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
-    // Returns a User object from the passed-in userID string.s
+    // Returns a User object from the passed-in userID string.
     func getUserWithID(_ userID: String, success: @escaping (User)->(), failure: @escaping (Error?)->()) {
         
         var paramDict: [String: String] = [String: String]()

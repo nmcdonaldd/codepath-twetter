@@ -118,6 +118,10 @@ class Tweet: NSObject {
         }
     }
     
+    func getTweetReplies(success: @escaping ()->(), failure: @escaping (Error?)->()) {
+        let _: TwitterClient = TwitterClient.sharedInstance
+    }
+    
     class func tweetWithText(_ tweetText: String, inReplyToTweet tweetInReplyTo: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?) -> ()) {
         let twitterClient: TwitterClient = TwitterClient.sharedInstance
         twitterClient.tweetWithText(tweetText, inReplyToTweet: tweetInReplyTo, success: { (tweet: Tweet) in
