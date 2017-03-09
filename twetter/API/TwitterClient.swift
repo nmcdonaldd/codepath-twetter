@@ -54,6 +54,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             let tweetsDictionaries: [NSDictionary] = response as! [NSDictionary]
             let tweets: [Tweet] = Tweet.tweetsFromArray(tweetsDictionaries: tweetsDictionaries)
+            print(tweetsDictionaries)
             
             success(tweets)
             
@@ -180,6 +181,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         
         guard let tweetID: String = tweet.tweetID else {
             // Somehow a tweet with no ID is requesting to be retweeted by the user. Good job user, you broke it.
+            // TODO: - make this an error, not just print error.
             print("Error!")
             return
         }

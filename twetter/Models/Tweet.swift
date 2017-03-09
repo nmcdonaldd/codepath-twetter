@@ -40,6 +40,10 @@ class Tweet: NSObject {
     var tweetEntities: TweetEntities?
     
     init(tweetDictionary: NSDictionary) {
+        var tweetDictionary = tweetDictionary
+        if let tweetInfo: NSDictionary = tweetDictionary["retweeted_status"] as? NSDictionary {
+            tweetDictionary = tweetInfo
+        }
         
         // Set up the basic Tweet details.
         self.text = tweetDictionary["text"] as? String

@@ -117,14 +117,12 @@ class ComposeTweetViewController: UIViewController {
     }
     
     func keyboardShown(notification: Notification) {
-        
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             self.toolBarBottomConstraint.constant = keyboardSize.height
         }
     }
 
     @IBAction func tweetButtonTapped(_ sender: Any) {
-        
         Tweet.tweetWithText(self.tweetTextView.text, inReplyToTweet: self.inReplyToTweet, success: { (tweet: Tweet) in
             self.delegate?.ComposeTweetViewController(self, willExitWithSuccessfulTweet: tweet)
             self.tweetTextView.resignFirstResponder()

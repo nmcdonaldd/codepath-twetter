@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             // Go to tweets screen since there is a logged in user.
-            print("There is a current User!")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
             window?.rootViewController = vc

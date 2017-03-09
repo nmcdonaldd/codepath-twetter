@@ -170,7 +170,7 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension TweetsViewController: TweetTableViewCellDelegate{
+extension TweetsViewController: TweetTableViewCellDelegate {
 
     // TweetTableViewCellDelegate
     func TweetTableViewCellProfileImageWasTapped(_ cell: TweetTableViewCell) {
