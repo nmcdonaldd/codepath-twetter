@@ -171,15 +171,10 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TweetsViewController: TweetTableViewCellDelegate {
-
-    // TweetTableViewCellDelegate
-    func TweetTableViewCellProfileImageWasTapped(_ cell: TweetTableViewCell) {
-        let indexPath: IndexPath = self.tweetsTableView.indexPath(for: cell)!
-        guard let userTapped: User = self.tweets[indexPath.row].tweetAuthor else {
-            return
-        }
+    
+    func TweetTableViewCell(_cell: TweetTableViewCell, userTappedUser user: User) {
         let navVC: TwetterNavigationController = self.navigationController as! TwetterNavigationController
-        navVC.pushProfileViewControllerOfUser(userTapped)
+        navVC.pushProfileViewControllerOfUser(user)
     }
 }
 

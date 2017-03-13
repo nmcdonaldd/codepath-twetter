@@ -51,13 +51,9 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
         
         self.get(TwitterClient.homeTimelineEndpoint, parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            
             let tweetsDictionaries: [NSDictionary] = response as! [NSDictionary]
             let tweets: [Tweet] = Tweet.tweetsFromArray(tweetsDictionaries: tweetsDictionaries)
-            print(tweetsDictionaries)
-            
             success(tweets)
-            
         }, failure: { (task: URLSessionDataTask?, error: Error) in
             failure(error)
             print(error)
@@ -86,7 +82,6 @@ class TwitterClient: BDBOAuth1SessionManager {
             // Error
             failure(error)
         })
-        
     }
     
     // Returns a User object from the passed-in userID string.s

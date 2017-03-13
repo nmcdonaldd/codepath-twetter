@@ -11,7 +11,7 @@ import SwiftDate
 import SVProgressHUD
 
 protocol TweetTableViewCellDelegate: class {
-    func TweetTableViewCellProfileImageWasTapped(_ cell: TweetTableViewCell)
+    func TweetTableViewCell(_cell: TweetTableViewCell, userTappedUser user: User)
 }
 
 class TweetTableViewCell: UITableViewCell {
@@ -27,9 +27,17 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var retweetsLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
     
-    // Media
+    // Media.
     @IBOutlet weak var tweetMediaImageView: UIImageView!
     @IBOutlet weak var tweetMediaImageViewHeightConstraint: NSLayoutConstraint!
+    
+    // Retweet info.
+    @IBOutlet weak var retweetInfoContainerView: UIView!
+    @IBOutlet weak var retweetedByNameLabel: UILabel!
+    @IBOutlet weak var retweetedByImageView: UIImageView!
+    
+    // Retweeted by TapGestureRecognizer.
+    lazy private var retweetedByLabelTapGestureRecognizer: UITapGestureRecognizer! = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedRetweetedByLabel))
     
     weak var delegate: TweetTableViewCellDelegate?
     
@@ -40,6 +48,25 @@ class TweetTableViewCell: UITableViewCell {
             guard let tweetAuthor: User = self.tweetData.tweetAuthor else {
                 return
             }
+            
+            if let retweetedByUser: User = self.tweetData.userRetweeted {
+                if let gestureRecognizers = self.retweetedByNameLabel.gestureRecognizers {
+                    if !gestureRecognizers.contains(self.retweetedByLabelTapGestureRecognizer) {
+                        self.retweetedByNameLabel.addGestureRecognizer(self.retweetedByLabelTapGestureRecognizer)
+                        self.retweetedByNameLabel.isUserInteractionEnabled = true
+                    }
+                } else {
+                    self.retweetedByNameLabel.addGestureRecognizer(self.retweetedByLabelTapGestureRecognizer)
+                    self.retweetedByNameLabel.isUserInteractionEnabled = true
+                }
+                self.retweetedByNameLabel.text = "\(retweetedByUser.name!) retweeted"
+                self.retweetedByImageView.isHidden = false
+            } else {
+                self.retweetedByNameLabel.text = nil
+                self.retweetedByImageView.isHidden = true
+                self.removeGestureRecognizer(self.retweetedByLabelTapGestureRecognizer)
+            }
+            self.retweetedByNameLabel.sizeToFit()
             
             tweetMediaLabel: if let tweetMediaInfo: TweetEntities = self.tweetData.getTweetEntities() {
                 // Need to grab the url for the tweet media.
@@ -113,6 +140,8 @@ class TweetTableViewCell: UITableViewCell {
         
         // Initialization code
         
+        self.retweetInfoContainerView.isUserInteractionEnabled = true
+        
         let retweetTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedRetweet))
         let favoriteTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedFavorite))
         let profileImageTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetTableViewCell.userTappedProfileImage))
@@ -125,8 +154,24 @@ class TweetTableViewCell: UITableViewCell {
         self.tweetAuthorImageView.isUserInteractionEnabled = true
     }
     
+    func userTappedRetweetedByLabel() {
+        guard let retweetedByUser: User = self.tweetData.userRetweeted else {
+            // Error!
+            return
+        }
+        self.notifyDelegateToTransitionToProfile(retweetedByUser)
+    }
+    
     func userTappedProfileImage() {
-        self.delegate?.TweetTableViewCellProfileImageWasTapped(self)
+        guard let tweetAuthor: User = self.tweetData.tweetAuthor else {
+            // Error!
+            return
+        }
+        self.notifyDelegateToTransitionToProfile(tweetAuthor)
+    }
+    
+    private func notifyDelegateToTransitionToProfile(_ user: User) {
+        self.delegate?.TweetTableViewCell(_cell: self, userTappedUser: user)
     }
     
     func userTappedRetweet() {        

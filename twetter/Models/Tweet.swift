@@ -38,11 +38,16 @@ class Tweet: NSObject {
     
     var tweetAuthor: User?
     var tweetEntities: TweetEntities?
+    var userRetweeted: User?
+    var isARetweet: Bool = false
     
     init(tweetDictionary: NSDictionary) {
         var tweetDictionary = tweetDictionary
         if let tweetInfo: NSDictionary = tweetDictionary["retweeted_status"] as? NSDictionary {
+            // Is a retweet. So let's grab the user that retweeted it.
+            self.userRetweeted = User(userDictionary: tweetDictionary["user"] as! NSDictionary)
             tweetDictionary = tweetInfo
+            self.isARetweet = true
         }
         
         // Set up the basic Tweet details.
