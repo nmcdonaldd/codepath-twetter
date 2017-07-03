@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetMedia: NSObject {
+class TweetMedia {
     
     private var mediaURL: URL?
     private var mediaWidth: Int?

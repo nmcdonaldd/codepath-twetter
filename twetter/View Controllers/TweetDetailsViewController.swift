@@ -80,7 +80,6 @@ class TweetDetailsViewController: BaseTwetterViewController {
         guard let user: User = tweetData.tweetAuthor else {
             return
         }
-        
         let navVC: TwetterNavigationController = self.navigationController as! TwetterNavigationController
         navVC.pushProfileViewControllerOfUser(user)
     }
@@ -103,7 +102,6 @@ class TweetDetailsViewController: BaseTwetterViewController {
                     // Successful response from the network.
                     tweetAuthor.setCachedProfileImage(image: image)
                     self.tweetAuthorImageView.image = image
-                    
                 }, failure: { (request: URLRequest, response: HTTPURLResponse?, error: Error) in
                     // Error.
                 })
@@ -172,33 +170,26 @@ class TweetDetailsViewController: BaseTwetterViewController {
     }
     
     func userTappedRetweet() {
-        
         self.tweetData.toggleRetweet(success: {
-            
            self.retweetCountLabel.text = self.tweetData.formattedRetweetNumString
             let retweetNoun: String = self.tweetData.retweetCount == 1 ? TweetDetailsViewController.retweetSingular : TweetDetailsViewController.retweetsPlural
             self.retweetsTextLabel.text = retweetNoun
             let retweetAssetName: String = self.tweetData.isRetweeted ? TweetDetailsViewController.retweetGreenImageIdentifier : TweetDetailsViewController.retweetGreyImageIdentifier
             self.retweetImageView.image = UIImage(imageLiteralResourceName: retweetAssetName)
-            
             self.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
-            
         }) { (error: Error?) in
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
         }
     }
     
     func userTappedFavorite() {
-        
-        self.tweetData.toggleFavorite(success: { 
-            
+        self.tweetData.toggleFavorite(success: {
             self.favoriteCountLabel.text = self.tweetData.formattedFavoriteNumString
             let favoriteNoun: String = self.tweetData.favoriteCount == 1 ? TweetDetailsViewController.favoriteSingular: TweetDetailsViewController.favoritesPlural
             self.favoriteTextLabel.text = favoriteNoun
             let favoriteAssetName: String = self.tweetData.isFavorited ? TweetDetailsViewController.favoriteRedIdentifier : TweetDetailsViewController.favoriteGreyIdentifier
             self.favoriteImageView.image = UIImage(imageLiteralResourceName: favoriteAssetName)
             self.delegate?.tweetDetailsViewControllerDidUpdateRTOrFavoriteValue()
-            
         }) { (error: Error?) in
             self.favoriteImageView.image = UIImage(imageLiteralResourceName: TweetDetailsViewController.favoriteGreyIdentifier)
             SVProgressHUD.showError(withStatus: error?.localizedDescription)
@@ -217,5 +208,4 @@ class TweetDetailsViewController: BaseTwetterViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }

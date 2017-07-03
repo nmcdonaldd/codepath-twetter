@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetEntities: NSObject {
+class TweetEntities {
     
     // Holds info about the width/height and url of the medias
     var mediaInfo: [TweetMedia]?

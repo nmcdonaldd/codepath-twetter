@@ -30,18 +30,7 @@ class LoginViewController: UIViewController {
         twitterClient.login(success: {
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
         }) { (error: Error?) in
-            print("Error: \(error?.localizedDescription)")
+            print("Error: \(String(describing: error?.localizedDescription))")
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

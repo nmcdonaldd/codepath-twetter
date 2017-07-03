@@ -43,7 +43,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func homeTimeline(startingAtTweetID tweetIDToStart: String?, success: @escaping ([Tweet])->(), failure: @escaping (Error)->()) {
-        
         var paramDict: [String: String] = [String: String]()
         paramDict.updateValue(tweetsToLoadCount, forKey: "count")
         if let sinceTweetID: String = tweetIDToStart {
@@ -156,7 +155,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func tweetWithText(_ text: String, inReplyToTweet: Tweet?, success: @escaping (Tweet)->(), failure: @escaping (Error?)->()) {
-        
         var paramDict: [String: String] = [String: String]()
         paramDict.updateValue(text, forKey: "status")
         
@@ -166,8 +164,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
         
         self.post(TwitterClient.submitTweetEndpoint, parameters: paramDict, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            
-            // Find something to do here!
             let tweetResponse: NSDictionary = response as! NSDictionary
             let tweet: Tweet = Tweet(tweetDictionary: tweetResponse)
             success(tweet)
@@ -177,7 +173,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func retweet(tweet: Tweet, success: @escaping ()->(),  failure: @escaping (Error?)->()) {
-        
         guard let tweetID: String = tweet.tweetID else {
             // Somehow a tweet with no ID is requesting to be retweeted by the user. Good job user, you broke it.
             print("Error!")

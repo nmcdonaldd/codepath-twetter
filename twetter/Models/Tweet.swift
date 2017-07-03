@@ -9,7 +9,7 @@
 import UIKit
 import SwiftDate
 
-class Tweet: NSObject {
+class Tweet {
     
     var text: String?
     var timeStamp: Date?
@@ -59,6 +59,7 @@ class Tweet: NSObject {
             self.timeStamp = dateFormatter.date(from: timeStampString)
             
             let date: DateInRegion = try! DateInRegion(string: (self.timeStamp?.description)!, format: .custom("yyyy-MM-dd HH:mm:ss Z"))
+//            let din = try! DateInRegion(absoluteDate: self.time)
             let (colloquial, _): (String, String?) = try! date.colloquialSinceNow()
             
             self.relativeTime = colloquial
